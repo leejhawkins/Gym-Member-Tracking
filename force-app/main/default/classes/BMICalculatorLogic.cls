@@ -1,13 +1,13 @@
 public inherited sharing class BMICalculatorLogic {
     
-     public static Double BMICalculator(Member__c member){
+     public static void BMICalculator(Member__c member){
 
         Double weightInKilos = member.Weight__c * 0.453592;
         Double heightInMeters = (((member.Height_Feet__c * 12) + member.Height_Inches__c)* .0254);
         Double bmi = weightInKilos / (heightInMeters * heightInMeters);
         member.BMI__c = bmi;
 
-        return bmi;
+        
     }
 
     public static void getAllMembers(List<Member__c> members){
