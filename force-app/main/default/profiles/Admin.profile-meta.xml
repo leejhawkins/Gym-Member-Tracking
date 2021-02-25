@@ -71,9 +71,6 @@
         <layout>Benchmark__c-Benchmark Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Benchmark__c-Benchmark Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>Member__c-Member Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
