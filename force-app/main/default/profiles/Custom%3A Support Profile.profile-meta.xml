@@ -17,6 +17,18 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+
+        <field>Member__c.Height_Feet__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Member__c.Height_Inches__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+
         <field>Member__c.Knee_Issues__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -40,14 +52,39 @@
         <field>Member__c.Weight__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Workout__c.Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Workout__c.Fitness_Level__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Workout__c.Issues__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <layoutAssignments>
+        <layout>Benchmark__c-Benchmark Layout</layout>
+    </layoutAssignments>
     <layoutAssignments>
         <layout>Benchmark__c-Benchmark Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Member__c-Member Layout</layout>
     </layoutAssignments>
+    <layoutAssignments>
+        <layout>Workout__c-Workout Layout</layout>
+    </layoutAssignments>
     <tabVisibilities>
         <tab>Member__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Workout__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>
