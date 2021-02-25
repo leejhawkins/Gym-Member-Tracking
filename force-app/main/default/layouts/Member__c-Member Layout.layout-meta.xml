@@ -42,6 +42,7 @@
                 <behavior>Edit</behavior>
                 <field>Premium_User__c</field>
             </layoutItems>
+
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Height_Feet__c</field>
@@ -50,6 +51,7 @@
                 <behavior>Edit</behavior>
                 <field>Height_Inches__c</field>
             </layoutItems>
+
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

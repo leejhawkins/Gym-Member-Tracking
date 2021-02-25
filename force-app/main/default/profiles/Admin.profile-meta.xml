@@ -17,6 +17,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+
         <field>Member__c.Height_Feet__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -27,6 +28,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+
         <field>Member__c.Knee_Issues__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -69,6 +71,9 @@
         <layout>Benchmark__c-Benchmark Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Benchmark__c-Benchmark Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Member__c-Member Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -89,6 +94,17 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
+
+        <object>Benchmark__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+
         <object>Member__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
