@@ -5,16 +5,18 @@ public inherited sharing class BMICalculatorLogic {
         Double weightInKilos = member.Weight__c * 0.453592;
         Double heightInMeters = (((member.Height_Feet__c * 12) + member.Height_Inches__c)* .0254);
         Double bmi = weightInKilos / (heightInMeters * heightInMeters);
-        
+        member.BMI__c = bmi;
+
         return bmi;
     }
 
     public static void getAllMembers(List<Member__c> members){
         for(Member__c m: members){
-            BMICalculator(m);
-        }
+                BMICalculator(m);
+            }
+        
     }
-
+   /*
     public static void interpretBMI(Double bmi){
         if(bmi < 18.5){
             System.debug('Member is underweight');
@@ -31,6 +33,7 @@ public inherited sharing class BMICalculatorLogic {
             }
         }
     }
+    */
 
 
 
