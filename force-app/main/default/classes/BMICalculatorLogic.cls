@@ -1,16 +1,9 @@
 public inherited sharing class BMICalculatorLogic {
     
      public static Double BMICalculator(Member__c member){
-        List<Member__c> weightField = [select Weight__c from Member__c limit 1];
-        List<Member__c> feetField = [select Height_Feet__c from Member__c limit 1];
-        List<Member__c> inchesField = [select Height_Inches__c from Member__c limit 1];
 
-        Decimal weight = weightField[0].Weight__c;
-        Decimal feet = feetField[0].Height_Feet__c;
-        Decimal inches = inchesField[0].Height_Inches__c;
-
-        Double weightInKilos = weight * 0.453592;
-        Double heightInMeters = (((feet * 12) + inches)* .0254);
+        Double weightInKilos = member.Weight__c * 0.453592;
+        Double heightInMeters = (((member.Height_Feet__c * 12) + member.Height_Inches__c)* .0254);
         Double bmi = weightInKilos / (heightInMeters * heightInMeters);
         
         return bmi;
