@@ -68,11 +68,7 @@
         <field>Member__c.Active__c</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Member__c.BMI__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+
     <fieldPermissions>
         <editable>true</editable>
         <field>Member__c.Back_Squat__c</field>
@@ -95,7 +91,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Member__c.Fitness_Level__c</field>
         <field>Member__c.Goal_Benchmark__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -112,11 +107,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Member__c.Issues__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Member__c.Knee_Issues__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
