@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Knee</fullName>
+        <default>false</default>
+        <label>Knee</label>
+    </customValue>
+    <customValue>
+        <fullName>Shoulder</fullName>
+        <default>false</default>
+        <label>Shoulder</label>
+    </customValue>
+    <masterLabel>Issues</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>
