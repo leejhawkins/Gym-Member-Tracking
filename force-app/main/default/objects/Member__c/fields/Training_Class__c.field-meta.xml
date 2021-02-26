@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Fitness_Level__c</fullName>
+    <fullName>Training_Class__c</fullName>
     <externalId>false</externalId>
-    <label>Fitness Level</label>
+    <label>Training Class</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
-        <valueSetName>Fitness_Level</valueSetName>
+        <valueSetName>Training_Class</valueSetName>
     </valueSet>
 </CustomField>
