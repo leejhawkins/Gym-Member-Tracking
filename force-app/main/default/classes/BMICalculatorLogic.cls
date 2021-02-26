@@ -6,8 +6,6 @@ public inherited sharing class BMICalculatorLogic {
         Double heightInMeters = (((member.Height_Feet__c * 12) + member.Height_Inches__c)* .0254);
         Double bmi = weightInKilos / (heightInMeters * heightInMeters);
         member.BMI__c = bmi;
-        Benchmark__c b = [Select Id from Benchmark__c where Id =: member.Current_Benchmark__c];
-        insert b;
 
         
     }
