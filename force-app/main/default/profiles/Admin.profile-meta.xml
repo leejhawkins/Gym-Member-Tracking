@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>Gym_Tracker_App</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__LightningBolt</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
     <classAccesses>
         <apexClass>BMICalculatorLogic</apexClass>
         <enabled>true</enabled>
@@ -10,6 +20,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>ClientFocused</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WorkoutDistributor</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <custom>false</custom>
@@ -60,11 +74,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Member__c.BMI__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Member__c.Active__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -91,8 +100,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+<<<<<<< HEAD
         <field>Member__c.Goal_Benchmark__c</field>
+=======
+        <field>Member__c.Fitness_Level__c</field>
+>>>>>>> 2847a215f9a6b4331c19029a8f0bb19a3d477d26
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Member__c.Goal_Benchmark__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
