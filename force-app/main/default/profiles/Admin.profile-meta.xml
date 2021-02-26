@@ -7,6 +7,16 @@
     <custom>false</custom>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Member__c.Active__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Member__c.BMI__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Member__c.Back_Squat__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -17,7 +27,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-
+        <field>Member__c.Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Member__c.Fitness_Level__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Member__c.Height_Feet__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -28,7 +47,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-
+        <field>Member__c.Issues__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Member__c.Knee_Issues__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -49,6 +72,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Member__c.Training_Class__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Member__c.Weight__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -65,6 +93,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Workout__c.Issues__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Workout__c.Training_Class__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Workout__c.Workout_Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <layoutAssignments>
@@ -91,17 +129,6 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-
-        <object>Benchmark__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-
         <object>Member__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
