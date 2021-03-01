@@ -37,4 +37,5 @@ public class WorkoutDistributor implements Schedulable{
 
         return message;
     }
+
 }
