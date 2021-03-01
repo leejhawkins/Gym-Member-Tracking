@@ -1,5 +1,3 @@
-trigger MemberTrigger on Member__c (before insert) {
-     if(Trigger.isInsert){
-         BMICalculatorLogic.getAllMembers(Trigger.new);
-     }
+trigger MemberTrigger on Member__c (before insert,before update) {
+     
 }
