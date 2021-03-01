@@ -7,11 +7,13 @@ public inherited sharing class BenchmarkTriggerUtility {
             Double bs = b.Back_Squat__c;
             Double dl = b.Deadlift__c;
             Double sp = b.Shoulder_Press__c;
-            if( bp > w*1.5 && bs > w*2.0 && dl > w*2.5 && sp > w ){
+            Double mileM = b.Mile_Time_Minutes__c;
+            Double mileS = b.Mile_Time_Seconds__c;
+            if( bp > w*1.5 && bs > w*2.0 && dl > w*2.5 && sp > w && mileM < 6){
                 b.Fitness_Level__c = 'Elite';
-            } else if( bp > w*1.25 && bs > w*1.75 && dl > w*2.25 && sp >.75* w ){
+            } else if( bp > w*1.25 && bs > w*1.75 && dl > w*2.25 && sp >.75* w && mileM < 7){
                 b.Fitness_Level__c = 'Advanced';
-            }  else if( bp > w && bs > w*1.50 && dl > w*2 && sp >.60* w ){
+            }  else if( bp > w && bs > w*1.50 && dl > w*2 && sp >.60* w && mileM < 8){
                 b.Fitness_Level__c = 'Intermediate';
             }  else {
                 b.Fitness_Level__c = 'Beginner';
@@ -39,10 +41,11 @@ public inherited sharing class BenchmarkTriggerUtility {
     }
     public static void isCurrentBenchmark(List<Benchmark__c> bens) {
         for(Benchmark__c b:bens){
-            if(b.Date__c > Date.Today().toStartofMonth() && b.Date__c < Date.Today().addMonths(1).toStartofMonth()){
+            if(b.Date__c >= Date.Today().toStartofMonth() && b.Date__c < Date.Today().addMonths(1).toStartofMonth()){
                 Member__c m = [Select Id from Member__c Where Id=:b.Member__c];
                 m.Current_Benchmark__c = b.Id;
                 m.Fitness_Level__c = b.Fitness_Level__c;
+                m.BMI__c = b.BMI__c;
                 update m;
             }
         }

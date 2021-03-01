@@ -7,4 +7,4 @@ trigger BenchmarkTrigger on Benchmark__c (before insert,before update,after upda
         BenchmarkTriggerUtility.isGoalBenchmark(Trigger.New);
         BenchmarkTriggerUtility.isCurrentBenchmark(Trigger.New);
     }
-}
+} 
