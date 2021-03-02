@@ -7,7 +7,6 @@ public class WorkoutDistributor implements Schedulable{
     public void execute(SchedulableContext context){
         List<Member__c> members = [SELECT Name, Email__c, Training_Class__c, Fitness_Level__c, Issues__c FROM Member__c WHERE Active__c = TRUE AND Email__c != NULL];
         List<Workout__c> workouts = [SELECT Training_Class__c, Fitness_Level__c, Issues__c, Workout_Description__c, Date__c FROM Workout__c WHERE Date__c = TODAY];
-        EmailTemplate template = [SELECT Id, Subject from EmailTemplate where DeveloperName = 'Workout_Template' LIMIT 1];
         
         List<Messaging.SingleEmailMessage> messages = new List<Messaging.SingleEmailMessage>();
 
@@ -31,9 +30,10 @@ public class WorkoutDistributor implements Schedulable{
     static Messaging.SingleEmailMessage sendWorkout(Workout__c w, Member__c m, EmailTemplate template){
 
         Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();
-        message.setTemplateId(template.id);
+        message.setSenderDisplayName('Workout Delivery Bot');
         message.setToAddresses(new String[]{m.Email__c});
-        message.setHtmlBody(w.Workout_Description__c);
+        message.setHtmlBody('<p>Hello ' + m.Name + ',</p> </p>Below is your daily workout for ' + Date.today().format() + ':</p>' + w.Workout_Description__c);
+        message.setSubject('Your Daily Workout');
 
         return message;
     }
