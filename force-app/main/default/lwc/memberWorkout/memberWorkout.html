@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Workout of the Day" icon-name="custom:custom63">
+        <template if:true={workout.data}>
+            <div class="slds-var-m-around_medium">
+                <p>Level: {fitnessLevel}</p>
+                <lightning-formatted-rich-text value={description}></lightning-formatted-rich-text>
+            </div>
+        </template>
+        <lightning-input type="date" label="Workout Date" name="date" onchange={handleChange}></lightning-input>
+    </lightning-card>
+</template>
