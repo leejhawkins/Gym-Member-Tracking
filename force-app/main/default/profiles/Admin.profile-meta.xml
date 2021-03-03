@@ -191,9 +191,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <layoutAssignments>
-        <layout>Benchmark__c-Benchmark Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>Member__c-Member Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -227,10 +224,6 @@
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <tabVisibilities>
-        <tab>Benchmark__c</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
         <tab>Member__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
@@ -238,7 +231,7 @@
         <tab>Workout__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
-    <userLicense>Salesforce</userLicense>
+    <userLicense        >Salesforce</userLicense>
     <userPermissions>
         <enabled>true</enabled>
         <name>ActivateContract</name>
