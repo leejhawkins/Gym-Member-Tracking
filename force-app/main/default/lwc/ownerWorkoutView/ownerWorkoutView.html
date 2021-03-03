@@ -1,0 +1,30 @@
+<template>
+  <lightning-card title="Workouts for the Day" icon-name="custom:custom63">
+    <div class="slds-grid slds-gutters">
+      <template if:true={workouts.data}>
+        <template for:each={workouts.data} for:item="workout">
+          <div class="slds-col" key={workout.id}>
+            <p key={workout.id}>Level: {workout.Fitness_Level__c}</p>
+            <lightning-formatted-rich-text
+              value={workout.Workout_Description__c}
+              key={workout.id}
+            ></lightning-formatted-rich-text>
+          </div>
+        </template>
+      </template>
+    </div>
+    <template if:false={workouts.data}>
+      <div class="slds-var-m-around_medium">
+        <p style="font-style: oblique">
+          There isn't a workout for this date yet
+        </p>
+      </div>
+    </template>
+    <lightning-input
+      type="date"
+      label="Workout Date"
+      name="date"
+      onchange={handleChange}
+    ></lightning-input>
+  </lightning-card>
+</template>

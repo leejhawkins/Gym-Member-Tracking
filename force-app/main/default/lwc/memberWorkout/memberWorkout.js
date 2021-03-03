@@ -6,7 +6,7 @@ import DESCRIPTION_FIELD from '@salesforce/schema/Workout__c.Workout_Description
 import LEVEL_FIELD from '@salesforce/schema/Workout__c.Fitness_Level__c';
 export default class MemberWorkout extends LightningElement {
     @api recordId;
-    workoutDate = new Date();
+    workoutDate = null;
 
 
     @wire(getMemberWorkout,{memberId:'$recordId',workoutDate:'$workoutDate'})
