@@ -21,7 +21,7 @@ public class WorkoutDistributorTest {
                 new Workout__c(Name= 'Beginner Bodybuilding Workout Test', Date__c= Date.today(), Training_Class__c= 'Bodybuilding', Fitness_Level__c= 'Beginner', Workout_Description__c= 'Basic Beginner Workout'),
                 new Workout__c(Name= 'Elite Bodybuilding Workout Test', Date__c= Date.today(), Training_Class__c= 'Bodybuilding', Fitness_Level__c= 'Elite', Workout_Description__c= 'Elite Bodybuilding Workout'),
                 new Workout__c(Name= 'Advanced Cross-Training Knee;Shoulder Workout Test', Date__c= Date.today(), Training_Class__c= 'Advanced', Fitness_Level__c= 'Cross-Training', Workout_Description__c= 'Advanced Cross-Training Workout'),
-                new Workout__c(Name= 'Elite Bodybuilding Workout Test', Date= Date__c.today().addDays(1), Training_Class__c= 'Bodybuilding', Fitness_Level__c= 'Elite', Workout_Description__c= 'Basic Beginner Workout')
+                new Workout__c(Name= 'Elite Bodybuilding Workout Test', Date__c= Date.today().addDays(1), Training_Class__c= 'Bodybuilding', Fitness_Level__c= 'Elite', Workout_Description__c= 'Basic Beginner Workout')
         };
         insert workouts;
     }
@@ -41,7 +41,7 @@ public class WorkoutDistributorTest {
         List<Member__c> members = [SELECT Name, Email__c, Training_Class__c, Fitness_Level__c, Issues__c FROM Member__c WHERE Active__c = TRUE AND Email__c != NULL];
         List<Workout__c> workouts = [SELECT Training_Class__c, Fitness_Level__c, Issues__c, Workout_Description__c, Date__c FROM Workout__c WHERE Date__c = TODAY];
         Map<Member__c, Workout__c> assignments = WorkoutDistributor.getAssignments(members, workouts);
-        List<Messaging.SendEmailResult> results = WorkoutDistributor.sendEmails();
+        List<Messaging.SendEmailResult> results = WorkoutDistributor.sendEmails(assignments);
         for(Messaging.SendEmailResult r : results){
             System.assert(r.isSuccess());
         }
