@@ -16,7 +16,9 @@ public class WorkoutDistributor implements Schedulable{
         Workout__c w = new Workout__c();
         for(Member__c m : members){
             w = getProgram(m, workouts);
-            assignments.put(m, w);
+            if(w != null){
+                assignments.put(m, w);
+            }
         }
         return assignments;
     }
