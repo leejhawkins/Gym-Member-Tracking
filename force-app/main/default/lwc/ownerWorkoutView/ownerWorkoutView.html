@@ -1,25 +1,82 @@
 <template>
   <lightning-card title="Workouts for the Day" icon-name="custom:custom63">
     <div class="slds-grid slds-gutters">
-      <template if:true={workouts.data}>
-        <template for:each={workouts.data} for:item="workout">
-          <div class="slds-col" key={workout.id}>
-            <p key={workout.id}>Level: {workout.Fitness_Level__c}</p>
-            <lightning-formatted-rich-text
-              value={workout.Workout_Description__c}
-              key={workout.id}
-            ></lightning-formatted-rich-text>
+      <div class="slds-col">
+        <template if:true={workout.data}>
+          <p>Level: Beginner</p>
+          <lightning-record-form
+            object-api-name="Workout__c"
+            record-id={workoutId}
+            fields="Workout_Description__c"
+          ></lightning-record-form>
+        </template>
+        <template if:false={workout.data}>
+          <div class="slds-var-m-around_medium">
+            <p style="font-style: oblique">
+              There isn't a workout for this date yet
+            </p>
           </div>
         </template>
-      </template>
-    </div>
-    <template if:false={workouts.data}>
-      <div class="slds-var-m-around_medium">
-        <p style="font-style: oblique">
-          There isn't a workout for this date yet
-        </p>
       </div>
-    </template>
+      <div class="slds-col">
+        <template if:true={intermediateWorkout.data}>
+          <p>Level: Intermediate</p>
+          <lightning-record-form
+            object-api-name="Workout__c"
+            record-id={intermediateWorkoutId}
+            fields="Workout_Description__c"
+          ></lightning-record-form>
+        </template>
+        <template if:false={intermediateWorkout.data}>
+          <div class="slds-var-m-around_medium">
+            <p style="font-style: oblique">
+              There isn't a workout for this date yet
+            </p>
+          </div>
+        </template>
+      </div>
+      <div class="slds-col">
+        <template if:true={advancedWorkout.data}>
+          <p>Level: Advanced</p>
+          <lightning-record-form
+            object-api-name="Workout__c"
+            record-id={advancedWorkoutId}
+            fields="Workout_Description__c"
+          ></lightning-record-form>
+        </template>
+        <template if:false={advancedWorkout.data}>
+          <div class="slds-var-m-around_medium">
+            <p style="font-style: oblique">
+              There isn't a workout for this date yet
+            </p>
+          </div>
+        </template>
+      </div>
+      <div class="slds-col">
+        <template if:true={eliteWorkout.data}>
+          <p>Level: Elite</p>
+          <lightning-record-form
+            object-api-name="Workout__c"
+            record-id={eliteWorkoutId}
+            fields="Workout_Description__c"
+          ></lightning-record-form>
+        </template>
+        <template if:false={eliteWorkout.data}>
+          <div class="slds-var-m-around_medium">
+            <p style="font-style: oblique">
+              There is no Elite workout for today, create one
+            </p>
+            <!-- <lightning-record-edit-form object-api-name="Workout__c" onsuccess={successHandler}>
+                <p><lightning-input-field field-name='Name'></lightning-input-field></p>
+                <p><lightning-input-field field-name='Workout_Description__c'></lightning-input-field></p>
+                <p>
+                    <lightning-button type="submit" variant="brand" name="save" label="Create Workout"></lightning-button>
+                </p>
+            </lightning-record-edit-form> -->
+          </div>
+        </template>
+      </div>
+    </div>
     <lightning-input
       type="date"
       label="Workout Date"
