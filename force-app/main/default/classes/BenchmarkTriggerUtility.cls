@@ -7,11 +7,11 @@ public inherited sharing class BenchmarkTriggerUtility {
             Double bs = b.Back_Squat__c;
             Double dl = b.Deadlift__c;
             Double sp = b.Shoulder_Press__c;
-            if( bp > w*1.5 && bs > w*2.0 && dl > w*2.5 && sp > w ){
+            if( bp > w*1.75 && bs > w*2.5 && dl > w*2.75 && sp > w*1.2 ){
                 b.Fitness_Level__c = 'Elite';
-            } else if( bp > w*1.25 && bs > w*1.75 && dl > w*2.25 && sp >.75* w ){
+            } else if( bp > w*1.5 && bs > w*2 && dl > w*2.25 && sp > w ){
                 b.Fitness_Level__c = 'Advanced';
-            }  else if( bp > w && bs > w*1.50 && dl > w*2 && sp >.60* w ){
+            }  else if( bp > w && bs > w*1.50 && dl > w*1.75 && sp >.75* w ){
                 b.Fitness_Level__c = 'Intermediate';
             }  else {
                 b.Fitness_Level__c = 'Beginner';
