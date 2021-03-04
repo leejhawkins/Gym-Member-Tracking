@@ -1,3 +1,7 @@
+/*
+   Created by Kareem El Sayed
+   Test class to test if the BMI calculations are performed
+*/
 @isTest public inherited sharing class BMICalculatorLogicTest {
     @TestSetup
     static void makeData(){

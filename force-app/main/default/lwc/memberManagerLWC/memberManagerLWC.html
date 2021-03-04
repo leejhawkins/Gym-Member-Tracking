@@ -1,0 +1,9 @@
+<template>
+    <div class="slds-scrollable_y" style="height:20rem;width:24rem" title="Members">
+        <div class="slds-text-longform">
+            <lightning-datatable key-field="Id" data={members.data} columns={columns}
+             hide-checkbox-column="true">
+            </lightning-datatable>
+        </div>
+    </div>
+</template>
