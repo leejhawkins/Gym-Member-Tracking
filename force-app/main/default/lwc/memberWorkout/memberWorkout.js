@@ -4,7 +4,8 @@ import getMemberWorkout from '@salesforce/apex/WorkoutController.getMemberWorkou
 
 import DESCRIPTION_FIELD from '@salesforce/schema/Workout__c.Workout_Description__c';
 import LEVEL_FIELD from '@salesforce/schema/Workout__c.Fitness_Level__c';
-export default class MemberWorkout extends LightningElement {
+
+export default class MemberWorkout extends LightningElement {             
     @api recordId;
     workoutDate = null;
 
@@ -14,12 +15,13 @@ export default class MemberWorkout extends LightningElement {
 
     get description(){
         return this.workout.data
-        ? getSObjectValue(this.workout.data, DESCRIPTION_FIELD).replaceAll('<[^>]+>',' '):'';
+        ? getSObjectValue(this.workout.data, DESCRIPTION_FIELD):'';
     }
     get fitnessLevel(){
         return this.workout.data
         ? getSObjectValue(this.workout.data, LEVEL_FIELD):'';
     }
+    
     handleChange(event) {
         this.workoutDate = event.target.value
     }
