@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Add a member">
+        <div class="slds-var-m-around_medium">
+        <lightning-record-edit-form object-api-name={memberObject}>
+            <lightning-messages></lightning-messages>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input-field field-name={nameField}></lightning-input-field>
+                    <lightning-input-field field-name={dobField}></lightning-input-field>
+                    <lightning-input-field field-name={weightField}></lightning-input-field>
+                    <lightning-input-field field-name={heightFtField}></lightning-input-field>
+                    <lightning-input-field field-name={heightInField}></lightning-input-field>
+                    <lightning-input-field field-name={emailField}></lightning-input-field>
+                    <lightning-input-field field-name={backSquatField}></lightning-input-field>
+                    <lightning-input-field field-name={deadliftField}></lightning-input-field>
+                    <lightning-input-field field-name={shldPressField}></lightning-input-field>
+                    <lightning-input-field field-name={fitnessLevelField}></lightning-input-field>
+                    <lightning-input-field field-name={trainingClassField}></lightning-input-field>
+                    <lightning-input-field field-name={activeField}></lightning-input-field>
+                </div>
+            </div>
+            <lightning-button type="submit" variant="brand" label="Create Member" onclick={showSuccessToast}></lightning-button>
+    </lightning-record-edit-form>
+        </div>
+    </lightning-card>
+</template>
+
+
