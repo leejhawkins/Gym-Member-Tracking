@@ -5,7 +5,6 @@ import MEMBER_OBJECT from '@salesforce/schema/Member__c';
 import NAME_FIELD from '@salesforce/schema/Member__c.Name';
 import DOB_FIELD from '@salesforce/schema/Member__c.Date_of_Birth__c';
 import ACTIVE_FIELD from '@salesforce/schema/Member__c.Active__c';
-import WEIGHT_FIELD from '@salesforce/schema/Member__c.Weight__c';
 import HEIGHTFT_FIELD from '@salesforce/schema/Member__c.Height_Feet__c';
 import HEIGHTIN_FIELD from '@salesforce/schema/Member__c.Height_Inches__c';
 import EMAIL_FIELD from '@salesforce/schema/Member__c.Email__c';
@@ -21,7 +20,6 @@ export default class AddMember extends LightningElement {
     nameField = NAME_FIELD;
     dobField = DOB_FIELD;
     activeField = ACTIVE_FIELD;
-    weightField = WEIGHT_FIELD;
     heightFtField = HEIGHTFT_FIELD;
     heightInField = HEIGHTIN_FIELD;
     emailField = EMAIL_FIELD;
