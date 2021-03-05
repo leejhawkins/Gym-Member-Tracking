@@ -4,15 +4,11 @@
 */
 public inherited sharing class MemberController {
     
-     @AuraEnabled(cacheable=true)
-    public static List<Member__c> getMemberList() {
-        return [SELECT Id, Name, Fitness_Level__c, Training_Class__c FROM Member__c];
-    }
-
-     @AuraEnabled(cacheable=true)
-     public static List<Member__c> findMembers(String searchKey){
-        String key = '%' + searchKey + '%';
-        return [SELECT Id, Name FROM Member__c WHERE Name LIKE :searchKey];
-     }
+      @AuraEnabled(cacheable=true)
+      public static List<Member__c> findMembers(String searchKey){
+         String key = '%' + searchKey + '%';
+         return [SELECT Id, Name, Fitness_Level__c, Training_Class__c FROM Member__c WHERE Name LIKE :key];
+         
+      }
     
 }

@@ -1,15 +1,38 @@
 <template>
-    <lightning-card title="Find Member">
-        <div class="slds-var-m-around_medium">
-            <lightning-input type="search" onchange={handleKeyChange} class="slds-var-m-bottom_small" label="Search"
-                value={searchKey}></lightning-input>
-                <lightning-layout-item class="slds-var-p-left_xx-small">
-                    <lightning-button label="Search" onclick={handleSearch}></lightning-button>
-                </lightning-layout-item>
-                <template for:each={members} for:item="member">
-                    <p key={member.Id}>{member.Name}</p>
-                </template>
+  <lightning-card title="Find Member">
+    <div class="slds-var-m-around_medium">
+      <lightning-input
+        type="search"
+        onchange={handleKeyChange}
+        class="slds-var-m-bottom_small"
+        label="Search"
+        value={searchKey}
+      ></lightning-input>
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_4-of-12" style="border-bottom: solid 3px;">
+          <span>Member Name</span>
         </div>
-    </lightning-card>
-
+        <div class="slds-col slds-size_4-of-12" style="border-bottom: solid 3px;">
+          <span>Fitness Level</span>
+        </div>
+        <div class="slds-col slds-size_4-of-12" style="border-bottom: solid 3px;">
+          <span>Program</span>
+        </div>
+        
+        <template if:true={members.data}>
+          <template for:each={members.data} for:item="member">
+            <div class="slds-col slds-size_4-of-12" key={member.Id}>
+              <span key={member.Id}>{member.Name}</span>
+            </div>
+            <div class="slds-col slds-size_4-of-12" key={member.Id}>
+              <span key={member.Id}>{member.Fitness_Level__c}</span>
+            </div>
+            <div class="slds-col slds-size_4-of-12" key={member.Id}>
+              <span key={member.Id}>{member.Training_Class__c}</span>
+            </div>
+          </template>
+        </template>
+      </div>
+    </div>
+  </lightning-card>
 </template>
