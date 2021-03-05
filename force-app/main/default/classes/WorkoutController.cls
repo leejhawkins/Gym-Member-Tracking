@@ -15,15 +15,25 @@ public inherited sharing class WorkoutController {
         }
     }
     @AuraEnabled(cacheable=true)
-    public static Workout__c getAllWorkoutsForDay(Date workoutDate,String fitnessLevel){
+    public static List<Workout__c> getAllWorkoutsForDay(Date workoutDate){
         try {
             workoutDate = workoutDate != null ? workoutDate: Date.today();
             return [SELECT Workout_Description__c,Fitness_Level__c,Id,Date__c
             FROM Workout__c 
             WHERE
-            Date__c =: workoutDate
-            AND Fitness_Level__c LIKE :fitnessLevel
-            LIMIT 1];
+            Date__c =: workoutDate];
+            
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+    @AuraEnabled(cacheable=true)
+    public static Workout__c getWorkoutById(Id workoutId){
+        try {
+            return [SELECT Fitness_Level__c,Id,Date__c
+            FROM Workout__c 
+            WHERE
+            Id =: workoutId];
             
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
