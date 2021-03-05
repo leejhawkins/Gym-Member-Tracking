@@ -4,7 +4,7 @@
 */
 @isTest public inherited sharing class TestDataFactory {
     
-    //generates  test-members with required fields
+    //methods to create records and populate the required fields
     public static List<Member__c> generateMembers(Integer numOfMembers){
        List<Member__c> members = new List<Member__c>();
        for(Integer i = 0; i < numOfMembers; i++){
@@ -18,7 +18,6 @@
        return members;
    }
 
-     //generates test-workouts with required fields
     public static List<Workout__c> generateWorkouts(Integer numOfWorkouts){
         List<Workout__c> workouts = new List<Workout__c>();
         Integer i = 0;
@@ -36,7 +35,6 @@
 
     }
 
-    //generate benchmarks with the members generated from the generateMembers method
    public static List<Benchmark__c> generateBenchmarks(Integer numOfBenchMarks, List<Member__c> members){
        List<Benchmark__c> benchmarks = new List<Benchmark__c>();
        
@@ -54,8 +52,8 @@
          return benchmarks;
    }
 
-    //generates a Member with specified fields
-    public static List<Member__c> generateMembersRobust(String email, String fitnessLevel, String trainingClass, String issues, Integer membersNum){
+    //methods to create records with specified fields
+    public static List<Member__c> generateMembers(String email, String fitnessLevel, String trainingClass, String issues, Integer membersNum){
          List<Member__c> members = new List<Member__c>();
          for(Integer i = 0; i < membersNum; i++){
             Member__c member = new Member__c();
@@ -71,8 +69,7 @@
 
    }
     
-    //generates a Workout with specified fields
-    public static List<Workout__c> generateWorkoutsRobust(Date workoutDate, String fitnessLevel, String trainingClass, String description, String issues, Integer numWorkouts){
+    public static List<Workout__c> generateWorkouts(Date workoutDate, String fitnessLevel, String trainingClass, String description, String issues, Integer numWorkouts){
             List<Workout__c> workouts = new List<Workout__c>();
 
             for(Integer i = 0; i < numWorkouts; i++){
@@ -91,11 +88,8 @@
             return workouts;
     }
 
-
-
-   //generates a benchmark with specified Name & a member with goals assosiated to the benchmark
-   //other needed fields?     
-   public static List<Benchmark__c> generateBenchmarksRobust(List<Member__c> members, Integer weight, Integer numBenchMarks){  
+    
+   public static List<Benchmark__c> generateBenchmarks(List<Member__c> members, Integer weight, Integer numBenchMarks){  
            List<Benchmark__c> benchmarks = new List<Benchmark__c>();
     
            for(Member__c m: members){
