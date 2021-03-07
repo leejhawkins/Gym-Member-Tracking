@@ -13,7 +13,6 @@ export default class OwnerWorkoutView extends LightningElement {
     advancedId = null;
     intermediateId = null;
     eliteId = null;
-
     @wire(getAllWorkoutsForDay,{workoutDate:'$workoutDate'})
     getEliteWorkout({ error, data }) {
         if (data) {
@@ -21,13 +20,16 @@ export default class OwnerWorkoutView extends LightningElement {
             this.advancedId = null;
             this.intermediateId = null;
             this.eliteId = null;
+            this.addBeginner = false;
+            this.addIntermediate = false;
+            this.addAdvanced = false;
+            this.addElite = false;
             data.forEach(workout=> {
                 
                 let fitnessLevel = getSObjectValue(workout,LEVEL_FIELD);
                 switch(fitnessLevel) {
                     case 'Beginner':
                         this.beginnerId = getSObjectValue(workout,ID_FIELD)
-                        console.log(this.beginnerId)
                     break;
                     case 'Intermediate':
                         this.intermediateId = getSObjectValue(workout,ID_FIELD)
@@ -46,28 +48,19 @@ export default class OwnerWorkoutView extends LightningElement {
             this.error = error;
         }
     }
-
-    get targetDate(){
-        return this.workout.data
-        ? getSObjectValue(this.workout.data, DATE_FIELD):'';
-    }
-    handleBeginner(event){
-        this.beginnerId = event.detail.id;
-        this.showToast('Beginner');
-    }
-    handleIntermediate(event){
-        this.intermediateId = event.detail.id;
-        this.showToast('Intermediate');
-    }
-    handleAdvanced(event){
-        this.advancedId = event.detail.id;
-        this.showToast('Advanced');
-    }
-    handleElite(event){
-        this.eliteId = event.detail.id;
-        this.showToast('Elite');
-    }
-    showToast(level){
+    
+    handleSuccess(event){
+        let level = event.detail.level;
+        console.log(level);
+        if (level==='Beginner'){
+            this.beginnerId = event.detail.id;
+        } else if(level==='Intermediate'){
+            this.intermediateId = event.detail.id;
+        } else if(level==='Advanced'){
+            this.advancedId = event.detail.id;
+        } else if(level==='Elite'){
+            this.eliteId = event.detail.id;
+        }
         this.dispatchEvent(
             new ShowToastEvent({
                 title: 'Success',
@@ -79,4 +72,5 @@ export default class OwnerWorkoutView extends LightningElement {
     handleChange(event) {
         this.workoutDate = event.target.value
     }
+   
 }

@@ -2,91 +2,20 @@
   <lightning-card title="Workouts for the Day" icon-name="custom:custom63">
     <div class="slds-grid">
       <div class="slds-size_3-of-12">
-        <template if:true={beginnerId}>
-          <p>Level: Beginner</p>
-          <lightning-record-form
-            object-api-name="Workout__c"
-            record-id={beginnerId}
-            fields="Workout_Description__c"
-          ></lightning-record-form>
-        </template>
-        <template if:false={beginnerId}>
-            <lightning-record-edit-form object-api-name="Workout__c" onsuccess={handleBeginner} >
-                <lightning-input-field field-name='Name'></lightning-input-field>
-                <lightning-input-field field-name='Workout_Description__c'></lightning-input-field>
-                <span>
-                    <lightning-input-field field-name='Date__c' value={workoutDate}></lightning-input-field>
-                    <lightning-input-field field-name='Fitness_Level__c' value='Beginner'></lightning-input-field>
-                </span>
-                <lightning-button type="submit" variant="brand" name="save" label="Create Workout"></lightning-button>
-                
-            </lightning-record-edit-form>
-        </template>
+        <c-workout-div workoutid={beginnerId} date={workoutDate} name='Beginner' onadd={handleSuccess}>
+        </c-workout-div>
       </div>
       <div class="slds-size_3-of-12">
-        <template if:true={intermediateId}>
-          <p>Level: Intermediate</p>
-          <lightning-record-form
-            object-api-name="Workout__c"
-            record-id={intermediateId}
-            fields="Workout_Description__c"
-          ></lightning-record-form>
-        </template>
-        <template if:false={intermediateId}>
-            <lightning-record-edit-form object-api-name="Workout__c" onsuccess={handleIntermediate} >
-                <lightning-input-field field-name='Name'></lightning-input-field>
-                <lightning-input-field field-name='Workout_Description__c'></lightning-input-field>
-                <span>
-                    <lightning-input-field field-name='Date__c' value={workoutDate}></lightning-input-field>
-                    <lightning-input-field field-name='Fitness_Level__c' value='Intermediate'></lightning-input-field>
-                </span>
-                    <lightning-button type="submit" variant="brand" name="save" label="Create Workout"></lightning-button>
-            </lightning-record-edit-form>
-        </template>
+        <c-workout-div workoutid={intermediateId} date={workoutDate} name='Intermediate' onadd={handleSuccess}>
+        </c-workout-div>
       </div>
       <div class="slds-size_3-of-12">
-        <template if:true={advancedId}>
-          <p>Level: Advanced</p>
-          <lightning-record-form
-            object-api-name="Workout__c"
-            record-id={advancedId}
-            fields="Workout_Description__c"
-          ></lightning-record-form>
-        </template>
-        <template if:false={advancedId}>
-            <lightning-record-edit-form object-api-name="Workout__c" onsuccess={handleAdvanced} >
-                <lightning-input-field field-name='Name'></lightning-input-field>
-                <lightning-input-field field-name='Workout_Description__c'></lightning-input-field>
-                <span>
-                    <lightning-input-field field-name='Date__c' value={workoutDate}></lightning-input-field>
-                    <lightning-input-field field-name='Fitness_Level__c' value='Advanced'></lightning-input-field>
-                </span>
-                    <lightning-button type="submit" variant="brand" name="save" label="Create Workout"></lightning-button>  
-            </lightning-record-edit-form>
-        </template>
+        <c-workout-div workoutid={advancedId} date={workoutDate} name='Advanced' onadd={handleSuccess}>
+        </c-workout-div>
       </div>
       <div class="slds-size_3-of-12">
-        <template if:true={eliteId}>
-          <p>Level: Elite</p>
-          <lightning-record-form
-            object-api-name="Workout__c"
-            record-id={eliteId}
-            fields="Workout_Description__c"
-          ></lightning-record-form>
-        </template>
-        <template if:false={eliteId}>
-            <lightning-record-edit-form object-api-name="Workout__c" onsuccess={handleElite} >
-                <lightning-input-field field-name='Name'></lightning-input-field>
-                <lightning-input-field field-name='Workout_Description__c'></lightning-input-field>
-                <span>
-                    <lightning-input-field field-name='Date__c' value={workoutDate}></lightning-input-field>
-                    <lightning-input-field field-name='Fitness_Level__c' value='Elite'></lightning-input-field>
-                </span>
-                
-                    <lightning-button type="submit" variant="brand" name="save" label="Create Workout"></lightning-button>
-                
-            </lightning-record-edit-form>
-        </template>
+        <c-workout-div workoutid={eliteId} date={workoutDate} name='Elite' onadd={handleSuccess}>
+        </c-workout-div>
       </div>
     </div>
     <lightning-input

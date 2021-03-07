@@ -1,40 +1,41 @@
 <template>
-  <div class="slds-scrollable_y" style="height:20rem;width:24rem">
-  <lightning-card title="Find Member">
-    <div class="slds-var-m-around_medium">
-      <lightning-input
-        type="search"
-        onchange={handleKeyChange}
-        class="slds-var-m-bottom_small"
-        label="Search"
-        value={searchKey}
-      ></lightning-input>
-      <div class="slds-grid slds-wrap">
-        <div class="slds-col slds-size_4-of-12" style="border-bottom: solid 3px;">
-          <span>Member Name</span>
+  <div class="slds-scrollable_y" style="height: 20rem">
+    <lightning-card title="Find Member">
+      <div class="slds-var-m-around_medium">
+        <lightning-input
+          type="search"
+          onchange={handleKeyChange}
+          class="slds-var-m-bottom_small"
+          label="Search"
+          value={searchKey}
+        ></lightning-input>
+        <div class="slds-grid slds-wrap">
+          <div
+            class="slds-col slds-size_4-of-12"
+            style="border-bottom: solid 3px"
+          >
+            <span>Member Name</span>
+          </div>
+          <div
+            class="slds-col slds-size_4-of-12"
+            style="border-bottom: solid 3px"
+          >
+            <span>Fitness Level</span>
+          </div>
+          <div
+            class="slds-col slds-size_4-of-12"
+            style="border-bottom: solid 3px"
+          >
+            <span>Program</span>
+          </div>
         </div>
-        <div class="slds-col slds-size_4-of-12" style="border-bottom: solid 3px;">
-          <span>Fitness Level</span>
-        </div>
-        <div class="slds-col slds-size_4-of-12" style="border-bottom: solid 3px;">
-          <span>Program</span>
-        </div>
-        
-        <template if:true={members.data}>
-          <template for:each={members.data} for:item="member">
-            <div class="slds-col slds-size_4-of-12" key={member.Id}>
-              <span key={member.Id}>{member.Name}</span>
-            </div>
-            <div class="slds-col slds-size_4-of-12" key={member.Id}>
-              <span key={member.Id}>{member.Fitness_Level__c}</span>
-            </div>
-            <div class="slds-col slds-size_4-of-12" key={member.Id}>
-              <span key={member.Id}>{member.Training_Class__c}</span>
-            </div>
+          <template if:true={members.data}> 
+              <template for:each={members.data} for:item="member">
+                  <c-member-row key={member.Id} member={member} onmemberselect={handleContactSelect} > 
+                  </c-member-row>
+              </template>
           </template>
-        </template>
       </div>
-    </div>
-  </lightning-card>
+    </lightning-card>
   </div>
 </template>
