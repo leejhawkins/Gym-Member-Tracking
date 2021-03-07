@@ -1,0 +1,11 @@
+<template>
+        <lightning-card title="Create a Copy of This Workout">
+            <div class="slds-var-m-around_medium">
+                <lightning-input name="name" label="Copy Name" onchange={handleNameChange}></lightning-input>            
+                <lightning-input type="date" label="Copy Date" name="date" onchange={handleDateChange}></lightning-input>
+                <lightning-layout-item class="slds-var-p-left_xx-small">
+                    <lightning-button label="Copy Workout" title="clone" onclick={handleClick}></lightning-button>
+                </lightning-layout-item>
+            </div>
+        </lightning-card>
+</template>
