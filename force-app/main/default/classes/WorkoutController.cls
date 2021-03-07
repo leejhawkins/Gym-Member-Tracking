@@ -29,5 +29,26 @@ public inherited sharing class WorkoutController {
             throw new AuraHandledException(e.getMessage());
         }
     }
-    
+    @AuraEnabled
+    public static void cloneWorkout(Id workoutId, String workoutName, Date workoutDate){
+        try {
+            
+            Workout__c w = [SELECT Id, Date__c, Fitness_Level__c, Training_Class__c, Issues__c, Workout_Description__c FROM Workout__c WHERE Id=: workoutId];
+
+            workoutName = workoutName != null? workoutName: w.Name;
+            workoutDate = workoutDate != null ? workoutDate: Date.today();
+
+            Workout__c clone = new Workout__c(Name= workoutName, Date__c= workoutDate);
+
+            clone.Fitness_Level__c = w.Fitness_Level__c;
+            clone.Training_Class__c = w.Training_Class__c;
+            clone.Issues__c = w.Issues__c;
+            clone.Workout_Description__c = w.Workout_Description__c;
+            
+            insert clone;
+            
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }
