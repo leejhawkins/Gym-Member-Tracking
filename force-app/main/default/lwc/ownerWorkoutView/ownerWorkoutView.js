@@ -20,10 +20,6 @@ export default class OwnerWorkoutView extends LightningElement {
             this.advancedId = null;
             this.intermediateId = null;
             this.eliteId = null;
-            this.addBeginner = false;
-            this.addIntermediate = false;
-            this.addAdvanced = false;
-            this.addElite = false;
             data.forEach(workout=> {
                 
                 let fitnessLevel = getSObjectValue(workout,LEVEL_FIELD);
