@@ -36,6 +36,7 @@ public class WorkoutDistributorTest {
             Test.stopTest();
             System.assert(true);
         }catch(Exception e){
+            System.assert(false);
             System.debug(e.getMessage());
         }
         List<Member__c> members = [SELECT Name, Email__c, Training_Class__c, Fitness_Level__c, Issues__c FROM Member__c WHERE Active__c = TRUE AND Email__c != NULL];
