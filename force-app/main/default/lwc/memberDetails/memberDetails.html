@@ -1,14 +1,24 @@
 <template>
-    <lightning-card
-        title={Name}
-    >
-        <div class="slds-m-around_medium">
+  <lightning-card title={Name}>
+    <template if:true={Name} onchange={handleChange} value={Name}>
+      <div class="slds-m-around_medium">
+        <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-size_4-of-12">
             <p>{Fitness_Level__c}</p>
-            <p>
-                <lightning-formatted-email
-                    value={Email__c}
-                ></lightning-formatted-email>
-            </p>
+            <lightning-formatted-email
+              value={Email__c}
+            ></lightning-formatted-email>
+          </div>
+          <c-member-bar-chart 
+            cbs={currentBackSquat}
+            cdl={currentDeadlift}
+            gbs={goalBackSquat}
+            gdl={goalDeadLift}
+            class="slds-col slds-size_8-of-12">
+          </c-member-bar-chart>
+         
         </div>
-    </lightning-card>
+      </div>
+    </template>
+  </lightning-card>
 </template>

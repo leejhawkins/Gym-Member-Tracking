@@ -41,7 +41,7 @@ public inherited sharing class BenchmarkTriggerUtility {
         for(Benchmark__c b:bens){
             if(b.Date__c >= Date.Today().toStartofMonth() && b.Date__c < Date.Today().addMonths(1).toStartofMonth()){
                 Member__c m = [Select Id from Member__c Where Id=:b.Member__c];
-                m.Current_Benchmark__c = b.Id;
+                // m.Current_Benchmark__c = b.Id;
                 m.Fitness_Level__c = b.Fitness_Level__c;
                 m.BMI__c = b.BMI__c;
                 update m;
