@@ -17,7 +17,6 @@ public inherited sharing class WorkoutController {
     @AuraEnabled(cacheable=true)
     public static List<Workout__c> getAllWorkoutsForDay(Date workoutDate){
         try {
-            workoutDate = workoutDate != null ? workoutDate: Date.today();
             return [SELECT Workout_Description__c,Fitness_Level__c,Id,Date__c
             FROM Workout__c 
             WHERE

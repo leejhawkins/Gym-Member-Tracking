@@ -3,18 +3,15 @@
         <div class="slds-var-m-around_medium">
         <lightning-record-edit-form object-api-name={memberObject}>
             <lightning-messages></lightning-messages>
-            <div class="slds-grid slds-wrapper">
-                <div class="slds-col slds-size_2-of-2">
-                    <lightning-input-field field-name={nameField}></lightning-input-field>
-                    <lightning-input-field field-name={dobField}></lightning-input-field>
-                    <lightning-input-field field-name={weightField}></lightning-input-field>
-                    <lightning-input-field field-name={heightFtField}></lightning-input-field>
-                    <lightning-input-field field-name={heightInField}></lightning-input-field>
-                    <lightning-input-field field-name={emailField}></lightning-input-field>
-                    <lightning-input-field field-name={fitnessLevelField}></lightning-input-field>
-                    <lightning-input-field field-name={trainingClassField}></lightning-input-field>
-                    <lightning-input-field field-name={activeField}></lightning-input-field>
-                </div>
+            <div class="slds-grid slds-wrap">
+                    <lightning-input-field class="slds-col slds-size_1-of-2" field-name={nameField}></lightning-input-field>
+                    <lightning-input-field class="slds-col slds-size_1-of-2" field-name={dobField}></lightning-input-field>
+                    <lightning-input-field class="slds-col slds-size_1-of-2" field-name={heightFtField}></lightning-input-field>
+                    <lightning-input-field class="slds-col slds-size_1-of-2" field-name={heightInField}></lightning-input-field>
+                    <lightning-input-field class="slds-col slds-size_1-of-2" field-name={emailField}></lightning-input-field>
+                    <lightning-input-field class="slds-col slds-size_1-of-2" field-name={fitnessLevelField}></lightning-input-field>
+                    <lightning-input-field class="slds-col slds-size_1-of-2" field-name={trainingClassField}></lightning-input-field>
+                    <lightning-input-field class="slds-col slds-size_1-of-2" field-name={activeField}></lightning-input-field>
             </div>
             <lightning-button type="submit" variant="brand" label="Create Member" onclick={showSuccessToast}></lightning-button>
     </lightning-record-edit-form>
