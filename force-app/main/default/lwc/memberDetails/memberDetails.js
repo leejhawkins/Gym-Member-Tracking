@@ -4,8 +4,7 @@ import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 
 import { subscribe, MessageContext } from "lightning/messageService";
 import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected__c";
-import getCurrentBenchmark from "@salesforce/apex/BenchmarkController.getCurrentBenchmark";
-import getGoalBenchmark from "@salesforce/apex/BenchmarkController.getGoalBenchmark";
+import getBenchmarks from "@salesforce/apex/BenchmarkController.getBenchmarks";
 
 import getMemberWorkout from '@salesforce/apex/WorkoutController.getMemberWorkout';
 import NAME_FIELD from "@salesforce/schema/Member__c.Name";
@@ -50,21 +49,14 @@ export default class MemberDetails extends LightningElement {
   
   handleMessage(message) {
     this.recordId = message.recordId;
-    getCurrentBenchmark({ memberId: this.recordId })
+    getBenchmarks({ memberId: this.recordId })
       .then((data) => {
-        this.currentBackSquat = getSObjectValue(data, BACKSQUAT_FIELD);
-        this.currentDeadlift = getSObjectValue(data, DEADLIFT_FIELD);
-      })
-      .catch((error) => {
-        this.error = error;
-        this.currentBackSquat = 0;
-        this.currentDeadlift = 0;
-      });
-    getGoalBenchmark({ memberId: this.recordId })
-      .then((data) => {
-        console.log(data);
-        this.goalBackSquat = getSObjectValue(data, BACKSQUAT_FIELD);
-        this.goalDeadLift = getSObjectValue(data, DEADLIFT_FIELD);
+        let curBen = data['Current'];
+        let goalBen = data['Goal'];
+        this.currentBackSquat = getSObjectValue(curBen, BACKSQUAT_FIELD);
+        this.currentDeadlift = getSObjectValue(curBen, DEADLIFT_FIELD);
+        this.goalBackSquat = getSObjectValue(goalBen, BACKSQUAT_FIELD);
+        this.goalDeadLift = getSObjectValue(goalBen, DEADLIFT_FIELD);
         if (this.template.querySelector("c-member-bar-chart").chartCreated()) {
           this.template
             .querySelector("c-member-bar-chart")
@@ -78,6 +70,8 @@ export default class MemberDetails extends LightningElement {
       })
       .catch((error) => {
         this.error = error;
+        this.currentBackSquat = 0;
+        this.currentDeadlift = 0;
         this.goalBackSquat = 0;
         this.goalDeadLift = 0;
         if (this.template.querySelector("c-member-bar-chart").chartCreated()) {
