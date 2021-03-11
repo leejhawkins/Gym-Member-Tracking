@@ -30,7 +30,7 @@ public with sharing class MailToNewMember {
            }
 
              Messaging.sendEmail(mails);
-             checkSentEmails(mails);
+             
         }
 
     }
