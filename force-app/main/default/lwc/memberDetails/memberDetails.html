@@ -8,6 +8,12 @@
             <lightning-formatted-email
               value={Email__c}
             ></lightning-formatted-email>
+            <lightning-button 
+              type="button"
+              name="edit"
+              label="Send Email"
+              onclick={handleShowModal}>
+            </lightning-button>
           </div>
           <c-member-bar-chart 
             cbs={currentBackSquat}
@@ -16,6 +22,19 @@
             gdl={goalDeadLift}
             class="slds-col slds-size_8-of-12">
           </c-member-bar-chart>
+          <c-email-modal
+            name={Name}
+            level={Fitness_Level__c}
+            email={Email__c}
+            workoutdes={workoutDes}>
+            <div slot="footer">
+              <lightning-button
+                  label="Cancel"
+                  variant="neutral"
+                  onclick={handleCancelModal}
+              ></lightning-button>
+          </div>
+          </c-email-modal>
          
         </div>
       </div>
