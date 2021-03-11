@@ -1,7 +1,7 @@
 public inherited sharing class BenchmarkTriggerUtility {
     
     public static void fitnessLevel(List<Benchmark__c> bens){
-        List<Member__c> members = [SELECT Id, Gender__c FROM Member__c WHERE Active__c = TRUE];
+        List<Member__c> members = [SELECT Id, Weight__c, Gender__c FROM Member__c WHERE Active__c = TRUE];
         Map<Benchmark__c, Member__c> bmMap = new Map<Benchmark__c, Member__c>();
         for(Benchmark__c b : bens){
             for(Member__c m : members){
