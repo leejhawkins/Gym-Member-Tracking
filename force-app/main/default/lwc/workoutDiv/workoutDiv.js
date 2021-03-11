@@ -4,8 +4,8 @@ export default class WorkoutDiv extends LightningElement {
     @api workoutid;
     @api date;
     @api name;
-    
     edit = false;
+    
     handleSuccess(event){
         this.edit = false;
         const id = event.detail.id;
@@ -17,6 +17,7 @@ export default class WorkoutDiv extends LightningElement {
     showEdit(){
         this.edit = true;
     }
-
-
+    get workoutName(){
+        return `${this.name} Workout for ${this.date}`.trim()
+    }
 }

@@ -4,15 +4,32 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getAllWorkoutsForDay from '@salesforce/apex/WorkoutController.getAllWorkoutsForDay';
 import LEVEL_FIELD from '@salesforce/schema/Workout__c.Fitness_Level__c';
 import ID_FIELD from '@salesforce/schema/Workout__c.Id';
-import DATE_FIELD from '@salesforce/schema/Workout__c.Date__c';
+import { loadScript } from 'lightning/platformResourceLoader';
+import MOMENT_JS from '@salesforce/resourceUrl/moment';
+
 
 export default class OwnerWorkoutView extends LightningElement {
-    workoutDate = null;
+    workoutDate = new Date().toISOString();
     error;
     beginnerId = null;
     advancedId = null;
     intermediateId = null;
     eliteId = null;
+    renderedCallback() {
+        if (this.momentjsInitialized) {
+            return;
+        }
+        this.momentjsInitialized = true;
+        loadScript(this, MOMENT_JS)
+            .then(() => {
+                this.workoutDate = moment().format('YYYY-MM-DD');
+            })
+            .catch((error) => {
+                this.error = error;
+            });
+    }
+    
+
     @wire(getAllWorkoutsForDay,{workoutDate:'$workoutDate'})
     getEliteWorkout({ error, data }) {
         if (data) {
@@ -20,10 +37,6 @@ export default class OwnerWorkoutView extends LightningElement {
             this.advancedId = null;
             this.intermediateId = null;
             this.eliteId = null;
-            this.addBeginner = false;
-            this.addIntermediate = false;
-            this.addAdvanced = false;
-            this.addElite = false;
             data.forEach(workout=> {
                 
                 let fitnessLevel = getSObjectValue(workout,LEVEL_FIELD);
