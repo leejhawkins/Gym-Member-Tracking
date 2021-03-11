@@ -34,15 +34,5 @@ public with sharing class MailToNewMember {
         }
 
     }
-    //maintain copies of sent mail
-    public static List<Messaging.SingleEmailMessage> checkSentEmails(List<Messaging.SingleEmailMessage> mails){
-             List<Messaging.SingleEmailMessage> sentMails = new List<Messaging.SingleEmailMessage>();
-             
-             for(Integer i = 0; i < mails.size(); i++){
-               sentMails.add(mails[i]);
-             }
-           
-            return sentMails;
-    }
 
 }
