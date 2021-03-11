@@ -1,0 +1,20 @@
+<template>
+    <div class="slds-scrollable_y" style="height: 20rem">
+        <lightning-card title="Benchmark details">
+            
+            <div class="slds-var-m-around_medium">
+             <template if:true={currentBenchmark.data}>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_4-of-12" style="border-bottom: solid 3px">
+                        <span> Current deadlift: {currentDeadlift}</span>
+                    </div>
+                    <div class="slds-col slds-size_4-of-12" style="border-bottom: solid 3px">
+                        <span>Current backsquat: {currentBacksquat}</span>
+                    </div>
+                 
+                </div>
+                </template>
+            </div>
+        </lightning-card>
+    </div>
+</template>
