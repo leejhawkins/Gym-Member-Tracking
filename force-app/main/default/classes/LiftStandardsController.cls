@@ -9,33 +9,33 @@ public class LiftStandardsController {
     //Verify that weight falls into proper range and use other methods to determine level in each lift
     public static String getFitnessLevel(Benchmark__c b, Member__c m){
         
-        if(m.Weight__c == null){
+        if(b.Weight__c == null){
             return 'Beginner';
         }
         if(m.Gender__c == 'Female'){
-            if(m.Weight__c < 90 || m.Weight__c > 260){
+            if(b.Weight__c < 90 || b.Weight__c > 260){
                 return 'Beginner';
             }
         }else{
-            if(m.Weight__c < 110 || m.Weight__c > 310){
+            if(b.Weight__c < 110 || b.Weight__c > 310){
                 return 'Beginner';
             }
         }
 
-        Integer bpLevel = getBenchPressLevel(m, b.Bench_Press__c);
-        Integer bsLevel = getBackSquatLevel(m, b.Back_Squat__c);
-        Integer dlLevel = getDeadliftLevel(m, b.Deadlift__c);
-        Integer spLevel = getShoulderPressLevel(m, b.Shoulder_Press__c);
-        if(bpLevel <= 1 || bsLevel <= 1 || dlLevel <= 1 || spLevel <= 1){
+        Integer bpLevel = getBenchPressLevel(b, m, b.Bench_Press__c);
+        Integer bsLevel = getBackSquatLevel(b, m, b.Back_Squat__c);
+        Integer dlLevel = getDeadliftLevel(b, m, b.Deadlift__c);
+        Integer spLevel = getShoulderPressLevel(b, m, b.Shoulder_Press__c);
+        if((bpLevel <= 1) || (bsLevel <= 1) || (dlLevel <= 1) || (spLevel <= 1)){
             return 'Beginner';
         }
-        if(bpLevel <= 2 || bsLevel <= 2 || dlLevel <= 2 || spLevel <= 2){
+        if((bpLevel <= 2) || (bsLevel <= 2) || (dlLevel <= 2) || (spLevel <= 2)){
             return 'Novice';
         }
-        if(bpLevel <= 3 || bsLevel <= 3 || dlLevel <= 3 || spLevel <= 3){
+        if((bpLevel <= 3) || (bsLevel <= 3) || (dlLevel <= 3) || (spLevel <= 3)){
             return 'Intermediate';
         }
-        if(bpLevel <= 4 || bsLevel <= 4 || dlLevel <= 4 || spLevel <= 4){
+        if((bpLevel <= 4) || (bsLevel <= 4) || (dlLevel <= 4) || (spLevel <= 4)){
             return 'Advanced';
         }
         return 'Elite';
@@ -58,10 +58,10 @@ public class LiftStandardsController {
         return resourceMap;
     }
     //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
-    public static Integer getBenchPressLevel(Member__c m, Decimal bp){
+    public static Integer getBenchPressLevel(Benchmark__c b, Member__c m, Decimal bp){
         if(m.Gender__c == 'Female'){
             Map<String, Integer> standards = createMap('FemaleBenchPressStandards');
-            Decimal w = m.Weight__c / 10;
+            Decimal w = b.Weight__c / 10;
             Integer weight = w.round().intValue()*10;
             if(bp < standards.get('Novice ' + weight)){
                 return 1;
@@ -79,7 +79,7 @@ public class LiftStandardsController {
         }
         else{
             Map<String, Integer> standards = createMap('MaleBenchPressStandards');
-            Decimal w = m.Weight__c / 10;
+            Decimal w = b.Weight__c / 10;
             Integer weight = w.round().intValue()*10;
             if(bp < standards.get('Novice ' + weight)){
                 return 1;
@@ -97,10 +97,10 @@ public class LiftStandardsController {
         }
     }
     //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
-    public static Integer getBackSquatLevel(Member__c m, Decimal bs){
+    public static Integer getBackSquatLevel(Benchmark__c b, Member__c m, Decimal bs){
         if(m.Gender__c == 'Female'){
             Map<String, Integer> standards = createMap('FemaleBackSquatStandards');
-            Decimal w = m.Weight__c / 10;
+            Decimal w = b.Weight__c / 10;
             Integer weight = w.round().intValue()*10;
             if(bs < standards.get('Novice ' + weight)){
                 return 1;
@@ -118,7 +118,7 @@ public class LiftStandardsController {
         }
         else{
             Map<String, Integer> standards = createMap('MaleBackSquatStandards');
-            Decimal w = m.Weight__c / 10;
+            Decimal w = b.Weight__c / 10;
             Integer weight = w.round().intValue()*10;
             if(bs < standards.get('Novice ' + weight)){
                 return 1;
@@ -136,10 +136,10 @@ public class LiftStandardsController {
         }
     }
     //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
-    public static Integer getDeadliftLevel(Member__c m, Decimal dl){
+    public static Integer getDeadliftLevel(Benchmark__c b, Member__c m, Decimal dl){
         if(m.Gender__c == 'Female'){
             Map<String, Integer> standards = createMap('FemaleDeadliftStandards');
-            Decimal w = m.Weight__c / 10;
+            Decimal w = b.Weight__c / 10;
             Integer weight = w.round().intValue()*10;
             if(dl < standards.get('Novice ' + weight)){
                 return 1;
@@ -157,7 +157,7 @@ public class LiftStandardsController {
         }
         else{
             Map<String, Integer> standards = createMap('MaleDeadliftStandards');
-            Decimal w = m.Weight__c / 10;
+            Decimal w = b.Weight__c / 10;
             Integer weight = w.round().intValue()*10;
             if(dl < standards.get('Novice ' + weight)){
                 return 1;
@@ -176,10 +176,10 @@ public class LiftStandardsController {
 
     }
     //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
-    public static Integer getShoulderPressLevel(Member__c m, Decimal sp){
+    public static Integer getShoulderPressLevel(Benchmark__c b, Member__c m, Decimal sp){
         if(m.Gender__c == 'Female'){
             Map<String, Integer> standards = createMap('FemaleShoulderPressStandards');
-            Decimal w = m.Weight__c / 10;
+            Decimal w = b.Weight__c / 10;
             Integer weight = w.round().intValue()*10;
             if(sp < standards.get('Novice ' + weight)){
                 return 1;
@@ -197,7 +197,7 @@ public class LiftStandardsController {
         }
         else{
             Map<String, Integer> standards = createMap('MaleShoulderPressStandards');
-            Decimal w = m.Weight__c / 10;
+            Decimal w = b.Weight__c / 10;
             Integer weight = w.round().intValue()*10;
             if(sp < standards.get('Novice ' + weight)){
                 return 1;
