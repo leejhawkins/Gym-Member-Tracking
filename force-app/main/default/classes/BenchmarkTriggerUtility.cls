@@ -11,7 +11,7 @@ public inherited sharing class BenchmarkTriggerUtility {
             }
         }
         for (Benchmark__c b:bens){
-            b.Fitness_Level__c = LiftStandardsController.getFitnessLevel(b, m);
+            b.Fitness_Level__c = LiftStandardsController.getFitnessLevel(b, bmMap.get(b));
         }
     }
     public static void BMICalculator(List<Benchmark__c> bens){

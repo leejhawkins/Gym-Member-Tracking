@@ -17,7 +17,7 @@ public class LiftStandardsController {
                 return 'Beginner';
             }
         }else{
-            if(m.Weight__c < 110 || m.Weight > 310){
+            if(m.Weight__c < 110 || m.Weight__c > 310){
                 return 'Beginner';
             }
         }
