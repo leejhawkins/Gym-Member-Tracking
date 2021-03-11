@@ -3,7 +3,7 @@ public inherited sharing class WorkoutController {
     public static Workout__c getMemberWorkout(Id memberId,Date workoutDate){
         try {
             workoutDate = workoutDate != null ? workoutDate: Date.today();
-            Member__c m = [Select Fitness_Level__c from Member__c Where Id=:memberId];
+            Member__c m = [Select Fitness_Level__c from Member__c Where Id=:memberId LIMIT 1];
             return [SELECT Workout_Description__c,Fitness_Level__c,Id
             FROM Workout__c 
             WHERE Fitness_Level__c =:m.Fitness_Level__c
