@@ -1,12 +1,8 @@
 import { LightningElement , api} from 'lwc';
-//import { getSObjectValue } from '@salesforce/apex';
 import getGoalBenchmark from '@salesforce/apex/BenchmarkController.getGoalBenchmark';
 import getBenchmark from '@salesforce/apex/BenchmarkController.getBenchmark';
 
-//import BACKSQUAT_FIELD from '@salesforce/schema/Benchmark__c.Back_Squat__c';
-//import DEADLIFT_FIELD from '@salesforce/schema/Benchmark__c.Deadlift__c';
 
-//imperative apex with direct assignment to public template properties
 export default class DisplayMemberBenchmark extends LightningElement {
           @api recordId;
 

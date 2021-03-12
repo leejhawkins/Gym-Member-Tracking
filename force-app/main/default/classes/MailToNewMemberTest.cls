@@ -1,38 +1,48 @@
 @isTest 
 public class MailToNewMemberTest {
     
+    @TestSetup
+    static void makeData(){
+        Member__c m = new Member__c();
+        m.Name = 'Bob';
+        m.Date_of_Birth__c = Date.today();
+        m.Email__c = 'kareemthedeveloper'+1+'@gmail.com';
+        insert m;
+       
+        List<Member__c> newMembers = TestDataFactory.generateMembers(5);
+        Integer counter = 1;
+        for(Member__c member: newMembers){
+            member.Email__c = 'kareemfullstackdev'+counter+'@gmail.com';
+        }
+
+    }
     @isTest 
     public static void baseTest(){
             
                 Test.startTest();
-                Member__c m = new Member__c();
-                m.Name = 'Bob';
-                m.Date_of_Birth__c = Date.today();
-                m.Email__c = 'kareemfullstackdev'+1+'@gmail.com';
-                
-                insert m;
-
-                if(Test.isRunningTest()) {
-                  System.assert(true);
+                List<Member__c> newMember = [SELECT Name, Email__c FROM Member__c WHERE Name LIKE 'Bob' LIMIT 1];
+              
+                if(newMember.size() > 0){
+                  MailToNewMember.sendWelcomeEmail(newMember);
                 }
                 else{
-                   System.assert(false);
+                  System.assert(false);
                 }
+         
                 Test.stopTest();   
+              
       }
+
     @isTest
-    public static void addMoreMembers(){
+    public static void addMembersTest(){
         Test.startTest();
-        List<Member__c> newMembers = TestDataFactory.generateMembers(10);
-        Integer counter = 1;
-        for(Member__c m: newMembers){
-            m.Email__c = 'kareemfullstackdev'+counter+'@gmail.com';
-            if(Test.isRunningTest()) {
-                  System.assert(true);
-                }
-            else{
-                   System.assert(false);
-                }
+        //Over 5 emails at a time exceeds the governer limits       
+        try{
+            List<Member__c> newMembers = [SELECT Name, Email__c FROM Member__c WHERE Name LIKE 'Test member'];
+            MailToNewMember.sendWelcomeEmail(newMembers);
+        }
+        catch(LimitException e){
+          System.debug(e.getMessage());
         }
         Test.stopTest();
 
