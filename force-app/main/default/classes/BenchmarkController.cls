@@ -16,4 +16,13 @@ public inherited sharing class BenchmarkController {
                 WHERE Member__c=:memberId
                 AND Goal_Benchmarks__c = true];
     }
+    //method used in the displayMemberBenchmark LWC
+    @AuraEnabled(cacheable=true)
+    public static Benchmark__c getBenchmark(Id memberId){
+        return [SELECT Back_Squat__c,Deadlift__c 
+                FROM Benchmark__c 
+                WHERE Member__c=:memberId
+                AND Goal_Benchmarks__c != true LIMIT 1];
+    }
+
 }
