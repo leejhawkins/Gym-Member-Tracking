@@ -8,18 +8,21 @@
             <lightning-formatted-email
               value={Email__c}
             ></lightning-formatted-email>
-            <lightning-button 
+            <button 
               type="button"
               name="edit"
-              label="Send Email"
               onclick={handleShowModal}>
-            </lightning-button>
+            Send Workout</button>
           </div>
           <c-member-bar-chart 
             cbs={currentBackSquat}
             cdl={currentDeadlift}
+            cbp={currentBenchPress}
+            csp={currentShoulderPress}
             gbs={goalBackSquat}
             gdl={goalDeadLift}
+            gbp={goalBenchPress}
+            gsp={goalShoulderPress}
             class="slds-col slds-size_8-of-12">
           </c-member-bar-chart>
           <c-email-modal

@@ -9,33 +9,40 @@ export default class MemberBarChart extends LightningElement {
     @api cdl;
     @api gbs;
     @api gdl;
+    @api cbp;
+    @api gbp;
+    @api csp;
+    @api gsp;
 
     config = {
         type: 'horizontalBar',
         data: {
             datasets: [
                 {
-                    data: [0,0,0,0
-
-                    ],
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 159, 64)',
-                        'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)'
-                    ],
-                    label: 'Lifts'
+                    data: [0,0,0,0],
+                    backgroundColor: 'rgb(0, 0, 0)',
+                    label: 'Current'
+                    
+                },
+                {
+                    data: [0,0,0,0],
+                    backgroundColor: 'rgb(192,192,192)',
+                    label: 'Goal'
                 }
             ],
-            labels: ['Current Back Squat', 'Goal Back Squat', 'Current Deadlift', 'Goal Deadlift']
+            labels: ['Back Squat','Deadlift','Bench Press','Shoulder Press']
         },
         options: {
-            legend: {
-                display:false
-            },
             animation: {
                 animateScale: false
             },
+            legend:{
+                labels:{
+                    fontSize:8,
+                    boxWidth:15,
+                }
+            },
+
             options: {
                 scales: {
                     xAxes: [{
@@ -62,9 +69,13 @@ export default class MemberBarChart extends LightningElement {
                 // disable Chart.js CSS injection
                 window.Chart.platform.disableCSSInjection = true;
                 this.config.data.datasets[0].data[0] = this.cbs;
-                this.config.data.datasets[0].data[1] = this.gbs;
-                this.config.data.datasets[0].data[2] = this.cdl;
-                this.config.data.datasets[0].data[3] = this.gdl;
+                this.config.data.datasets[1].data[0] = this.gbs;
+                this.config.data.datasets[0].data[1] = this.cdl;
+                this.config.data.datasets[1].data[1] = this.gdl;
+                this.config.data.datasets[0].data[2] = this.cbp;
+                this.config.data.datasets[1].data[2] = this.gbp;
+                this.config.data.datasets[0].data[3] = this.csp;
+                this.config.data.datasets[0].data[3] = this.gsp;
                 const canvas = document.createElement('canvas');
                 this.template.querySelector('div.chart').appendChild(canvas);
                 const ctx = canvas.getContext('2d');
@@ -76,11 +87,15 @@ export default class MemberBarChart extends LightningElement {
             });
     }
     @api
-    updateChart(cB,gB,cD,gD){
-        this.chart.data.datasets[0].data[0] = cB;
-        this.chart.data.datasets[0].data[1] = gB;
-        this.chart.data.datasets[0].data[2] = cD;
-        this.chart.data.datasets[0].data[3] = gD;
+    updateChart(cBS,gBS,cDL,gDL,cBP,gBP,cSP,gSP){
+        this.chart.data.datasets[0].data[0] = cBS;
+        this.chart.data.datasets[1].data[0] = gBS;
+        this.chart.data.datasets[0].data[1] = cDL;
+        this.chart.data.datasets[1].data[1] = gDL;
+        this.chart.data.datasets[0].data[2] = cBP;
+        this.chart.data.datasets[1].data[2] = gBP;
+        this.chart.data.datasets[0].data[3] = cSP;
+        this.chart.data.datasets[1].data[3] = gSP;
         this.chart.update()    
     }
     @api
