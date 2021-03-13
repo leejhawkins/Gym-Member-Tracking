@@ -1,5 +1,6 @@
 trigger BenchmarkTrigger on Benchmark__c (before insert,before update,after update,after insert) {
     if((Trigger.isInsert || Trigger.isUpdate) && Trigger.isBefore){
+        BenchmarkTriggerUtility.setBenchmarkEmptyFields(Trigger.New);
         BenchmarkTriggerUtility.fitnessLevel(Trigger.New);
         BenchmarkTriggerUtility.BMICalculator(Trigger.New);
     }

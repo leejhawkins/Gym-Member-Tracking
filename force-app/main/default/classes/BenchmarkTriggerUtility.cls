@@ -1,4 +1,26 @@
 public inherited sharing class BenchmarkTriggerUtility {
+    public static void setBenchmarkEmptyFields(List<Benchmark__c> bens){
+        for(Benchmark__c b:bens){
+            try{
+                b.Date__c = b.Date__c == null ? Date.Today() : b.Date__c;
+                List<Benchmark__c> mRecent = [SELECT Deadlift__c,Back_Squat__c,Bench_Press__c,Shoulder_Press__c,Weight__c FROM Benchmark__c 
+                                    WHERE Date__c <: b.Date__c AND Member__c =: b.Member__c AND Goal_Benchmarks__c=false
+                                    ORDER BY Date__c DESC
+                                    LIMIT 1];
+                if(mRecent.size() != 0) {
+                    b.Deadlift__c = b.Deadlift__c == null ? mRecent[0].Deadlift__c:b.Deadlift__c;
+                    b.Back_Squat__c = b.Back_Squat__c == null ? mRecent[0].Back_Squat__c:b.Back_Squat__c;
+                    b.Bench_Press__c = b.Bench_Press__c == null ? mRecent[0].Bench_Press__c:b.Bench_Press__c;
+                    b.Shoulder_Press__c = b.Shoulder_Press__c == null ? mRecent[0].Shoulder_Press__c:b.Shoulder_Press__c;
+                    b.Weight__c = b.Weight__c == null ? mRecent[0].Weight__c : b.weight__c;
+                }
+               
+            } catch (QueryException e) {
+                throw new AuraHandledException(e.getMessage());
+            }
+        
+        }
+    }
     
     public static void fitnessLevel(List<Benchmark__c> bens){
         List<Member__c> members = [SELECT Id, Weight__c, Gender__c FROM Member__c WHERE Active__c = TRUE];
