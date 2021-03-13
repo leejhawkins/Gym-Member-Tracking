@@ -6,6 +6,11 @@
         <label>Beginner</label>
     </customValue>
     <customValue>
+        <fullName>Novice</fullName>
+        <default>false</default>
+        <label>Novice</label>
+    </customValue>
+    <customValue>
         <fullName>Intermediate</fullName>
         <default>false</default>
         <label>Intermediate</label>

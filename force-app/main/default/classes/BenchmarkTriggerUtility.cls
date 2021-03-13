@@ -1,23 +1,17 @@
 public inherited sharing class BenchmarkTriggerUtility {
     
     public static void fitnessLevel(List<Benchmark__c> bens){
-        for (Benchmark__c b:bens){
-            Double w = b.Weight__c;
-            Double bp = b.Bench_Press__c;
-            Double bs = b.Back_Squat__c;
-            Double dl = b.Deadlift__c;
-            Double sp = b.Shoulder_Press__c;
-            if(w != null && bp != null && bs != null && dl != null && sp != null){
-                if( bp > w*1.75 && bs > w*2.5 && dl > w*2.75 && sp > w*1.2 ){
-                    b.Fitness_Level__c = 'Elite';
-                } else if( bp > w*1.5 && bs > w*2 && dl > w*2.25 && sp > w ){
-                    b.Fitness_Level__c = 'Advanced';
-                }  else if( bp > w && bs > w*1.50 && dl > w*1.75 && sp >.75* w ){
-                    b.Fitness_Level__c = 'Intermediate';
-                }  else {
-                    b.Fitness_Level__c = 'Beginner';
+        List<Member__c> members = [SELECT Id, Weight__c, Gender__c FROM Member__c WHERE Active__c = TRUE];
+        Map<Benchmark__c, Member__c> bmMap = new Map<Benchmark__c, Member__c>();
+        for(Benchmark__c b : bens){
+            for(Member__c m : members){
+                if(b.Member__c == m.Id){
+                    bmMap.put(b, m);
                 }
             }
+        }
+        for (Benchmark__c b:bens){
+            b.Fitness_Level__c = LiftStandardsController.getFitnessLevel(b, bmMap.get(b));
         }
     }
     public static void BMICalculator(List<Benchmark__c> bens){
@@ -47,9 +41,7 @@ public inherited sharing class BenchmarkTriggerUtility {
         for(Benchmark__c b:bens){
             if(b.Date__c >= Date.Today().toStartofMonth() && b.Date__c < Date.Today().addMonths(1).toStartofMonth()){
                 Member__c m = [Select Id from Member__c Where Id=:b.Member__c];
-
                 //m.Current_Benchmark__c = b.Id;
-
                 m.Fitness_Level__c = b.Fitness_Level__c;
                 m.BMI__c = b.BMI__c;
                 update m;
