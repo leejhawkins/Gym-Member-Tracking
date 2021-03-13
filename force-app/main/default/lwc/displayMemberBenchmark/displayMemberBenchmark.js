@@ -10,10 +10,17 @@ export default class DisplayMemberBenchmark extends LightningElement {
           deadliftGoal
           backsquatCurrent
           deadliftCurrent
+          benchpressGoal
+          benchpressCurrent
+          shoulderpressGoal
+          shoulderpressCurrent
         
           // private
+          // Get the current and goal data
           _goalData;
           _benchmarkData;
+         
+
         
           //directly assigned what comes back from server payload (this._goalData) to your template bound variable
           async connectedCallback() {
@@ -26,12 +33,14 @@ export default class DisplayMemberBenchmark extends LightningElement {
             if (this._goalData) {
               this.backsquatGoal = this._goalData.Back_Squat__c;
               this.deadliftGoal = this._goalData.Deadlift__c;
+              this.benchpressGoal = this._goalData.Bench_Press__c;
+              this.shoulderpressGoal = this._goalData.Shoulder_Press__c;
             }
             if (this._benchmarkData) {
               this.backsquatCurrent = this._benchmarkData.Back_Squat__c;
-              //console.log(this.backsquatCurrent);
               this.deadliftCurrent = this._benchmarkData.Deadlift__c;
-              //console.log(this.deadliftCurrent);
+              this.benchpressCurrent = this._benchmarkData.Bench_Press__c;
+              this.shoulderpressCurrent = this._benchmarkData.Shoulder_Press__c;
             }
           }
       

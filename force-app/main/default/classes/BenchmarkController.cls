@@ -11,7 +11,8 @@ public inherited sharing class BenchmarkController {
     }
     @AuraEnabled(cacheable=true)
     public static Benchmark__c getGoalBenchmark(Id memberId) {
-            return [SELECT Back_Squat__c,Deadlift__c 
+            return [SELECT Back_Squat__c,Deadlift__c,
+                Bench_Press__c, Shoulder_Press__c
                 FROM Benchmark__c 
                 WHERE Member__c=:memberId
                 AND Goal_Benchmarks__c = true];
@@ -19,7 +20,8 @@ public inherited sharing class BenchmarkController {
     //method used in the displayMemberBenchmark LWC
     @AuraEnabled(cacheable=true)
     public static Benchmark__c getBenchmark(Id memberId){
-        return [SELECT Back_Squat__c,Deadlift__c 
+        return [SELECT Back_Squat__c,Deadlift__c,
+                Bench_Press__c, Shoulder_Press__c 
                 FROM Benchmark__c 
                 WHERE Member__c=:memberId
                 AND Goal_Benchmarks__c != true LIMIT 1];

@@ -1,17 +1,25 @@
 <template>
     <lightning-card title="Member Benchmarks" icon-name="custom:custom63">
         <div class="slds-var-m-around_medium">
-            <p>Squat goal benchmark:</p>
+            <p>Goal squat:</p>
             <lightning-formatted-rich-text value={backsquatGoal}></lightning-formatted-rich-text>
-            <p>Deadlift goal benchmark:</p>
+            <p>Goal deadlift:</p>
             <lightning-formatted-rich-text value={deadliftGoal}></lightning-formatted-rich-text>
+            <p>Goal benchpress:</p>
+            <lightning-formatted-rich-text value={benchpressGoal}></lightning-formatted-rich-text>
+            <p>Goal shoulderpress:</p>
+            <lightning-formatted-rich-text value={shoulderpressGoal}></lightning-formatted-rich-text>
 
             <hr />
 
-            <p>Current squat benchmark:</p>
+            <p>Current squat:</p>
             <lightning-formatted-rich-text value={backsquatCurrent}></lightning-formatted-rich-text>
-            <p>Current deadlift benchmark:</p>
+            <p>Current deadlift:</p>
             <lightning-formatted-rich-text value={deadliftCurrent}></lightning-formatted-rich-text>
+            <p>Current benchpress:</p>
+            <lightning-formatted-rich-text value={benchpressCurrent}></lightning-formatted-rich-text>
+            <p>Current shoulderpress:</p>
+            <lightning-formatted-rich-text value={shoulderpressCurrent}></lightning-formatted-rich-text>
         </div>
     </lightning-card>
 </template>
