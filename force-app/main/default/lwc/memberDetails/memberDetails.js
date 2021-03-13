@@ -12,16 +12,22 @@ import LEVEL_FIELD from "@salesforce/schema/Member__c.Fitness_Level__c";
 import EMAIL_FIELD from "@salesforce/schema/Member__c.Email__c";
 import BACKSQUAT_FIELD from "@salesforce/schema/Benchmark__c.Back_Squat__c";
 import DEADLIFT_FIELD from "@salesforce/schema/Benchmark__c.Deadlift__c";
+import BENCHPRESS_FIELD from "@salesforce/schema/Benchmark__c.Bench_Press__c";
+import SHOULDERPRESS_FIELD from "@salesforce/schema/Benchmark__c.Shoulder_Press__c";
 import DESCRIPTION_FIELD from "@salesforce/schema/Workout__c.Workout_Description__c"
 
 const fields = [NAME_FIELD, LEVEL_FIELD, EMAIL_FIELD];
 
 export default class MemberDetails extends LightningElement {
   subscription = null;
-  currentBackSquat;
-  currentDeadlift;
-  goalBackSquat;
-  goalDeadlift;
+  currentBackSquat = 0;
+  currentDeadlift= 0;
+  currentBenchPress = 0;
+  currentShoulderPress = 0;
+  goalBackSquat = 0;
+  goalDeadlift = 0;
+  goalBenchPress = 0;
+  goalShoulderPress = 0;
   recordId;
 
   Name;
@@ -48,6 +54,14 @@ export default class MemberDetails extends LightningElement {
   }
   
   handleMessage(message) {
+    this.currentBackSquat = 0;
+    this.currentDeadlift= 0;
+    this.currentBenchPress = 0;
+    this.currentShoulderPress = 0;
+    this.goalBackSquat = 0;
+    this.goalDeadlift = 0;
+    this.goalBenchPress = 0;
+    this.goalShoulderPress = 0;
     this.recordId = message.recordId;
     getBenchmarks({ memberId: this.recordId })
       .then((data) => {
@@ -55,8 +69,12 @@ export default class MemberDetails extends LightningElement {
         let goalBen = data['Goal'];
         this.currentBackSquat = getSObjectValue(curBen, BACKSQUAT_FIELD);
         this.currentDeadlift = getSObjectValue(curBen, DEADLIFT_FIELD);
+        this.currentBenchPress = getSObjectValue(curBen, BENCHPRESS_FIELD);
+        this.currentShoulderPress = getSObjectValue(curBen, SHOULDERPRESS_FIELD);
         this.goalBackSquat = getSObjectValue(goalBen, BACKSQUAT_FIELD);
         this.goalDeadLift = getSObjectValue(goalBen, DEADLIFT_FIELD);
+        this.goalBenchPress = getSObjectValue(goalBen, BENCHPRESS_FIELD);
+        this.goalShoulderPress = getSObjectValue(goalBen, SHOULDERPRESS_FIELD);
         if (this.template.querySelector("c-member-bar-chart").chartCreated()) {
           this.template
             .querySelector("c-member-bar-chart")
@@ -64,27 +82,19 @@ export default class MemberDetails extends LightningElement {
               this.currentBackSquat,
               this.goalBackSquat,
               this.currentDeadlift,
-              this.goalDeadLift
+              this.goalDeadLift,
+              this.currentBenchPress,
+              this.goalBenchPress,
+              this.currentShoulderPress,
+              this.goalShoulderPress
             );
         }
       })
       .catch((error) => {
         this.error = error;
-        this.currentBackSquat = 0;
-        this.currentDeadlift = 0;
-        this.goalBackSquat = 0;
-        this.goalDeadLift = 0;
-        if (this.template.querySelector("c-member-bar-chart").chartCreated()) {
-          this.template
-            .querySelector("c-member-bar-chart")
-            .updateChart(
-              this.currentBackSquat,
-              this.goalBackSquat,
-              this.currentDeadlift,
-              this.goalDeadLift
-            );
+        
         }
-      });
+       );
   }
 
   // By using the MessageContext @wire adapter, unsubscribe will be called

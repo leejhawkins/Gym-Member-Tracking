@@ -10,12 +10,11 @@
   <template if:false={workoutid}>
     <template if:false={edit}>
       <p>There is no {name} workout for today, create one</p>
-      <lightning-button
+      <button
         type="button"
         name="edit"
         onclick={showEdit}
-        label="Add Workout"
-      ></lightning-button>
+      >Add Workout</button>
     </template>
     <template if:true={edit}>
       <p>Level: {name}</p>
