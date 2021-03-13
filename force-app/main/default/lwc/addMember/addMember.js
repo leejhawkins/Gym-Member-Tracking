@@ -12,9 +12,6 @@ import FITNESSLEVEL_FIELD from '@salesforce/schema/Member__c.Fitness_Level__c';
 import TRAININGCLASS_FIELD from '@salesforce/schema/Member__c.Training_Class__c';
 
 
-
-
-
 export default class AddMember extends LightningElement {
     memberObject = MEMBER_OBJECT;
     nameField = NAME_FIELD;
@@ -26,8 +23,6 @@ export default class AddMember extends LightningElement {
     fitnessLevelField = FITNESSLEVEL_FIELD;
     trainingClassField = TRAININGCLASS_FIELD;
   
-
-
      
   showSuccessToast() {
     const evt = new ShowToastEvent({

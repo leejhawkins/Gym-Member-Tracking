@@ -13,11 +13,8 @@ public with sharing class MailToNewMember {
              List<String> sendTo = new List<String>();
               sendTo.add(m.Email__c);
               mail.setToAddresses(sendTo);
-
               mail.setReplyTo('kareem.elsayed@smoothstack.com');
               mail.setSenderDisplayName('Gym Owner');
-
-
               mail.setSubject('Welcome to the Gym');
               String body = 'Hi ' + m.Name + ', ';
               body += 'Thanks for joining our Gym. ';

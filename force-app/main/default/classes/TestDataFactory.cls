@@ -58,6 +58,7 @@
          for(Integer i = 0; i < membersNum; i++){
             Member__c member = new Member__c();
             member.Name = 'Robust-Test-Member '+i;
+            member.Date_of_Birth__c = Date.today();
             member.Email__c = email;
             member.Issues__c = issues;
             member.Fitness_Level__c = fitnessLevel;
