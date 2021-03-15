@@ -18,7 +18,6 @@ public with sharing class MailToNewMember {
               mail.setSubject('Welcome to the Gym');
               String body = 'Hi ' + m.Name + ', ';
               body += 'Thanks for joining our Gym. ';
-              body+= 'You’ve taken the first step towards achieving your fitness goals. ';
               body += 'We are excited have you on board!';
 
               mail.setHtmlBody(body);
