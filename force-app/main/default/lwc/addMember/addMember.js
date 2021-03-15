@@ -10,6 +10,7 @@ import HEIGHTIN_FIELD from '@salesforce/schema/Member__c.Height_Inches__c';
 import EMAIL_FIELD from '@salesforce/schema/Member__c.Email__c';
 import FITNESSLEVEL_FIELD from '@salesforce/schema/Member__c.Fitness_Level__c';
 import TRAININGCLASS_FIELD from '@salesforce/schema/Member__c.Training_Class__c';
+import CITY_FIELD from '@salesforce/schema/Member__c.City__c';
 
 
 export default class AddMember extends LightningElement {
@@ -22,6 +23,7 @@ export default class AddMember extends LightningElement {
     emailField = EMAIL_FIELD;
     fitnessLevelField = FITNESSLEVEL_FIELD;
     trainingClassField = TRAININGCLASS_FIELD;
+    cityField = CITY_FIELD;
   
      
   showSuccessToast() {
