@@ -1,19 +1,17 @@
 public inherited sharing class BenchmarkTriggerUtility {
     public static void setBenchmarkEmptyFields(List<Benchmark__c> bens){
+
         for(Benchmark__c b:bens){
             try{
                 b.Date__c = b.Date__c == null ? Date.Today() : b.Date__c;
-                List<Benchmark__c> mRecent = [SELECT Deadlift__c,Back_Squat__c,Bench_Press__c,Shoulder_Press__c,Weight__c FROM Benchmark__c 
-                                    WHERE Date__c <: b.Date__c AND Member__c =: b.Member__c AND Goal_Benchmarks__c=false
-                                    ORDER BY Date__c DESC
-                                    LIMIT 1];
-                if(mRecent.size() != 0) {
-                    b.Deadlift__c = b.Deadlift__c == null ? mRecent[0].Deadlift__c:b.Deadlift__c;
-                    b.Back_Squat__c = b.Back_Squat__c == null ? mRecent[0].Back_Squat__c:b.Back_Squat__c;
-                    b.Bench_Press__c = b.Bench_Press__c == null ? mRecent[0].Bench_Press__c:b.Bench_Press__c;
-                    b.Shoulder_Press__c = b.Shoulder_Press__c == null ? mRecent[0].Shoulder_Press__c:b.Shoulder_Press__c;
-                    b.Weight__c = b.Weight__c == null ? mRecent[0].Weight__c : b.weight__c;
-                }
+                Benchmark__c mRecent = BenchmarkTriggerUtility.getMostRecent(b.Member__c, b.Date__c);
+                
+                b.Deadlift__c = b.Deadlift__c == null ? mRecent.Deadlift__c:b.Deadlift__c;
+                b.Back_Squat__c = b.Back_Squat__c == null ? mRecent.Back_Squat__c:b.Back_Squat__c;
+                b.Bench_Press__c = b.Bench_Press__c == null ? mRecent.Bench_Press__c:b.Bench_Press__c;
+                b.Shoulder_Press__c = b.Shoulder_Press__c == null ? mRecent.Shoulder_Press__c:b.Shoulder_Press__c;
+                b.Weight__c = b.Weight__c == null ? mRecent.Weight__c : b.weight__c;
+                
                
             } catch (QueryException e) {
                 throw new AuraHandledException(e.getMessage());
@@ -50,25 +48,40 @@ public inherited sharing class BenchmarkTriggerUtility {
         }
         
     }
-    public static void isGoalBenchmark(List<Benchmark__c> bens) {
-        for(Benchmark__c b:bens){
-            if(b.Goal_Benchmarks__c){
-                Member__c m = [Select Id from Member__c Where Id=:b.Member__c];
-                //m.Goal_Benchmark__c = b.Id;
-                update m;
-            }
-        }
-    }
     public static void isCurrentBenchmark(List<Benchmark__c> bens) {
         for(Benchmark__c b:bens){
-            if(b.Date__c >= Date.Today().toStartofMonth() && b.Date__c < Date.Today().addMonths(1).toStartofMonth()){
-                Member__c m = [Select Id from Member__c Where Id=:b.Member__c];
-                //m.Current_Benchmark__c = b.Id;
-                m.Fitness_Level__c = b.Fitness_Level__c;
-                m.BMI__c = b.BMI__c;
-                update m;
+            Benchmark__c mRecent = BenchmarkTriggerUtility.getMostRecent(b.Member__c, Date.today());
+            Member__c m = [Select Id from Member__c Where Id=:b.Member__c];
+            m.Fitness_Level__c = b.Fitness_Level__c;
+            m.BMI__c = b.BMI__c;
+            update m;
+        }
+    }
+    public static Benchmark__c getMostRecent(Id memberId,Date targetDate){
+        Integer count = (Integer)[SELECT count () FROM Benchmark__c 
+                            WHERE Date__c <=: targetDate
+                            AND Member__c =: memberId
+                            AND Goal_Benchmarks__c=false];
+        List<Benchmark__c> recentBs = new List<Benchmark__c>();
+        Benchmark__c currentBenchmark = new Benchmark__c(Back_Squat__c=0,Deadlift__c=0,Bench_Press__c=0,Shoulder_Press__c=0,Weight__c=150);
+        if (count > 0) {
+            recentBs = [SELECT Deadlift__c,Back_Squat__c,Bench_Press__c,Shoulder_Press__c,Weight__c,Date__c,LastModifiedDate,Fitness_Level__c FROM Benchmark__c 
+            WHERE Date__c <=: targetDate AND Member__c =: memberId AND Goal_Benchmarks__c=false
+            ORDER BY Date__c   DESC
+            LIMIT 10];
+            date recentDate = targetDate.addYears(-1);
+            Datetime recentModified = Datetime.now().addYears(-1);
+            for(Benchmark__c b:recentBs){
+                if(b.Date__c >= recentDate && b.LastModifiedDate > recentModified){
+                    recentDate = b.Date__c;
+                    recentModified = b.LastModifiedDate;
+                    currentBenchmark = b;
+                    System.debug(b);
+                    } 
             }
         }
+        return currentBenchmark;
+                                   
     }
     
          

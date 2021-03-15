@@ -47,6 +47,7 @@ export default class RecordLift extends LightningElement {
                 variant: 'success'
             })
         );
+        window.location.reload();
     }
 
     get benchmarkName(){

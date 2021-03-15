@@ -213,6 +213,51 @@ public class LiftStandardsController {
             }
             return 5;
         }
+        
+
+    }
+    public static Benchmark__c getNextLevel(Benchmark__c currentBenchmark,String gender){
+            String currentLevel = currentBenchmark.Fitness_Level__c;
+            Decimal w = currentBenchmark.Weight__c != null ?  currentBenchmark.Weight__c / 10 :15;
+            Integer weight = w.round().intValue()*10;
+            Benchmark__c nextBenchmark = new Benchmark__c();
+            List<List<String>> liftList = new List<List<String>>{
+                new List<String>{'FemaleBenchPressStandards','MaleBenchPressStandards','Bench_Press__c'},
+                new List<String>{'FemaleBackSquatStandards','MaleBackSquatStandards','Back_Squat__c'},
+                new List<String>{'FemaleDeadliftStandards','MaleDeadliftStandards','Deadlift__c'},
+                new List<String>{'FemaleShoulderPressStandards','MaleShoulderPressStandards','Shoulder_Press__c'}
+            };
+            switch on currentLevel {
+                when 'Beginner' {
+                    nextBenchmark.Fitness_Level__c = 'Novice';
+                }   
+                when 'Novice' {
+                    nextBenchmark.Fitness_Level__c = 'Intermediate';
+                }
+                when 'Intermediate' {
+                    nextBenchmark.Fitness_Level__c = 'Advanced';
+                }
+                when 'Advanced' {
+                    nextBenchmark.Fitness_Level__c = 'Elite';
+                }
+                when 'Elite'{
+                    nextBenchmark.Fitness_Level__c = 'Elite';
+                }
+                when else {
+                    nextBenchmark.Fitness_Level__c = 'Novice';
+                }
+            }
+            for(List<String> lift:liftList){
+                if(gender =='Female'){
+                    Map<String, Integer> standards = createMap(lift[0]);
+                    nextBenchmark.put(lift[2],standards.get(nextBenchmark.Fitness_Level__c + ' ' + weight));
+                } else {
+                    Map<String, Integer> standards = createMap(lift[1]);
+                    nextBenchmark.put(lift[2],standards.get(nextBenchmark.Fitness_Level__c + ' ' + weight));
+                }
+                
+            }
+            return nextBenchmark;
 
     }
 }

@@ -20,11 +20,18 @@
             cbp={currentBenchPress}
             csp={currentShoulderPress}
             gbs={goalBackSquat}
-            gdl={goalDeadLift}
+            gdl={goalDeadlift}
             gbp={goalBenchPress}
             gsp={goalShoulderPress}
             class="slds-col slds-size_8-of-12">
           </c-member-bar-chart>
+          <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-size_3-of-12"><p>Next Back Squat Level:{toBSNextLevel}</p></div>
+          <div class="slds-col slds-size_3-of-12"><p>Next Deadlift Level: {toDLNextLevel}</p></div>
+          <div class="slds-col slds-size_3-of-12"><p>Next Bench Press Level: {toBPNextLevel}</p></div>
+          <div class="slds-col slds-size_3-of-12"><p>Next Shoulder Press Level: {toSPNextLevel}</p></div>
+          </div>
+          
           <c-email-modal
             name={Name}
             level={Fitness_Level__c}
