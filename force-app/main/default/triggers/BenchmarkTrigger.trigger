@@ -5,7 +5,6 @@ trigger BenchmarkTrigger on Benchmark__c (before insert,before update,after upda
         BenchmarkTriggerUtility.BMICalculator(Trigger.New);
     }
     if((Trigger.isUpdate || Trigger.isInsert) && Trigger.isAfter){
-        BenchmarkTriggerUtility.isGoalBenchmark(Trigger.New);
         BenchmarkTriggerUtility.isCurrentBenchmark(Trigger.New);
     }
 }

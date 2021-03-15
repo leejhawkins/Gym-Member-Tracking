@@ -52,6 +52,18 @@ export default class MemberDetails extends LightningElement {
       ? getSObjectValue(this.workout.data, DESCRIPTION_FIELD)
       : "";
   }
+  get toBSNextLevel(){
+    return this.currentBackSquat >= this.goalBackSquat ? `Achieved!`: ` ${this.goalBackSquat-this.currentBackSquat}lbs `
+  }
+  get toDLNextLevel(){
+    return this.currentDeadlift >= this.goalDeadlift ? `Achieved!`:` ${this.goalDeadlift-this.currentDeadlift}lbs `
+  }
+  get toBPNextLevel(){
+    return this.currentBenchPress >= this.goalBenchPress ? `Achieved!`:` ${this.goalBenchPress-this.currentBenchPress}lbs `
+  }
+  get toSPNextLevel(){
+    return this.currentShoulderPress >= this.goalShoulderPress ? `Achieved!`:`${this.goalShoulderPress-this.currentShoulderPress}lbs `
+  }
   
   handleMessage(message) {
     this.currentBackSquat = 0;
@@ -67,14 +79,15 @@ export default class MemberDetails extends LightningElement {
       .then((data) => {
         let curBen = data['Current'];
         let goalBen = data['Goal'];
-        this.currentBackSquat = getSObjectValue(curBen, BACKSQUAT_FIELD);
-        this.currentDeadlift = getSObjectValue(curBen, DEADLIFT_FIELD);
-        this.currentBenchPress = getSObjectValue(curBen, BENCHPRESS_FIELD);
-        this.currentShoulderPress = getSObjectValue(curBen, SHOULDERPRESS_FIELD);
-        this.goalBackSquat = getSObjectValue(goalBen, BACKSQUAT_FIELD);
-        this.goalDeadLift = getSObjectValue(goalBen, DEADLIFT_FIELD);
-        this.goalBenchPress = getSObjectValue(goalBen, BENCHPRESS_FIELD);
-        this.goalShoulderPress = getSObjectValue(goalBen, SHOULDERPRESS_FIELD);
+        console.log(goalBen)
+        this.currentBackSquat = getSObjectValue(curBen, BACKSQUAT_FIELD) !=null? getSObjectValue(curBen, BACKSQUAT_FIELD):0;
+        this.currentDeadlift = getSObjectValue(curBen, DEADLIFT_FIELD) != null? getSObjectValue(curBen, DEADLIFT_FIELD):0 ;
+        this.currentBenchPress = getSObjectValue(curBen, BENCHPRESS_FIELD) !=null? getSObjectValue(curBen, BENCHPRESS_FIELD):0;
+        this.currentShoulderPress = getSObjectValue(curBen, SHOULDERPRESS_FIELD) != null? getSObjectValue(curBen, SHOULDERPRESS_FIELD):0;
+        this.goalBackSquat = getSObjectValue(goalBen, BACKSQUAT_FIELD) != null? getSObjectValue(goalBen, BACKSQUAT_FIELD):0;
+        this.goalDeadlift = getSObjectValue(goalBen, DEADLIFT_FIELD) != null? getSObjectValue(goalBen, DEADLIFT_FIELD):0 ;
+        this.goalBenchPress = getSObjectValue(goalBen, BENCHPRESS_FIELD) !=null? getSObjectValue(goalBen, BENCHPRESS_FIELD):0;
+        this.goalShoulderPress = getSObjectValue(goalBen, SHOULDERPRESS_FIELD) != null? getSObjectValue(goalBen, SHOULDERPRESS_FIELD):0;
         if (this.template.querySelector("c-member-bar-chart").chartCreated()) {
           this.template
             .querySelector("c-member-bar-chart")
@@ -82,7 +95,7 @@ export default class MemberDetails extends LightningElement {
               this.currentBackSquat,
               this.goalBackSquat,
               this.currentDeadlift,
-              this.goalDeadLift,
+              this.goalDeadlift,
               this.currentBenchPress,
               this.goalBenchPress,
               this.currentShoulderPress,
