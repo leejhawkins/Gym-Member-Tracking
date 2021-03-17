@@ -1,20 +1,25 @@
 <template>
-  <lightning-card title={Name}>
+  <lightning-card title={Name} if:true={Name}>
     <template if:true={Name} onchange={handleChange} value={Name}>
       <div class="slds-m-around_medium">
         <div class="slds-grid slds-wrap">
-          <div class="slds-col slds-size_4-of-12">
-            <p>{Fitness_Level__c}</p>
+          <div class="slds-col slds-size_5-of-12">
+            <span>{Fitness_Level__c}</span>
+            <div class="slds-m-around_medium">
+              <lightning-layout-item>
+                <img src={Picture__c} alt="Profile photo" />
+              </lightning-layout-item>
+            </div>
+
             <lightning-formatted-email
               value={Email__c}
             ></lightning-formatted-email>
-            <button 
-              type="button"
-              name="edit"
-              onclick={handleShowModal}>
-            Send Workout</button>
+            <button type="button" name="edit" onclick={handleShowModal}>
+              Send Workout
+            </button>
           </div>
-          <c-member-bar-chart 
+          <div class="slds-col slds-size_7-of-12">
+            <c-member-bar-chart
             cbs={currentBackSquat}
             cdl={currentDeadlift}
             cbp={currentBenchPress}
@@ -23,29 +28,43 @@
             gdl={goalDeadlift}
             gbp={goalBenchPress}
             gsp={goalShoulderPress}
-            class="slds-col slds-size_8-of-12">
+            
+          >
           </c-member-bar-chart>
-          <div class="slds-grid slds-wrap">
-          <div class="slds-col slds-size_3-of-12"><p>Next Back Squat Level:{toBSNextLevel}</p></div>
-          <div class="slds-col slds-size_3-of-12"><p>Next Deadlift Level: {toDLNextLevel}</p></div>
-          <div class="slds-col slds-size_3-of-12"><p>Next Bench Press Level: {toBPNextLevel}</p></div>
-          <div class="slds-col slds-size_3-of-12"><p>Next Shoulder Press Level: {toSPNextLevel}</p></div>
+          <div class="slds-grid slds-gutters_direct-medium slds-wrap slds-m-around_medium slds-align_absolute-center">
+            <div class="slds-col slds-size_12-of-12">
+              <h1 class="slds-align_absolute-center slds-border_bottom">Next Level: {nextLevel}</h1>
+            </div>
+            <div class={getBSStyle}>
+              <p>Next Back Squat Level:</p><p>{toBSNextLevel}</p>
+            </div>
+            <div class={getDLStyle}>
+              <p>Next Deadlift Level:</p><p>{toDLNextLevel}</p>
+            </div>
+            <div class={getBPStyle}>
+              <p>Next Bench Press Level: {toBPNextLevel}</p>
+            </div>
+            <div class={getSPStyle}>
+              <p>Next Shoulder Press Level: {toSPNextLevel}</p>
+            </div>
           </div>
+          </div>
+          
           
           <c-email-modal
             name={Name}
             level={Fitness_Level__c}
             email={Email__c}
-            workoutdes={workoutDes}>
+            workoutdes={workoutDes}
+          >
             <div slot="footer">
               <lightning-button
-                  label="Cancel"
-                  variant="neutral"
-                  onclick={handleCancelModal}
+                label="Cancel"
+                variant="neutral"
+                onclick={handleCancelModal}
               ></lightning-button>
-          </div>
+            </div>
           </c-email-modal>
-         
         </div>
       </div>
     </template>

@@ -27,7 +27,7 @@ export default class MemberBarChart extends LightningElement {
                 {
                     data: [0,0,0,0],
                     backgroundColor: 'rgb(192,192,192)',
-                    label: 'Goal'
+                    label: 'Next Level'
                 }
             ],
             labels: ['Back Squat','Deadlift','Bench Press','Shoulder Press']
@@ -75,7 +75,7 @@ export default class MemberBarChart extends LightningElement {
                 this.config.data.datasets[0].data[2] = this.cbp;
                 this.config.data.datasets[1].data[2] = this.gbp;
                 this.config.data.datasets[0].data[3] = this.csp;
-                this.config.data.datasets[0].data[3] = this.gsp;
+                this.config.data.datasets[1].data[3] = this.gsp;
                 const canvas = document.createElement('canvas');
                 this.template.querySelector('div.chart').appendChild(canvas);
                 const ctx = canvas.getContext('2d');
@@ -104,5 +104,6 @@ export default class MemberBarChart extends LightningElement {
             console.log(true)
             return true
         }
+        return false
     }
 }

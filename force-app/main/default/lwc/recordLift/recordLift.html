@@ -1,57 +1,60 @@
 <template>
-  <lightning-card title="Record a member lift" icon-name="custom:custom63">
-    <div class="slds-select_container">
-      <select
-        class="slds-select"
-        name="lift"
-        label="Select Benchmark Type"
-        onchange={handleSelect}
-        value={benchmarkAPI}
-        required
+  <lightning-card title="Record a Member Lift" icon-name="custom:custom63">
+    <div class="slds-m-around_medium">
+      <div class="slds-select_container">
+        <select
+          class="slds-select"
+          name="lift"
+          label="Select Benchmark Type"
+          onchange={handleSelect}
+          value={benchmarkAPI}
+          required
+        >
+        <option value="" required="">Choose Lift</option>
+          <option value="Back_Squat__c">Back Squat</option>
+          <option value="Deadlift__c">Deadlift</option>
+          <option value="Bench_Press__c">Bench Press</option>
+          <option value="Shoulder_Press__c">Shoulder Press</option>
+        </select>
+      </div>
+      <lightning-input type="number" name="reps" label="Reps" value={reps} onchange={handleChange} required></lightning-input>
+      <lightning-input type="number" name="weight" label="Weight" value={weight} onchange={handleChange} required></lightning-input>
+      <lightning-record-edit-form
+        object-api-name="Benchmark__c"
+        onsuccess={handleSuccess}
       >
-      <option value="" required="">Choose Lift</option>
-        <option value="Back_Squat__c">Back Squat</option>
-        <option value="Deadlift__c">Deadlift</option>
-        <option value="Bench_Press__c">Bench Press</option>
-        <option value="Shoulder_Press__c">Shoulder Press</option>
-      </select>
+        <div class="slds-hide">
+          <lightning-input-field
+            field-name="Name"
+            value={benchmarkName}
+          ></lightning-input-field>
+        </div>
+  
+        <lightning-input-field field-name="Member__c" value={memberName} name="memberName" onchange={handleChange} required>
+  
+        </lightning-input-field>
+        <div>
+          <lightning-input-field
+            field-name="Date__c"
+            value={date}
+            name="date"
+            onchange={handleChange}
+          ></lightning-input-field>
+        </div>
+        <div class="slds-hide">
+          <lightning-input-field
+            field-name={benchmarkAPI}
+            value={computedWeight}
+          ></lightning-input-field>
+        </div>
+        <lightning-button
+          type="submit"
+          variant="brand"
+          name="save"
+          label="Record Lift"
+        ></lightning-button>
+      </lightning-record-edit-form>
     </div>
-    <lightning-input type="number" name="reps" label="Reps" value={reps} onchange={handleChange}></lightning-input>
-    <lightning-input type="number" name="weight" label="Weight" value={weight} onchange={handleChange} required></lightning-input>
-    <lightning-record-edit-form
-      object-api-name="Benchmark__c"
-      onsuccess={handleSuccess}
-    >
-      <div class="slds-hide">
-        <lightning-input-field
-          field-name="Name"
-          value={benchmarkName}
-        ></lightning-input-field>
-      </div>
-
-      <lightning-input-field field-name="Member__c" value={memberName} name="memberName" onchange={handleChange}>
-
-      </lightning-input-field>
-      <div>
-        <lightning-input-field
-          field-name="Date__c"
-          value={date}
-          name="date"
-          onchange={handleChange}
-        ></lightning-input-field>
-      </div>
-      <div class="slds-hide">
-        <lightning-input-field
-          field-name={benchmarkAPI}
-          value={computedWeight}
-        ></lightning-input-field>
-      </div>
-      <lightning-button
-        type="submit"
-        variant="brand"
-        name="save"
-        label="Record Lift"
-      ></lightning-button>
-    </lightning-record-edit-form>
+    
   </lightning-card>
 </template>

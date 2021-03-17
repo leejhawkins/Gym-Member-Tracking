@@ -1,57 +1,69 @@
 <template>
-  <template if:true={workoutid}>
-    <p>Level: {name}</p>
-    <lightning-record-form
-      object-api-name="Workout__c"
-      record-id={workoutid}
-      fields="Workout_Description__c"
-    ></lightning-record-form>
-  </template>
-  <template if:false={workoutid}>
-    <template if:false={edit}>
-      <p>There is no {name} workout for today, create one</p>
-      <button
-        type="button"
-        name="edit"
-        onclick={showEdit}
-      >Add Workout</button>
-    </template>
-    <template if:true={edit}>
+  <div class="slds-m-around_medium">
+    <template if:true={workoutid}>
       <p>Level: {name}</p>
-
-      <lightning-record-edit-form
+      <lightning-record-form
         object-api-name="Workout__c"
-        onsuccess={handleSuccess}
-      >
-        <div class="slds-hide">
-          <lightning-input-field
-            field-name="Name"
-            value={workoutName}
-          ></lightning-input-field>
-        </div>
-
-        <lightning-input-field
-          field-name="Workout_Description__c"
-        ></lightning-input-field>
-        <div class="slds-hide">
-          <lightning-input-field
-            field-name="Date__c"
-            value={date}
-          ></lightning-input-field>
-        </div>
-        <div class="slds-hide">
-          <lightning-input-field
-            field-name="Fitness_Level__c"
-            value={name}
-          ></lightning-input-field>
-        </div>
-        <lightning-button
-          type="submit"
-          variant="brand"
-          name="save"
-          label="Create Workout"
-        ></lightning-button>
-      </lightning-record-edit-form>
+        record-id={workoutid}
+        fields="Workout_Description__c"
+      ></lightning-record-form>
     </template>
-  </template>
+    <template if:false={workoutid}>
+      <template if:false={edit}>
+        <p>There is no {name} workout for today, create one</p>
+        <button
+          type="button"
+          name="edit"
+          onclick={showEdit}
+          class="slds-float_right"
+        >
+          Add Workout
+        </button>
+      </template>
+      <template if:true={edit}>
+        <p>Level: {name}</p>
+
+        <lightning-record-edit-form
+          object-api-name="Workout__c"
+          onsuccess={handleSuccess}
+        >
+          <div class="slds-hide">
+            <lightning-input-field
+              field-name="Name"
+              value={workoutName}
+            ></lightning-input-field>
+          </div>
+
+          <lightning-input-field
+            field-name="Workout_Description__c"
+          ></lightning-input-field>
+          <div class="slds-hide">
+            <lightning-input-field
+              field-name="Date__c"
+              value={date}
+            ></lightning-input-field>
+          </div>
+          <div class="slds-hide">
+            <lightning-input-field
+              field-name="Fitness_Level__c"
+              value={name}
+            ></lightning-input-field>
+          </div>
+
+          <lightning-button
+            type="submit"
+            variant="brand"
+            name="save"
+            label="Create Workout"
+          ></lightning-button>
+          <lightning-button
+            type="button"
+            onclick={showEdit}
+            variant="destructive-text"
+            label="Cancel"
+          ></lightning-button>
+        </lightning-record-edit-form>
+      </template>
+    </template>
+  </div>
 </template>

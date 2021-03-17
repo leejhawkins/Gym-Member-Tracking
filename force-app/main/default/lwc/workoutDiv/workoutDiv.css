@@ -5,3 +5,6 @@ button {
     border-radius:5px;
     box-shadow: silver 2px 2px;
 }
+p {
+    font-size: 12px;
+}

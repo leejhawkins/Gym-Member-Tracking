@@ -6,22 +6,23 @@ import { subscribe, MessageContext } from "lightning/messageService";
 import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected__c";
 import getBenchmarks from "@salesforce/apex/BenchmarkController.getBenchmarks";
 
-import getMemberWorkout from '@salesforce/apex/WorkoutController.getMemberWorkout';
+import getMemberWorkout from "@salesforce/apex/WorkoutController.getMemberWorkout";
 import NAME_FIELD from "@salesforce/schema/Member__c.Name";
 import LEVEL_FIELD from "@salesforce/schema/Member__c.Fitness_Level__c";
 import EMAIL_FIELD from "@salesforce/schema/Member__c.Email__c";
+import PICTURE_FIELD from "@salesforce/schema/Member__c.Picture__c";
 import BACKSQUAT_FIELD from "@salesforce/schema/Benchmark__c.Back_Squat__c";
 import DEADLIFT_FIELD from "@salesforce/schema/Benchmark__c.Deadlift__c";
 import BENCHPRESS_FIELD from "@salesforce/schema/Benchmark__c.Bench_Press__c";
 import SHOULDERPRESS_FIELD from "@salesforce/schema/Benchmark__c.Shoulder_Press__c";
-import DESCRIPTION_FIELD from "@salesforce/schema/Workout__c.Workout_Description__c"
+import DESCRIPTION_FIELD from "@salesforce/schema/Workout__c.Workout_Description__c";
 
-const fields = [NAME_FIELD, LEVEL_FIELD, EMAIL_FIELD];
+const fields = [NAME_FIELD, LEVEL_FIELD, EMAIL_FIELD, PICTURE_FIELD];
 
 export default class MemberDetails extends LightningElement {
   subscription = null;
   currentBackSquat = 0;
-  currentDeadlift= 0;
+  currentDeadlift = 0;
   currentBenchPress = 0;
   currentShoulderPress = 0;
   goalBackSquat = 0;
@@ -33,6 +34,7 @@ export default class MemberDetails extends LightningElement {
   Name;
   Email__c;
   Fitness_Level__c;
+  Picture__c;
 
   @wire(getRecord, { recordId: "$recordId", fields })
   wiredRecord({ error, data }) {
@@ -40,54 +42,59 @@ export default class MemberDetails extends LightningElement {
       this.dispatchToast(error);
     } else if (data) {
       fields.forEach(
-        (item) => (this[item.fieldApiName] = getFieldValue(data, item))
+        (item) =>
+          (this[item.fieldApiName] =
+            getFieldValue(data, item) != null
+              ? getFieldValue(data, item)
+              : item.fieldApiName === "Picture__c"
+              ? "https://thumbs.dreamstime.com/z/avatar-fitness-man-running-icon-over-white-background-vector-illustration-avatar-fitness-man-running-icon-165673931.jpg"
+              : "")
       );
     }
   }
   @wire(getMemberWorkout, { memberId: "$recordId", workoutDate: null })
   workout;
-
-  get workoutDes() {
-    return this.workout.data
-      ? getSObjectValue(this.workout.data, DESCRIPTION_FIELD)
-      : "";
-  }
-  get toBSNextLevel(){
-    return this.currentBackSquat >= this.goalBackSquat ? `Achieved!`: ` ${this.goalBackSquat-this.currentBackSquat}lbs `
-  }
-  get toDLNextLevel(){
-    return this.currentDeadlift >= this.goalDeadlift ? `Achieved!`:` ${this.goalDeadlift-this.currentDeadlift}lbs `
-  }
-  get toBPNextLevel(){
-    return this.currentBenchPress >= this.goalBenchPress ? `Achieved!`:` ${this.goalBenchPress-this.currentBenchPress}lbs `
-  }
-  get toSPNextLevel(){
-    return this.currentShoulderPress >= this.goalShoulderPress ? `Achieved!`:`${this.goalShoulderPress-this.currentShoulderPress}lbs `
-  }
-  
-  handleMessage(message) {
-    this.currentBackSquat = 0;
-    this.currentDeadlift= 0;
-    this.currentBenchPress = 0;
-    this.currentShoulderPress = 0;
-    this.goalBackSquat = 0;
-    this.goalDeadlift = 0;
-    this.goalBenchPress = 0;
-    this.goalShoulderPress = 0;
-    this.recordId = message.recordId;
-    getBenchmarks({ memberId: this.recordId })
-      .then((data) => {
-        let curBen = data['Current'];
-        let goalBen = data['Goal'];
-        console.log(goalBen)
-        this.currentBackSquat = getSObjectValue(curBen, BACKSQUAT_FIELD) !=null? getSObjectValue(curBen, BACKSQUAT_FIELD):0;
-        this.currentDeadlift = getSObjectValue(curBen, DEADLIFT_FIELD) != null? getSObjectValue(curBen, DEADLIFT_FIELD):0 ;
-        this.currentBenchPress = getSObjectValue(curBen, BENCHPRESS_FIELD) !=null? getSObjectValue(curBen, BENCHPRESS_FIELD):0;
-        this.currentShoulderPress = getSObjectValue(curBen, SHOULDERPRESS_FIELD) != null? getSObjectValue(curBen, SHOULDERPRESS_FIELD):0;
-        this.goalBackSquat = getSObjectValue(goalBen, BACKSQUAT_FIELD) != null? getSObjectValue(goalBen, BACKSQUAT_FIELD):0;
-        this.goalDeadlift = getSObjectValue(goalBen, DEADLIFT_FIELD) != null? getSObjectValue(goalBen, DEADLIFT_FIELD):0 ;
-        this.goalBenchPress = getSObjectValue(goalBen, BENCHPRESS_FIELD) !=null? getSObjectValue(goalBen, BENCHPRESS_FIELD):0;
-        this.goalShoulderPress = getSObjectValue(goalBen, SHOULDERPRESS_FIELD) != null? getSObjectValue(goalBen, SHOULDERPRESS_FIELD):0;
+  @wire(getBenchmarks,{ memberId: "$recordId" })
+  wiredBenchmarks({error,data}) {
+    if(error) {
+      this.dispatchToast(error);
+    } else if (data) {
+      let curBen = data.Current;
+        let goalBen = data.Goal;
+        console.log(goalBen);
+        this.currentBackSquat =
+          getSObjectValue(curBen, BACKSQUAT_FIELD) != null
+            ? getSObjectValue(curBen, BACKSQUAT_FIELD)
+            : 0;
+        this.currentDeadlift =
+          getSObjectValue(curBen, DEADLIFT_FIELD) != null
+            ? getSObjectValue(curBen, DEADLIFT_FIELD)
+            : 0;
+        this.currentBenchPress =
+          getSObjectValue(curBen, BENCHPRESS_FIELD) != null
+            ? getSObjectValue(curBen, BENCHPRESS_FIELD)
+            : 0;
+        this.currentShoulderPress =
+          getSObjectValue(curBen, SHOULDERPRESS_FIELD) != null
+            ? getSObjectValue(curBen, SHOULDERPRESS_FIELD)
+            : 0;
+        this.goalBackSquat =
+          getSObjectValue(goalBen, BACKSQUAT_FIELD) != null
+            ? getSObjectValue(goalBen, BACKSQUAT_FIELD)
+            : 0;
+        this.goalDeadlift =
+          getSObjectValue(goalBen, DEADLIFT_FIELD) != null
+            ? getSObjectValue(goalBen, DEADLIFT_FIELD)
+            : 0;
+        this.goalBenchPress =
+          getSObjectValue(goalBen, BENCHPRESS_FIELD) != null
+            ? getSObjectValue(goalBen, BENCHPRESS_FIELD)
+            : 0;
+        this.goalShoulderPress =
+          getSObjectValue(goalBen, SHOULDERPRESS_FIELD) != null
+            ? getSObjectValue(goalBen, SHOULDERPRESS_FIELD)
+            : 0;
+        this.nextLevel = getSObjectValue(goalBen, LEVEL_FIELD);
         if (this.template.querySelector("c-member-bar-chart").chartCreated()) {
           this.template
             .querySelector("c-member-bar-chart")
@@ -102,12 +109,57 @@ export default class MemberDetails extends LightningElement {
               this.goalShoulderPress
             );
         }
-      })
-      .catch((error) => {
-        this.error = error;
-        
-        }
-       );
+    }
+  }
+
+  get workoutDes() {
+    return this.workout.data
+      ? getSObjectValue(this.workout.data, DESCRIPTION_FIELD)
+      : "";
+  }
+  get toBSNextLevel() {
+    return this.currentBackSquat >= this.goalBackSquat
+      ? `Achieved!✔️`
+      : ` ${this.goalBackSquat - this.currentBackSquat}lbs `;
+  }
+  get toDLNextLevel() {
+    return this.currentDeadlift >= this.goalDeadlift
+      ? `Achieved!✔️`
+      : ` ${this.goalDeadlift - this.currentDeadlift}lbs `;
+  }
+  get toBPNextLevel() {
+    return this.currentBenchPress >= this.goalBenchPress
+      ? `Achieved!✔️`
+      : ` ${this.goalBenchPress - this.currentBenchPress}lbs `;
+  }
+  get toSPNextLevel() {
+    return this.currentShoulderPress >= this.goalShoulderPress
+      ? `Achieved!✔️`
+      : `${this.goalShoulderPress - this.currentShoulderPress}lbs `;
+  }
+  get getBSStyle() {
+    return this.currentBackSquat >= this.goalBackSquat
+      ? "achieved slds-col slds-size_5-of-12"
+      : "next-level slds-col slds-size_5-of-12";
+  }
+  get getDLStyle() {
+    return this.currentDeadlift >= this.goalDeadlift
+      ? "achieved slds-col slds-size_5-of-12"
+      : "next-level slds-col slds-size_5-of-12";
+  }
+  get getBPStyle() {
+    return this.currentBenchPress >= this.goalBenchPress
+      ? "achieved slds-col slds-size_5-of-12"
+      : "next-level slds-col slds-size_5-of-12";
+  }
+  get getSPStyle() {
+    return this.currentShoulderPress >= this.goalShoulderPress
+      ? "achieved slds-col slds-size_5-of-12"
+      : "next-level slds-col slds-size_5-of-12";
+  }
+
+  handleMessage(message) {
+    this.recordId = message.recordId;
   }
 
   // By using the MessageContext @wire adapter, unsubscribe will be called

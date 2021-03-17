@@ -15,6 +15,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>BenchmarkController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>BenchmarkTriggerUtility</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -27,7 +31,19 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>EmailController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>LiftStandardsController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>MailToNewMember</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>MailToNewMemberTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -92,6 +108,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Benchmark__c.Mile_Time_Minutes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Benchmark__c.Mile_Time_Seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Benchmark__c.Shoulder_Press__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -113,6 +139,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Member__c.Back_Squat__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Member__c.City__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

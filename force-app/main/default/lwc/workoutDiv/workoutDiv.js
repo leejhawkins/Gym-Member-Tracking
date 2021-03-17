@@ -15,7 +15,7 @@ export default class WorkoutDiv extends LightningElement {
         this.dispatchEvent(successEvent);
     }
     showEdit(){
-        this.edit = true;
+        this.edit = !this.edit;
     }
     get workoutName(){
         return `${this.name} Workout for ${this.date}`.trim()
