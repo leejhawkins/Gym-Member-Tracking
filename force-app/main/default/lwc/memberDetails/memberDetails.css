@@ -1,38 +1,36 @@
 button {
-    margin-top:20px;
-    background-color:silver;
-    font:black;
-    border-radius:5px;
-    box-shadow: silver 2px 2px;
+  margin-top: 20px;
+  background-color: silver;
+  font: black;
+  border-radius: 5px;
+  box-shadow: silver 2px 2px;
 }
 
 img {
-    width: var(--lwc-squareIconLargeBoundaryAlt, 80px);
-    height: var(--lwc-squareIconLargeBoundaryAlt, 80px);
-    border-radius: var(--lwc-borderRadiusCircle, 50%);
-    margin-bottom: var(--lwc-varSpacingXSmall, 8px);
+  width: var(--lwc-squareIconLargeBoundaryAlt, 80px);
+  height: var(--lwc-squareIconLargeBoundaryAlt, 80px);
+  border-radius: var(--lwc-borderRadiusCircle, 50%);
+  margin-bottom: var(--lwc-varSpacingXSmall, 8px);
 }
 
-.slds-size_5-of-12 p{
-    font-size:12px;
-   
+.slds-size_5-of-12 p {
+  font-size: 12px;
 }
 .next-level {
-    border-radius:5px;
-    margin-top:8px;
-    margin-right:10px;
-    border: solid 2px lightblue;
-    box-shadow: silver 5px 5px;
+  border-radius: 5px;
+  margin-top: 8px;
+  margin-right: 10px;
+  border: solid 2px lightblue;
+  box-shadow: silver 5px 5px;
 }
 .achieved {
-    border-radius:5px;
-    margin-top:8px;
-    margin-right:10px;
-    border: solid 5px lightblue;
-    box-shadow: silver 2px 2px; 
+  border-radius: 5px;
+  margin-top: 8px;
+  margin-right: 10px;
+  border: solid 5px lightblue;
+  box-shadow: silver 2px 2px;
 }
-.achieved p{
-    font-weight:bold;
-    font-style:oblique;
+.achieved p {
+  font-weight: bold;
+  font-style: oblique;
 }
-

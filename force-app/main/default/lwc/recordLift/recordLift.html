@@ -10,15 +10,29 @@
           value={benchmarkAPI}
           required
         >
-        <option value="" required="">Choose Lift</option>
+          <option value="" required="">Choose Lift</option>
           <option value="Back_Squat__c">Back Squat</option>
           <option value="Deadlift__c">Deadlift</option>
           <option value="Bench_Press__c">Bench Press</option>
           <option value="Shoulder_Press__c">Shoulder Press</option>
         </select>
       </div>
-      <lightning-input type="number" name="reps" label="Reps" value={reps} onchange={handleChange} required></lightning-input>
-      <lightning-input type="number" name="weight" label="Weight" value={weight} onchange={handleChange} required></lightning-input>
+      <lightning-input
+        type="number"
+        name="reps"
+        label="Reps"
+        value={reps}
+        onchange={handleChange}
+        required
+      ></lightning-input>
+      <lightning-input
+        type="number"
+        name="weight"
+        label="Weight"
+        value={weight}
+        onchange={handleChange}
+        required
+      ></lightning-input>
       <lightning-record-edit-form
         object-api-name="Benchmark__c"
         onsuccess={handleSuccess}
@@ -29,9 +43,14 @@
             value={benchmarkName}
           ></lightning-input-field>
         </div>
-  
-        <lightning-input-field field-name="Member__c" value={memberName} name="memberName" onchange={handleChange} required>
-  
+
+        <lightning-input-field
+          field-name="Member__c"
+          value={memberName}
+          name="memberName"
+          onchange={handleChange}
+          required
+        >
         </lightning-input-field>
         <div>
           <lightning-input-field
@@ -55,6 +74,5 @@
         ></lightning-button>
       </lightning-record-edit-form>
     </div>
-    
   </lightning-card>
 </template>

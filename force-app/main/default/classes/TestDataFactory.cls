@@ -108,19 +108,17 @@ public inherited sharing class TestDataFactory {
   ) {
     List<Benchmark__c> benchmarks = new List<Benchmark__c>();
 
-      for (Integer i = 0; i < numBenchMarks; i++) {
-        Benchmark__c b = new Benchmark__c();
-        b.Deadlift__c = 350+i;
-        b.Bench_Press__c = 250+1;
-        b.Shoulder_Press__c = 175+i;
-        b.Back_Squat__c =350+i;
-        b.Name = 'Robust-Benchmark ' + i;
-        b.Member__c = member.Id;
-        b.Date__c = Date.today().addDays(-i);
-        benchmarks.add(b);
-        insert b;
-      }
-
-    
+    for (Integer i = 0; i < numBenchMarks; i++) {
+      Benchmark__c b = new Benchmark__c();
+      b.Deadlift__c = 350 + i;
+      b.Bench_Press__c = 250 + 1;
+      b.Shoulder_Press__c = 175 + i;
+      b.Back_Squat__c = 350 + i;
+      b.Name = 'Robust-Benchmark ' + i;
+      b.Member__c = member.Id;
+      b.Date__c = Date.today().addDays(-i);
+      benchmarks.add(b);
+      insert b;
+    }
   }
 }
