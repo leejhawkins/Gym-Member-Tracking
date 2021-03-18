@@ -11,10 +11,6 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
-        <apexClass>BMICalculatorLogicTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>BenchmarkController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
