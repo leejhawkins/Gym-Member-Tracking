@@ -1,5 +1,5 @@
 <template>
-    <lightning-card title="Add a member">
+    <lightning-card title="Add Member">
         <div class="slds-var-m-around_medium">
         <lightning-record-edit-form object-api-name={memberObject}>
             <div class="slds-grid slds-wrap">
@@ -10,8 +10,6 @@
                     <lightning-input-field class="slds-col slds-size_1-of-2" field-name={emailField}></lightning-input-field>
                     <lightning-input-field class="slds-col slds-size_1-of-2" field-name={fitnessLevelField}></lightning-input-field>
                     <lightning-input-field class="slds-col slds-size_1-of-2" field-name={trainingClassField}></lightning-input-field>
-                    <lightning-input-field class="slds-col slds-size_1-of-2" field-name={cityField}></lightning-input-field>
-                    <lightning-input-field class="slds-col slds-size_1-of-2" field-name={activeField}></lightning-input-field>
             </div>
             <lightning-button type="submit" variant="brand" label="Create Member" onclick={showSuccessToast}></lightning-button>
     </lightning-record-edit-form>
