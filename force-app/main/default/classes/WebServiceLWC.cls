@@ -4,21 +4,22 @@
     to be processed by the JS class in the LWC
 */
 public class WebServiceLWC {
+    
+    private static String ownerCity = 'London';
+    private static String apiKey = '4ef90ad4a7e5df0276f8920bcb07d888';
+
+    
     @AuraEnabled (cacheable=true)
     public static String performCallout(Id recordId) {
-       String ownerCity = 'London';
-    
-       String apiKey = '4ef90ad4a7e5df0276f8920bcb07d888';
        
-       //https://api.openweathermap.org/data/2.5/forecast?q=Moscow&appid=... requestEndPoint to get the forecast 
-       String requestEndPoint = 'http://api.openweathermap.org/data/2.5/weather';
-       requestEndPoint+='?q='+ownerCity;
-       requestEndPoint+='&units=metric';
-       requestEndPoint+='&APPID='+apiKey;
+       String apiUrl = 'http://api.openweathermap.org/data/2.5/weather';
+       apiUrl+='?q='+ownerCity;
+       apiUrl+='&units=metric';
+       apiUrl+='&APPID='+apiKey;
 
        Http http = new Http();
        HttpRequest request = new HttpRequest();
-       request.setEndpoint(requestEndPoint);
+       request.setEndpoint(apiUrl);
        request.setMethod('GET');
        HttpResponse response = http.send(request);
        JSON2Apex parsedResult = JSON2Apex.parse(response.getBody());
@@ -26,6 +27,8 @@ public class WebServiceLWC {
        return jsonString;
   
     }
+  
+
 }
 
 

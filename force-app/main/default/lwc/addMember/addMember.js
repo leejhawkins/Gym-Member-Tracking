@@ -27,7 +27,7 @@ export default class AddMember extends LightningElement {
   showSuccessToast() {
     const evt = new ShowToastEvent({
         title: 'Member Added',   
-        message: 'Opearion sucessful',
+        message: 'Opearation sucessful',
         variant: 'success',
         mode: 'dismissable'
     });
