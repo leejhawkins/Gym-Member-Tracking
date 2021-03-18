@@ -22,7 +22,6 @@ export default class displayWeather extends LightningElement {
         this._temp = this._parsedWeatherData.main.temp;
         this._description = this._parsedWeatherData.weather[0].description;
         this._icon = `http://openweathermap.org/img/wn/${this._parsedWeatherData.weather[0].icon}@2x.png`;
-        //this._time = 
         this._time = d.toLocaleTimeString();
         this._convertedTemp = (this._temp * 2) + 30;
         }catch(error){
