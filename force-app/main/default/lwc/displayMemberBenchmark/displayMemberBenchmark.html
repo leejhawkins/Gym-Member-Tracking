@@ -1,20 +1,25 @@
 <template>
-    <div class="slds-scrollable_y" style="height: 20rem">
-        <lightning-card title="Benchmark details">
-            
-            <div class="slds-var-m-around_medium">
-             <template if:true={currentBenchmark.data}>
-                <div class="slds-grid slds-wrap">
-                    <div class="slds-col slds-size_4-of-12" style="border-bottom: solid 3px">
-                        <span> Current deadlift: {currentDeadlift}</span>
-                    </div>
-                    <div class="slds-col slds-size_4-of-12" style="border-bottom: solid 3px">
-                        <span>Current backsquat: {currentBacksquat}</span>
-                    </div>
-                 
-                </div>
-                </template>
-            </div>
-        </lightning-card>
-    </div>
+    <lightning-card title="Member Benchmarks" icon-name="custom:custom63">
+        <div class="slds-var-m-around_medium">
+            <p><strong>Goal squat:</strong></p>
+            <lightning-formatted-rich-text value={backsquatGoal}></lightning-formatted-rich-text>
+            <p><strong>Goal deadlift:</strong></p>
+            <lightning-formatted-rich-text value={deadliftGoal}></lightning-formatted-rich-text>
+            <p><strong>Goal benchpress:</strong></p>
+            <lightning-formatted-rich-text value={benchpressGoal}></lightning-formatted-rich-text>
+            <p><strong>Goal shoulderpress:</strong></p>
+            <lightning-formatted-rich-text value={shoulderpressGoal}></lightning-formatted-rich-text>
+
+            <hr />
+
+            <p><strong>Current squat:</strong></p>
+            <lightning-formatted-rich-text value={backsquatCurrent}></lightning-formatted-rich-text>
+            <p><strong>Current deadlift:</strong></p>
+            <lightning-formatted-rich-text value={deadliftCurrent}></lightning-formatted-rich-text>
+            <p><strong>Current benchpress:</strong></p>
+            <lightning-formatted-rich-text value={benchpressCurrent}></lightning-formatted-rich-text>
+            <p><strong>Current shoulderpress:</strong></p>
+            <lightning-formatted-rich-text value={shoulderpressCurrent}></lightning-formatted-rich-text>
+        </div>
+    </lightning-card>
 </template>
