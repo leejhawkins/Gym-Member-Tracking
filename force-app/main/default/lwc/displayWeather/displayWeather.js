@@ -18,12 +18,11 @@ export default class displayWeather extends LightningElement {
         this._weatherData = await performCallout({recordId: this.recordId});
         this._parsedWeatherData = await JSON.parse(this._weatherData);
         this._name = this._parsedWeatherData.name;
-        this._humidity = this._parsedWeatherData.main.humidity;
         this._temp = this._parsedWeatherData.main.temp;
         this._description = this._parsedWeatherData.weather[0].description;
         this._icon = `http://openweathermap.org/img/wn/${this._parsedWeatherData.weather[0].icon}@2x.png`;
         this._time = d.toLocaleTimeString();
-        this._convertedTemp = (this._temp * 2) + 30;
+        this._convertedTemp = (this._temp * (9/5) + 32);
         }catch(error){
             console.log(error);
         }

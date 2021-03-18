@@ -104,16 +104,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Benchmark__c.Mile_Time_Minutes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Benchmark__c.Mile_Time_Seconds__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Benchmark__c.Shoulder_Press__c</field>
         <readable>true</readable>
     </fieldPermissions>
