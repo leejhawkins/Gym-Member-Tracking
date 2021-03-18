@@ -11,7 +11,7 @@ public class WebServiceLWC {
 
     
     @AuraEnabled (cacheable=true)
-    public static String performCallout(Id recordId) {
+    public static String performCallout() {
        
        String apiUrl = 'http://api.openweathermap.org/data/2.5/weather';
        apiUrl+='?q='+ownerCity;
