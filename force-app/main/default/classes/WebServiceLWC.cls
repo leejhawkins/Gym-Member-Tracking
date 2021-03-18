@@ -1,5 +1,6 @@
 /*
     a class to make a GET Api call to the openweathermap api. Method performs a call, 
+
     gets the response. Uses the JSON2Apex class to get the data. Then data gets serialized 
     to be processed by the JS class in the LWC
 */
@@ -58,3 +59,4 @@ public class MemberCallouts {
     }
   }
 }
+
