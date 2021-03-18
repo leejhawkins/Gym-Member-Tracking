@@ -20,7 +20,8 @@ export default class MemberBarChart extends LightningElement {
             datasets: [
                 {
                     data: [0,0,0,0],
-                    backgroundColor: 'rgb(0, 0, 0)'                   
+                    backgroundColor: 'rgb(0, 0, 0)',
+                    label: 'Current Progress'                   
                 },
             ],
             labels: ['Back Squat','Deadlift','Bench Press','Shoulder Press']
@@ -37,9 +38,16 @@ export default class MemberBarChart extends LightningElement {
                             beginAtZero: true
                         }
                     }]
-                }
+                },
+
             }
-        }
+        },
+        options: {
+            title: {
+              display: true,
+              text: 'Lift Progress as a Ratio to Goal Weight'
+            }
+          }
     };
     
     connectedCallback() {

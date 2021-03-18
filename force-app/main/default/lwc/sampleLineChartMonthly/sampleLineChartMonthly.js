@@ -17,22 +17,22 @@ export default class MemberBarChart extends LightningElement {
           datasets: [{
               data: [86, 87, 87, 88, 88],
               label: "Bench Press",
-              borderColor: "#3e95cd",
+              borderColor: 'rgb(0, 0, 0)',
               fill: false
             }, { 
               data: [81, 81, 82, 83, 84],
               label: "Back Squat",
-              borderColor: "#8e5ea2",
+              borderColor: 'rgb(0, 255, 255)',
               fill: false
             }, { 
               data: [78, 79, 80, 80, 81],
               label: "Deadlift",
-              borderColor: "#3cba9f",
+              borderColor: 'rgb(128, 128, 128)',
               fill: false
             }, { 
               data: [91, 91, 92, 92, 93],
               label: "Shoulder Press",
-              borderColor: "#e8c3b9",
+              borderColor: 'rgb(0,115,255)',
               fill: false
             }
           ]

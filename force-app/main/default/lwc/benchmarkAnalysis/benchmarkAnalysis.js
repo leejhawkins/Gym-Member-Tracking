@@ -5,8 +5,8 @@ import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected_
 import getBenchmarks from "@salesforce/apex/BenchmarkController.getBenchmarks";
 import getAnnualProgress from "@salesforce/apex/BenchmarkController.getAnnualProgress";
 import getMembershipMonths from "@salesforce/apex/BenchmarkController.getMembershipMonths";
-import getMonthlyProgress from "@salesforce/apex/BenchmarkController.getMonthlyProgress";
-import getMonthlyBenchmarkDates from "@salesforce/apex/BenchmarkController.getMonthlyBenchmarkDates";
+//import getMonthlyProgress from "@salesforce/apex/BenchmarkController.getMonthlyProgress";
+//import getMonthlyBenchmarkDates from "@salesforce/apex/BenchmarkController.getMonthlyBenchmarkDates";
 import BACKSQUAT_FIELD from "@salesforce/schema/Benchmark__c.Back_Squat__c";
 import DEADLIFT_FIELD from "@salesforce/schema/Benchmark__c.Deadlift__c";
 import BENCHPRESS_FIELD from "@salesforce/schema/Benchmark__c.Bench_Press__c";
@@ -49,7 +49,7 @@ export default class MemberDetails extends LightningElement {
       this.generateAnnualLineChart();
     }
     if(this.monthlyProgressLineGraph){
-      this.generateMonthlyLineChart();
+      //this.generateMonthlyLineChart();
     }
     if(this.currentProgressBarGraph){
       this.generateBarChart();
@@ -109,7 +109,8 @@ export default class MemberDetails extends LightningElement {
             }
         });
   }
-  async generateMontlyLineChart(){
+      /*
+    async generateMontlyLineChart(){
     await getMonthlyBenchmarkDates({memberId: this.recordId})
     .then((data) => {
         console.log(data);
@@ -121,6 +122,7 @@ export default class MemberDetails extends LightningElement {
         
         }
     );
+
     await getMonthlyProgress({ memberId: this.recordId })
     .then((data) => {
         this.bp = data['Bench Press'] != null?  data['Bench Press'] : [];
@@ -164,6 +166,7 @@ export default class MemberDetails extends LightningElement {
         }
     });
   }
+  */
   generateBarChart(){
     console.log('Generating Bar Chart');
     this.currentBackSquat = 0;
@@ -249,9 +252,9 @@ export default class MemberDetails extends LightningElement {
           this.annualProgressLineGraph = true;
           this.monthlyProgressLineGraph = false;
           this.currentProgressBarGraph = false;
-          //if(this.recordId != null){
-          //  this.generateAnnualLineChart();
-         // }
+          if(this.recordId != null){
+            this.generateAnnualLineChart();
+          }
           break;
         case "monthlyProgressLineGraph":
           this.fitnessLevelPieChart = false;
@@ -265,7 +268,7 @@ export default class MemberDetails extends LightningElement {
           this.monthlyProgressLineGraph = false;
           this.currentProgressBarGraph = true;
           if(this.recordId != null){
-            this.generateBarChart(this.recordId);
+            this.generateBarChart();
           }
           break;
         default:

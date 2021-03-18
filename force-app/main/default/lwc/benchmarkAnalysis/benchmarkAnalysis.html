@@ -1,5 +1,5 @@
 <template>
-    <lightning-card title={Name}>
+    <lightning-card title="Benchmark Analysis">
         <div class="slds-p-around_medium lgc-bg">
             <div class="slds-select_container">
                 <select class="slds-select" name="Chart Selector" label="Select Chart" onchange={handleSelect} required>
@@ -22,9 +22,8 @@
         <template if:true={monthlyProgressLineGraph}>
             <div class="slds-m-around_medium">
                 <div class="slds-grid slds-wrap">
-                    <c-benchmark-line-chart bp={bp} bs={bs} dl={dl} sp={sp} months={months}
-                        class="slds-col slds-size_12-of-12">
-                    </c-benchmark-line-chart>
+                    <c-sample-line-chart-monthly class="slds-col slds-size_12-of-12">
+                    </c-sample-line-chart-monthly>
                 </div>
             </div>
         </template>

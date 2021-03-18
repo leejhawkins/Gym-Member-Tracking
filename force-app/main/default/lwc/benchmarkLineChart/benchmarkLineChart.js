@@ -21,22 +21,22 @@ export default class BenchmarkLineChart extends LightningElement {
           datasets: [{ 
               data: [65, 69, 74, 78, 83, 86, 89, 92, 94, 96, 98, 100],
               label: "Bench Press",
-              borderColor: "#3e95cd",
+              borderColor: 'rgb(0, 0, 0)',
               fill: false
             }, { 
               data: [67, 70, 73, 75, 78, 81, 83, 85, 88, 90, 93, 95],
               label: "Back Squat",
-              borderColor: "#8e5ea2",
+              borderColor: 'rgb(0, 255, 255)',
               fill: false
             }, { 
               data: [62, 65, 68, 72, 75, 78, 82, 87, 90, 93, 97, 100],
               label: "Deadlift",
-              borderColor: "#3cba9f",
+              borderColor: 'rgb(128, 128, 128)',
               fill: false
             }, { 
               data: [65, 68, 74, 77, 82, 87, 91, 95, 99, 102, 104, 105],
               label: "Shoulder Press",
-              borderColor: "#e8c3b9",
+              borderColor: 'rgb(0,115,255)',
               fill: false
             }
           ]
