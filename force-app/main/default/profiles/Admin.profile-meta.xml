@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>Gym_Tracker_App</application>
@@ -11,11 +11,11 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
-        <apexClass>BMICalculatorLogic</apexClass>
+        <apexClass>BMICalculatorLogicTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>BMICalculatorLogicTest</apexClass>
+        <apexClass>BenchmarkController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -31,7 +31,19 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>EmailController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>LiftStandardsController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>MailToNewMember</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>MailToNewMemberTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -96,6 +108,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Benchmark__c.Mile_Time_Minutes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Benchmark__c.Mile_Time_Seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Benchmark__c.Shoulder_Press__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -117,6 +139,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Member__c.Back_Squat__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Member__c.City__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
