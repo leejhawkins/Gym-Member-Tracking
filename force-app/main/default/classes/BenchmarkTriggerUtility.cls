@@ -77,32 +77,8 @@ public inherited sharing class BenchmarkTriggerUtility {
         FROM Member__c
         WHERE Id = :b.Member__c
       ];
-      String oldFitnessLevel = m.Fitness_Level__c;
-      m.Fitness_Level__c = b.Fitness_Level__c;
-      if (
-        (oldFitnessLevel == 'Beginner' &&
-        (m.Fitness_Level__c == 'Novice' ||
-        m.Fitness_Level__c == 'Intermediate' ||
-        m.Fitness_Level__c == 'Advanced' ||
-        m.Fitness_Level__c == 'Elite')) ||
-        (oldFitnessLevel == 'Novice' &&
-        (m.Fitness_Level__c == 'Intermediate' ||
-        m.Fitness_Level__c == 'Advanced' ||
-        m.Fitness_Level__c == 'Elite')) ||
-        (oldFitnessLevel == 'Intermediate' &&
-        (m.Fitness_Level__c == 'Advanced' ||
-        m.Fitness_Level__c == 'Elite')) ||
-        (oldFitnessLevel == 'Advanced' &&
-        m.Fitness_Level__c == 'Elite')
-      ) {
-        WebServiceLWC.getGIF(
-          m.Name,
-          m.Email__c,
-          oldFitnessLevel,
-          b.Fitness_Level__c
-        );
-      }
       m.BMI__c = b.BMI__c;
+      m.Fitness_Level__c = b.Fitness_Level__c;
       update m;
     }
   }

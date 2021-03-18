@@ -264,10 +264,6 @@
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <tabVisibilities>
-        <tab>Benchmark__c</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
         <tab>Member__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
