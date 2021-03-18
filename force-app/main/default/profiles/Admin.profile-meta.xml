@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>Gym_Tracker_App</application>
@@ -15,7 +15,15 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>BenchmarkController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>BenchmarkTriggerUtility</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>BenchmarkTriggerUtilityTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -23,11 +31,43 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>EmailController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>LiftStandardsController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>MailToNewMember</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>MailToNewMemberTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>MemberController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>MemberTriggerUtility</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TestDataFactory</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WorkoutController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>WorkoutDistributor</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WorkoutDistributorTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <custom>false</custom>
@@ -68,6 +108,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Benchmark__c.Mile_Time_Minutes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Benchmark__c.Mile_Time_Seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Benchmark__c.Shoulder_Press__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -93,6 +143,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Member__c.City__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Member__c.Current_Benchmark__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -109,6 +164,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Member__c.Fitness_Level__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Member__c.Gender__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -129,6 +189,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Member__c.Issues__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Member__c.Knee_Issues__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -177,6 +242,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <layoutAssignments>
+        <layout>Benchmark__c-Benchmark Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Member__c-Member Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -210,6 +278,10 @@
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <tabVisibilities>
+        <tab>Benchmark__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Member__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
@@ -217,7 +289,7 @@
         <tab>Workout__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
-    <userLicense        >Salesforce</userLicense>
+    <userLicense>Salesforce</userLicense>
     <userPermissions>
         <enabled>true</enabled>
         <name>ActivateContract</name>
