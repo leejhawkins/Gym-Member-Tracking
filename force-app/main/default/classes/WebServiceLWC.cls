@@ -9,12 +9,14 @@ public class WebServiceLWC {
   private static String ownerCity = 'Denver';
   private static String apiKey = '4ef90ad4a7e5df0276f8920bcb07d888';
 
+
   @AuraEnabled(cacheable=true)
   public static String performCallout() {
     String apiUrl = 'http://api.openweathermap.org/data/2.5/weather';
     apiUrl += '?q=' + ownerCity;
     apiUrl += '&units=metric';
     apiUrl += '&APPID=' + apiKey;
+
 
     Http http = new Http();
     HttpRequest request = new HttpRequest();
