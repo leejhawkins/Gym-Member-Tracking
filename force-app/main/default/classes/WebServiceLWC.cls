@@ -1,22 +1,18 @@
 /*
     a class to make a GET Api call to the openweathermap api. Method performs a call, 
-    gets the response. Uses the JSON2Apex class to get the data. Then data gets serialized 
+    gets the response. Uses the JSON2Apex class to get the data. Then the data gets serialized 
     to be processed by the JS class in the LWC
 */
-public class MemberCallouts {
+public class WebServiceLWC {
+    @AuraEnabled (cacheable=true)
+    public static String performCallout(Id recordId) {
+       String ownerCity = 'London';
     
-    //GET method to fetch data from the openweathermap API
-    @AuraEnabled(cacheable =true)
-    public static String makeGetCallout(Id memberId) {
-       Member__c member = new Member__c();
-       member = [SELECT Id, City__c FROM Member__c WHERE Id=:memberId];
-
-       
-       String memberCity = member.City__c;
        String apiKey = '4ef90ad4a7e5df0276f8920bcb07d888';
-
+       
+       //https://api.openweathermap.org/data/2.5/forecast?q=Moscow&appid=... requestEndPoint to get the forecast 
        String requestEndPoint = 'http://api.openweathermap.org/data/2.5/weather';
-       requestEndPoint+='?q='+memberCity;
+       requestEndPoint+='?q='+ownerCity;
        requestEndPoint+='&units=metric';
        requestEndPoint+='&APPID='+apiKey;
 
@@ -30,7 +26,8 @@ public class MemberCallouts {
        return jsonString;
   
     }
-
-
 }
+
+
+
 

@@ -1,0 +1,42 @@
+<template>
+    <lightning-card title="Weather Report" icon-name="standard:address">
+        <div slot="actions"></div>
+        <div slot="footer">
+            <lightning-layout horizontal-align="spread" vertical-align="center">
+                <lightning-layout-item>
+                    <lightning-layout horizontal-align="center" vertical-align="center">
+                        <div class="slds-text-heading_small">From&nbsp;</div>
+                        <div class="slds-text-title slds-text-color_weak">Celsius</div>
+                        <div class="slds-m-left_small slds-text-heading_large">{_temp}℃</div>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item>
+                    <lightning-layout vertical-align="center">
+                        <div class="slds-text-heading_small">To&nbsp;</div>
+                        <div class="slds-text-title slds-text-color_weak">Farenheit</div>
+                        <div class="slds-m-left_small slds-text-heading_large">{_convertedTemp}°F</div>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <lightning-layout class="slds-m-left_medium" vertical-align="center">
+            <lightning-layout-item>
+                <div
+                    class="slds-m-around_xx-small slds-m-top_xx-small slds-m-right_xx-small slds-m-bottom_xx-small slds-m-left_xx-small slds-p-around_none slds-p-top_none slds-p-right_none slds-p-bottom_none slds-p-left_none slds-text-heading_small">
+                    {_name}</div>
+            </lightning-layout-item>
+            <lightning-layout-item>
+                <div class="slds-text-title_caps slds-text-color_weak">{_time}</div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout class="slds-m-right_medium slds-m-left_medium" horizontal-align="spread" vertical-align="center">
+            <lightning-layout-item>
+                <div class="slds-m-top_small slds-text-heading_small">Right Now</div>
+                <div class="slds-text-title slds-text-color_weak">{_description}</div>
+            </lightning-layout-item>
+            <lightning-layout-item><img class="slds-m-top_small" src={_icon} alt="failed" />
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>
+

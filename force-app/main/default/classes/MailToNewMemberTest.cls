@@ -36,7 +36,6 @@ public class MailToNewMemberTest {
     @isTest
     public static void addMembersTest(){
         Test.startTest();
-        //Over 5 emails at a time exceeds the governer limits       
         try{
             List<Member__c> newMembers = [SELECT Name, Email__c FROM Member__c WHERE Name LIKE 'Test member'];
             MailToNewMember.sendWelcomeEmail(newMembers);
