@@ -95,7 +95,7 @@ public inherited sharing class BenchmarkTriggerUtility {
         (oldFitnessLevel == 'Advanced' &&
         m.Fitness_Level__c == 'Elite')
       ) {
-        MemberCallouts.getGIF(
+        WebServiceLWC.getGIF(
           m.Name,
           m.Email__c,
           oldFitnessLevel,
