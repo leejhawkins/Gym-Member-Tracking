@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="Benchmark Analysis">
+        <div class="slds-p-around_medium lgc-bg">
+            <div class="slds-select_container">
+                <select class="slds-select" name="Chart Selector" label="Select Chart" onchange={handleSelect} required>
+                    <option value="" required="">Choose Graph</option>
+                    <option value="annualProgressLineGraph">Annual Progress Line Graph</option>
+                    <option value="monthlyProgressLineGraph">Monthly Progress Line Graph</option>
+                    <option value="currentProgressBarGraph">Current Progress Bar Graph</option>
+                </select>
+            </div>
+        </div>
+        <template if:true={annualProgressLineGraph}>
+            <div class="slds-m-around_medium">
+                <div class="slds-grid slds-wrap">
+                    <c-benchmark-line-chart bp={bp} bs={bs} dl={dl} sp={sp} months={months}
+                        class="slds-col slds-size_12-of-12">
+                    </c-benchmark-line-chart>
+                </div>
+            </div>
+        </template>
+        <template if:true={monthlyProgressLineGraph}>
+            <div class="slds-m-around_medium">
+                <div class="slds-grid slds-wrap">
+                    <c-sample-line-chart-monthly class="slds-col slds-size_12-of-12">
+                    </c-sample-line-chart-monthly>
+                </div>
+            </div>
+        </template>
+        <template if:true={currentProgressBarGraph}>
+            <div class="slds-m-around_medium">
+                <div class="slds-grid slds-wrap">
+                    <c-benchmark-bar-chart cbs={currentBackSquat} cdl={currentDeadlift} cbp={currentBenchPress}
+                        csp={currentShoulderPress} gbs={goalBackSquat} gdl={goalDeadlift} gbp={goalBenchPress}
+                        gsp={goalShoulderPress} class="slds-col slds-size_8-of-12">
+                    </c-benchmark-bar-chart>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>
