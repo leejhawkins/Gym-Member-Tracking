@@ -1,6 +1,6 @@
 /*
    Created by Kareem El Sayed
-   A class with a method to send an email to a member, gets invoked when member is inserted
+   A class with the trigger logic to send an email to a member, gets invoked when member is inserted
 */
 public with sharing class MailToNewMember {
     
