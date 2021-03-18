@@ -72,8 +72,36 @@ public inherited sharing class BenchmarkTriggerUtility {
         b.Member__c,
         Date.today()
       );
-      Member__c m = [SELECT Id FROM Member__c WHERE Id = :b.Member__c];
+      Member__c m = [
+        SELECT Id, Fitness_Level__c, Name, Email__c
+        FROM Member__c
+        WHERE Id = :b.Member__c
+      ];
+      String oldFitnessLevel = m.Fitness_Level__c;
       m.Fitness_Level__c = b.Fitness_Level__c;
+      if (
+        (oldFitnessLevel == 'Beginner' &&
+        (m.Fitness_Level__c == 'Novice' ||
+        m.Fitness_Level__c == 'Intermediate' ||
+        m.Fitness_Level__c == 'Advanced' ||
+        m.Fitness_Level__c == 'Elite')) ||
+        (oldFitnessLevel == 'Novice' &&
+        (m.Fitness_Level__c == 'Intermediate' ||
+        m.Fitness_Level__c == 'Advanced' ||
+        m.Fitness_Level__c == 'Elite')) ||
+        (oldFitnessLevel == 'Intermediate' &&
+        (m.Fitness_Level__c == 'Advanced' ||
+        m.Fitness_Level__c == 'Elite')) ||
+        (oldFitnessLevel == 'Advanced' &&
+        m.Fitness_Level__c == 'Elite')
+      ) {
+        MemberCallouts.getGIF(
+          m.Name,
+          m.Email__c,
+          oldFitnessLevel,
+          b.Fitness_Level__c
+        );
+      }
       m.BMI__c = b.BMI__c;
       update m;
     }
