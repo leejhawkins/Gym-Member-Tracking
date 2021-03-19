@@ -8,6 +8,7 @@ export default class RecordLift extends LightningElement {
   benchmarkField;
   memberName;
   weight;
+  showForm = false;
 
   handleSelect(event) {
     this.benchmarkAPI = event.target.value;
@@ -28,6 +29,9 @@ export default class RecordLift extends LightningElement {
         this.benchmarkField = null;
     }
   }
+  handleClick() {
+    this.showForm = !this.showForm;
+  }
   handleChange(event) {
     this[event.target.name] = event.target.value;
   }
@@ -38,6 +42,7 @@ export default class RecordLift extends LightningElement {
     this.benchmarkField = null;
     this.memberName = null;
     this.weight = null;
+    this.showForm = false;
     this.dispatchEvent(
       new ShowToastEvent({
         title: "Success",

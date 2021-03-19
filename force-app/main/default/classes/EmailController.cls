@@ -27,8 +27,7 @@ public inherited sharing class EmailController {
     String name,
     String email,
     String oldLevel,
-    String newLevel,
-    String gif
+    String newLevel
   ) {
     List<Messaging.SingleEmailMessage> messages = new List<Messaging.SingleEmailMessage>();
     Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();
@@ -47,7 +46,6 @@ public inherited sharing class EmailController {
       '<p> You will now receive the daily ' +
       newLevel +
       ' workouts';
-    messageString += '<iframe src=' + gif + '/><</iframe><p>' + gif + '</p>';
     message.setSenderDisplayName('Your Gym');
     message.setToAddresses(new List<String>{ email });
     message.setHtmlBody(messageString);
