@@ -72,38 +72,45 @@ public inherited sharing class BenchmarkTriggerUtility {
         b.Member__c,
         Date.today()
       );
-      Member__c m = [
-        SELECT Id, Fitness_Level__c, Name, Email__c
-        FROM Member__c
-        WHERE Id = :b.Member__c
-      ];
-      String oldFitnessLevel = m.Fitness_Level__c;
-      m.Fitness_Level__c = b.Fitness_Level__c;
-      if (
-        (oldFitnessLevel == 'Beginner' &&
-        (m.Fitness_Level__c == 'Novice' ||
-        m.Fitness_Level__c == 'Intermediate' ||
-        m.Fitness_Level__c == 'Advanced' ||
-        m.Fitness_Level__c == 'Elite')) ||
-        (oldFitnessLevel == 'Novice' &&
-        (m.Fitness_Level__c == 'Intermediate' ||
-        m.Fitness_Level__c == 'Advanced' ||
-        m.Fitness_Level__c == 'Elite')) ||
-        (oldFitnessLevel == 'Intermediate' &&
-        (m.Fitness_Level__c == 'Advanced' ||
-        m.Fitness_Level__c == 'Elite')) ||
-        (oldFitnessLevel == 'Advanced' &&
-        m.Fitness_Level__c == 'Elite')
-      ) {
-        EmailController.sendCongratulationsEmail(
-          m.Name,
-          m.Email__c,
-          oldFitnessLevel,
-          b.Fitness_Level__c
-        );
+      if (mRecent.Id == b.id) {
+        Member__c m = [
+          SELECT Id, Fitness_Level__c, Name, Email__c, Gender__c
+          FROM Member__c
+          WHERE Id = :b.Member__c
+        ];
+        String oldFitnessLevel = m.Fitness_Level__c;
+        m.Fitness_Level__c = b.Fitness_Level__c;
+        if (
+          (oldFitnessLevel == 'Beginner' &&
+          (m.Fitness_Level__c == 'Novice' ||
+          m.Fitness_Level__c == 'Intermediate' ||
+          m.Fitness_Level__c == 'Advanced' ||
+          m.Fitness_Level__c == 'Elite')) ||
+          (oldFitnessLevel == 'Novice' &&
+          (m.Fitness_Level__c == 'Intermediate' ||
+          m.Fitness_Level__c == 'Advanced' ||
+          m.Fitness_Level__c == 'Elite')) ||
+          (oldFitnessLevel == 'Intermediate' &&
+          (m.Fitness_Level__c == 'Advanced' ||
+          m.Fitness_Level__c == 'Elite')) ||
+          (oldFitnessLevel == 'Advanced' &&
+          m.Fitness_Level__c == 'Elite')
+        ) {
+          Benchmark__c nextLevel = LiftStandardsController.getNextLevel(
+            b,
+            m.Gender__c
+          );
+          EmailController.sendCongratulationsEmail(
+            m.Name,
+            m.Email__c,
+            oldFitnessLevel,
+            b.Fitness_Level__c,
+            nextLevel
+          );
+        }
+        m.BMI__c = b.BMI__c;
+        update m;
       }
-      m.BMI__c = b.BMI__c;
-      update m;
     }
   }
   public static Benchmark__c getMostRecent(Id memberId, Date targetDate) {
@@ -134,7 +141,8 @@ public inherited sharing class BenchmarkTriggerUtility {
           Date__c,
           Name,
           LastModifiedDate,
-          Fitness_Level__c
+          Fitness_Level__c,
+          Id
         FROM Benchmark__c
         WHERE
           Date__c <= :targetDate

@@ -14,9 +14,15 @@
             <lightning-formatted-email
               value={Email__c}
             ></lightning-formatted-email>
-            <button type="button" name="edit" onclick={handleShowModal}>
-              Send Workout
-            </button>
+
+            <lightning-button
+              type="button"
+              name="edit"
+              onclick={handleShowModal}
+              label="Send Workout"
+              variant="brand"
+            >
+            </lightning-button>
           </div>
           <div class="slds-col slds-size_7-of-12">
             <c-member-bar-chart
@@ -59,7 +65,7 @@
             name={Name}
             level={Fitness_Level__c}
             email={Email__c}
-            workoutdes={workoutDes}
+            memberid={recordId}
           >
             <div slot="footer">
               <lightning-button
