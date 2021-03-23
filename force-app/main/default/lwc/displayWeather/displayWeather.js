@@ -1,5 +1,5 @@
 import { LightningElement } from "lwc";
-import performCallout from "@salesforce/apex/WebServiceLWC.performCallout";
+//import performCallout from "@salesforce/apex/WebServiceLWC.performCallout";
 
 export default class displayWeather extends LightningElement {
   _weatherData;
