@@ -27,7 +27,8 @@ public inherited sharing class EmailController {
     String name,
     String email,
     String oldLevel,
-    String newLevel
+    String newLevel,
+    Benchmark__c nextLevel
   ) {
     List<Messaging.SingleEmailMessage> messages = new List<Messaging.SingleEmailMessage>();
     Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();
@@ -45,7 +46,18 @@ public inherited sharing class EmailController {
     messageString +=
       '<p> You will now receive the daily ' +
       newLevel +
-      ' workouts';
+      ' workouts' +
+      '<p> Next Back Squat Level: ' +
+      nextLevel.Back_Squat__c +
+      '</p>' +
+      '<p> Next Deadlift Level: ' +
+      nextLevel.Deadlift__c +
+      '</p>' +
+      '<p> Next Bench Press Level: ' +
+      nextLevel.Bench_Press__c +
+      '</p>' +
+      '<p> Next Shoulder Press Level: ' +
+      nextLevel.Shoulder_Press__c;
     message.setSenderDisplayName('Your Gym');
     message.setToAddresses(new List<String>{ email });
     message.setHtmlBody(messageString);

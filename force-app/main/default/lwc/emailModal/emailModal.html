@@ -29,14 +29,17 @@
           class="slds-modal__content slds-p-around_medium"
           id="modal-content-id-1"
         >
-              <lightning-input-rich-text value={workoutdes} onchange={handleChange}></lightning-input-rich-text>
-              <lightning-button
-                type="button"
-                variant="brand"
-                name="save"
-                label="Send Workout Email"
-                onclick={sendEmail}
-              ></lightning-button> 
+          <lightning-input-rich-text
+            value={workoutDes}
+            onchange={handleChange}
+          ></lightning-input-rich-text>
+          <lightning-button
+            type="button"
+            variant="brand"
+            name="save"
+            label="Send Workout Email"
+            onclick={sendEmail}
+          ></lightning-button>
         </div>
 
         <footer class="slds-modal__footer modal-hidden">

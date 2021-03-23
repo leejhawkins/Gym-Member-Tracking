@@ -6,18 +6,23 @@ import { subscribe, MessageContext } from "lightning/messageService";
 import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected__c";
 import getBenchmarks from "@salesforce/apex/BenchmarkController.getBenchmarks";
 
-import getMemberWorkout from "@salesforce/apex/WorkoutController.getMemberWorkout";
 import NAME_FIELD from "@salesforce/schema/Member__c.Name";
 import LEVEL_FIELD from "@salesforce/schema/Member__c.Fitness_Level__c";
 import EMAIL_FIELD from "@salesforce/schema/Member__c.Email__c";
 import PICTURE_FIELD from "@salesforce/schema/Member__c.Picture__c";
+import ISSUES_FIELD from "@salesforce/schema/Member__c.Issues__c";
 import BACKSQUAT_FIELD from "@salesforce/schema/Benchmark__c.Back_Squat__c";
 import DEADLIFT_FIELD from "@salesforce/schema/Benchmark__c.Deadlift__c";
 import BENCHPRESS_FIELD from "@salesforce/schema/Benchmark__c.Bench_Press__c";
 import SHOULDERPRESS_FIELD from "@salesforce/schema/Benchmark__c.Shoulder_Press__c";
-import DESCRIPTION_FIELD from "@salesforce/schema/Workout__c.Workout_Description__c";
 
-const fields = [NAME_FIELD, LEVEL_FIELD, EMAIL_FIELD, PICTURE_FIELD];
+const fields = [
+  NAME_FIELD,
+  LEVEL_FIELD,
+  EMAIL_FIELD,
+  PICTURE_FIELD,
+  ISSUES_FIELD
+];
 
 export default class MemberDetails extends LightningElement {
   subscription = null;
@@ -35,6 +40,7 @@ export default class MemberDetails extends LightningElement {
   Email__c;
   Fitness_Level__c;
   Picture__c;
+  Issues__c;
 
   @wire(getRecord, { recordId: "$recordId", fields })
   wiredRecord({ error, data }) {
@@ -52,8 +58,6 @@ export default class MemberDetails extends LightningElement {
       );
     }
   }
-  @wire(getMemberWorkout, { memberId: "$recordId", workoutDate: null })
-  workout;
   @wire(getBenchmarks, { memberId: "$recordId" })
   wiredBenchmarks({ error, data }) {
     if (error) {
@@ -112,11 +116,6 @@ export default class MemberDetails extends LightningElement {
     }
   }
 
-  get workoutDes() {
-    return this.workout.data
-      ? getSObjectValue(this.workout.data, DESCRIPTION_FIELD)
-      : "";
-  }
   get toBSNextLevel() {
     return this.currentBackSquat >= this.goalBackSquat
       ? `Achieved!✔️`
