@@ -1,26 +1,51 @@
 /*
-    a class to make a GET Api call to the openweathermap api. Method performs a call, 
-
-    gets the response. Uses the JSON2Apex class to get the data. Then data gets serialized 
-    to be processed by the JS class in the LWC
+    a class to make a GET Api call to the openweathermap api. Method performs a get callout, 
+    gets the response from the weatherAPI. The API key is stored in a custom 
+    label named 'Forecast_API_Key' and used by this class. Using a named credintial to specify 
+    callout endpoint. 
 */
 public class WebServiceLWC {
-  //GET method to fetch data from the openweathermap API
-  private static String ownerCity = 'Denver';
-  private static String apiKey = '4ef90ad4a7e5df0276f8920bcb07d888';
+  
+  public static String apiURL = '/forecast?';
+	public static String apiKey = 'appid='+system.label.Forecast_API_Key; 
+  //String weatherUrl = 'http://api.openweathermap.org/data/2.5/forecast?appid=51c1be289b953d986f0f0559f3614165&cnt=24&units=imperial&q={City}';
+	
+  @AuraEnabled (cacheable=true)
+	public static map<String,List<String>> getWeatherForCity() {
+        string city = '&q=Mclean';
+        string ndays = '&cnt=40';
+        String units = '&units=imperial';
+        map<String,List<String>> forecastData = new map<String,List<String>>();
+		String weatherUrl =  apiURL + apiKey + ndays + units + city;
+		
 
-  @AuraEnabled(cacheable=true)
-  public static String performCallout() {
-    String apiUrl = 'http://api.openweathermap.org/data/2.5/weather';
-    apiUrl += '?q=' + ownerCity;
-    apiUrl += '&units=imperial';
-    apiUrl += '&APPID=' + apiKey;
+		String JSONResponse = getForecastJSON(weatherUrl);
+		
+		
+        forecastData = ForecastInfoParsing.forecastJsonParse(JSONResponse);
+		return forecastData;
+	}
+    
+    
+  // Pass in the endpoint to be used using the string url
+  private static String getForecastJSON(String url) {
+		String result = null;
 
-    Http http = new Http();
-    HttpRequest request = new HttpRequest();
-    request.setEndpoint(apiUrl);
-    request.setMethod('GET');
-    HttpResponse response = http.send(request);
-    return response.getBody();
+    Http htp = new Http();
+     // Instantiate a new HTTP request, specify the method (GET) as well as the endpoint
+    HttpRequest req = new HttpRequest();
+    req.setEndpoint('callout:Forecast_API'+url);
+    req.setMethod('GET');
+
+    // Send the request, and return a response
+    HttpResponse res = htp.send(req);
+		if(res.getStatusCode() == 200){
+			result = res.getBody();
+        }else{
+           System.debug('res.getStatusCode() : '+res.getStatusCode()); 
+        }
+      System.debug('result : '+result);
+    return result;
   }
+  
 }
