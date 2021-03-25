@@ -14,6 +14,7 @@ public class MailToNewMemberTest {
         for(Member__c member: newMembers){
             member.Email__c = 'kareemfullstackdev'+counter+'@gmail.com';
         }
+        insert newMembers;
 
     }
     @isTest 
