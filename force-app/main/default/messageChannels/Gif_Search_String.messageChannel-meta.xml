@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>SearchString</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Message Channel to pass search key</description>
+    <lightningMessageFields>
+        <fieldName>searchKey</fieldName>
+        <description>This is the search string to filter gifs</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

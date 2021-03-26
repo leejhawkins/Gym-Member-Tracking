@@ -5,52 +5,50 @@
     callout endpoint. 
 */
 public class WebServiceLWC {
-  
   public static String apiURL = '/forecast?';
-	public static String apiKey = 'appid='+system.label.Forecast_API_Key; 
+  public static String apiKey = 'appid=' + system.label.Forecast_API_Key;
   //String weatherUrl = 'http://api.openweathermap.org/data/2.5/forecast?appid=51c1be289b953d986f0f0559f3614165&cnt=24&units=imperial&q={City}';
-	
-  @AuraEnabled (cacheable=true)
-	public static map<String,List<String>> getWeatherForCity() {
-        string city = '&q=Mclean';
-        string ndays = '&cnt=40';
-        String units = '&units=imperial';
-        map<String,List<String>> forecastData = new map<String,List<String>>();
-		String weatherUrl =  apiURL + apiKey + ndays + units + city;
-		
 
-		String JSONResponse = getForecastJSON(weatherUrl);
-		
-		
-        forecastData = ForecastInfoParsing.forecastJsonParse(JSONResponse);
-		return forecastData;
-	}
-    
-    
+  @AuraEnabled(cacheable=true)
+  public static map<String, List<String>> getWeatherForCity() {
+    string city = '&q=Denver';
+    string ndays = '&cnt=40';
+    String units = '&units=imperial';
+    map<String, List<String>> forecastData = new Map<String, List<String>>();
+    String weatherUrl = apiURL + apiKey + ndays + units + city;
+
+    String JSONResponse = getForecastJSON(weatherUrl);
+
+    forecastData = ForecastInfoParsing.forecastJsonParse(JSONResponse);
+    return forecastData;
+  }
+
   // Pass in the endpoint to be used using the string url
   private static String getForecastJSON(String url) {
-		String result = null;
+    String result = null;
 
     Http htp = new Http();
-     // Instantiate a new HTTP request, specify the method (GET) as well as the endpoint
+    // Instantiate a new HTTP request, specify the method (GET) as well as the endpoint
     HttpRequest req = new HttpRequest();
-    req.setEndpoint('callout:Forecast_API'+url);
+    req.setEndpoint('callout:Forecast_API' + url);
     req.setMethod('GET');
 
     // Send the request, and return a response
     HttpResponse res = htp.send(req);
-		if(res.getStatusCode() == 200){
-			result = res.getBody();
-        }else{
-           System.debug('res.getStatusCode() : '+res.getStatusCode()); 
-        }
-      System.debug('result : '+result);
+    if (res.getStatusCode() == 200) {
+      result = res.getBody();
+    } else {
+      System.debug('res.getStatusCode() : ' + res.getStatusCode());
+    }
+    System.debug('result : ' + result);
     return result;
   }
+
   
 @AuraEnabled(cacheable=true)
 public static Datetime getNextDay(){
     return system.now().addDays(1);
 }
   
+
 }

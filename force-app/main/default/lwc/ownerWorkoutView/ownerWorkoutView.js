@@ -1,11 +1,13 @@
 import { LightningElement, wire } from "lwc";
+import { publish, MessageContext } from "lightning/messageService";
 import { getSObjectValue } from "@salesforce/apex";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import { loadScript } from "lightning/platformResourceLoader";
+import MOMENT_JS from "@salesforce/resourceUrl/moment";
 import getAllWorkoutsForDay from "@salesforce/apex/WorkoutController.getAllWorkoutsForDay";
 import LEVEL_FIELD from "@salesforce/schema/Workout__c.Fitness_Level__c";
 import ID_FIELD from "@salesforce/schema/Workout__c.Id";
-import { loadScript } from "lightning/platformResourceLoader";
-import MOMENT_JS from "@salesforce/resourceUrl/moment";
+import GIF_SEARCH_KEY from "@salesforce/messageChannel/Gif_Search_String__c";
 
 export default class OwnerWorkoutView extends LightningElement {
   workoutDate = new Date().toISOString();
@@ -14,6 +16,9 @@ export default class OwnerWorkoutView extends LightningElement {
   advancedId = null;
   intermediateId = null;
   eliteId = null;
+  gif = "";
+  @wire(MessageContext)
+  messageContext;
   renderedCallback() {
     if (this.momentjsInitialized) {
       return;
@@ -79,6 +84,10 @@ export default class OwnerWorkoutView extends LightningElement {
     );
   }
   handleChange(event) {
-    this.workoutDate = event.target.value;
+    this[event.target.name] = event.target.value;
+    if (event.target.name === "gifs") {
+      const payload = { searchKey: this.gifs };
+      publish(this.messageContext, GIF_SEARCH_KEY, payload);
+    }
   }
 }
