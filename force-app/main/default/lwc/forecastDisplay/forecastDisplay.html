@@ -1,69 +1,72 @@
 <template>
 <lightning-card>
-    <div class="slds-text-heading_medium">&nbsp;<strong>Location: </strong>{getCityName}</div>
-    <div class="kpi__container slds-grid slds-wrap slds-gutters_x-small" style="max-width:500px; margin:20px auto;">
-    <div class="slds-col slds-size_1-of-1">
-        <div class="kpi">
-            <template for:each={getTodayData} for:item="today">
-                <div key={today.temp}>
-                    <p class="slds-text-heading_small">&nbsp;<strong>Today:</strong>&nbsp;{today.temp}°F</p>
-                    <p><img src={today.icon} style="height: 60px;width: 60px;" alt="failed"></p>
-                    <p><strong>Condition:</strong></p>
-                    <p>{today.description}</p>
-                </div>
-            </template>
-        </div>
-    </div>
-    
-    <div class="slds-col slds-size_1-of-2">
-        <div class="kpi">
-            <template for:each={getTomorrowData} for:item="tom">
-                <div key={tom.temp}>
-                    <p class="slds-text-heading_small"><strong>Tomorrow:</strong></p>
-                    <p class=""><img class="slds-icon slds-icon_large svg" src={tom.icon} alt="failed"></img> &nbsp;{tom.temp}°F</p>
-                    <p><strong>&nbsp;Condition:</strong>&nbsp;{tom.description}</p>
-                </div>
-            </template>
-        </div>
-    </div>
-    
-    <div class="slds-col slds-size_1-of-2">
-        <div class="kpi">
-            <template for:each={getNextDayData} for:item="nextday">
-                <div key={nextday.temp}>
-                    <p class="slds-text-heading_small"><strong>Next Day:</strong></p>
-                    <p class=""><img class="slds-icon slds-icon_large svg" src={nextday.icon} alt="failed"></img> &nbsp;{nextday.temp}°F</p>
-                    <p><strong>&nbsp;Condition:</strong>&nbsp;{nextday.description}</p>
-                </div>
-            </template>
-        </div>
-    </div>
-    
-    <div class="slds-col slds-size_1-of-2">
-        <div class="kpi">
-        <template for:each={getFourthDayData} for:item="fourthday">
-            <div key={fourthday.temp}>
-                <p class="slds-text-heading_small"><strong>Fourth Day:</strong></p>
-                <p class=""><img class="slds-icon slds-icon_large svg" src={fourthday.icon} alt="failed"></img>
-                    &nbsp;{fourthday.temp}°F</p>
-                <p><strong>&nbsp;Condition:</strong>&nbsp;{fourthday.description}</p>
+<div class="slds-text-heading_medium"><strong>&nbsp;Location: </strong>{getCityName}</div>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-size_1-of-5">
+            <div class="slds-text-align_center">
+                <template for:each={getTodayData} for:item="today">
+                    <div key={today.temp}>
+                        <p class="">&nbsp;<strong>Today:</strong></p>
+                        <p class=""><img class="slds-icon slds-icon_large svg" src={today.icon} alt="failed"></img>
+                            &nbsp;{today.temp}°F</p>
+                        <p><strong>&nbsp;Condition:</strong></p>
+                        <p>{today.description}</p>
+                    </div>
+                </template>
             </div>
-        </template>
         </div>
-    </div>
-    <div class="slds-col slds-size_1-of-2">
-        <div class="kpi">
-            <template for:each={getFifthDayData} for:item="fifthday">
-                <div key={fifthday.temp}>
-                    <p class="slds-text-heading_small"><strong>Fifth Day:</strong></p>
-                    <p class=""><img class="slds-icon slds-icon_large svg" src={fifthday.icon} alt="failed"></img>
-                        &nbsp;{fifthday.temp}°F</p>
-                    <p><strong>&nbsp;Condition:</strong>&nbsp;{fifthday.description}</p>
-                </div>
-            </template>
+        <div class="slds-size_1-of-5">
+            <div class="slds-text-align_center">
+                <template for:each={getTomorrowData} for:item="tom">
+                    <div key={tom.temp}>
+                        <p class=""><strong>Tomorrow:</strong></p>
+                        <p class=""><img class="slds-icon slds-icon_large svg" src={tom.icon} alt="failed"></img> &nbsp;{tom.temp}°F</p>
+                        <p><strong>&nbsp;Condition:</strong></p>
+                        <p>{tom.description}</p>
+                    </div>
+                </template>
+            </div>
         </div>
-    </div>
-    </div>       
-        
+        <div class="slds-size_1-of-5">
+            <div class="slds-text-align_center">
+                <template for:each={getNextDayData} for:item="nextday">
+                    <div key={nextday.temp}>
+                        <p class=""><strong>Next Day:</strong></p>
+                        <p class=""><img class="slds-icon slds-icon_large svg" src={nextday.icon}
+                                alt="failed"></img>&nbsp;{nextday.temp}°F</p>
+                        <p><strong>&nbsp;Condition:</strong></p>
+                        <p>&nbsp;{nextday.description}</p>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <div class="slds-size_1-of-5">
+            <div class="slds-text-align_center">
+                <template for:each={getFourthDayData} for:item="fourthday">
+                    <div key={fourthday.temp}>
+                        <p class=""><strong>Fourth Day:</strong></p>
+                        <p class=""><img class="slds-icon slds-icon_large svg" src={fourthday.icon}
+                                alt="failed"></img>&nbsp;{fourthday.temp}°F</p>
+                        <p><strong>&nbsp;Condition:</strong></p>
+                        <p>&nbsp;{fourthday.description}</p>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <div class="slds-size_1-of-5">
+            <div class="slds-text-align_center">
+                <template for:each={getFifthDayData} for:item="fifthday">
+                    <div key={fifthday.temp}>
+                        <p class=""><strong>Fifth Day:</strong></p>
+                        <p class=""><img class="slds-icon slds-icon_large svg" src={fifthday.icon}
+                                alt="failed"></img>&nbsp;{fifthday.temp}°F
+                        </p>
+                        <p><strong>&nbsp;Condition:</strong></p>
+                        <p>&nbsp;{fifthday.description}</p>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>   
 </lightning-card>
 </template>

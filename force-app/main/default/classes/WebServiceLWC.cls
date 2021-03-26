@@ -43,4 +43,12 @@ public class WebServiceLWC {
     System.debug('result : ' + result);
     return result;
   }
+
+  
+@AuraEnabled(cacheable=true)
+public static Datetime getNextDay(){
+    return system.now().addDays(1);
+}
+  
+
 }

@@ -2,21 +2,26 @@ import { LightningElement, track } from "lwc";
 import getWeatherForCity from "@salesforce/apex/WebServiceLWC.getWeatherForCity";
 
 export default class ForecastDisplay extends LightningElement {
-  @track result;
-  @track todaydata = [];
-  @track tomorrowdata = [];
-  @track nextdaydata = [];
-  @track fourthdaydata = [];
-  @track fifthdaydata = [];
 
-  connectedCallback() {
-    getWeatherForCity()
-      .then((data) => {
-        this.result = data;
-        console.log("No error", this.result);
-      })
-      .catch((err) => console.log(err));
-  }
+    @track result;
+    @track todaydata = [];
+    @track tomorrowdata = [];
+    @track nextdaydata = [];
+    @track fourthdaydata = [];
+    @track fifthdaydata = [];
+    /*
+    now = Date.now();    
+    
+    get nowFormatted() {
+      return now.toLocaleString();
+    }
+    */
+    connectedCallback() {
+        getWeatherForCity().then(data => {
+            this.result = data;
+            console.log('No error' , this.result);
+        }).catch(err => console.log(err));
+
 
   get getTodayData() {
     if (this.result) {
