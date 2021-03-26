@@ -2,11 +2,13 @@
   <div class="slds-m-around_medium">
     <template if:true={workoutid}>
       <p>Level: {name}</p>
-      <lightning-record-form
-        object-api-name="Workout__c"
-        record-id={workoutid}
-        fields="Workout_Description__c"
-      ></lightning-record-form>
+      <div class="slds-scrollable_y" style="height: 15rem">
+        <lightning-record-form
+          object-api-name="Workout__c"
+          record-id={workoutid}
+          fields="Workout_Description__c"
+        ></lightning-record-form>
+      </div>
     </template>
     <template if:false={workoutid}>
       <template if:false={edit}>
@@ -37,6 +39,11 @@
 
           <lightning-input-field
             field-name="Workout_Description__c"
+            ondrop={dropGif}
+            ondragover={allowGifDrop}
+            value={workoutDes}
+            name={name}
+            onchange={handleChange}
           ></lightning-input-field>
           <div class="slds-hide">
             <lightning-input-field

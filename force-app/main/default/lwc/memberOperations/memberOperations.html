@@ -29,12 +29,16 @@
             <span>Program</span>
           </div>
         </div>
-          <template if:true={members.data}> 
-              <template for:each={members.data} for:item="member">
-                  <c-member-row key={member.Id} member={member} onmemberselect={handleContactSelect} > 
-                  </c-member-row>
-              </template>
+        <template if:true={members.data}>
+          <template for:each={members.data} for:item="member">
+            <c-member-row
+              key={member.Id}
+              member={member}
+              onmemberselect={handleContactSelect}
+            >
+            </c-member-row>
           </template>
+        </template>
       </div>
     </lightning-card>
   </div>

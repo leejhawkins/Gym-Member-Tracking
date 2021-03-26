@@ -1,8 +1,8 @@
 <template>
   <lightning-card title="Workouts for the Day" icon-name="custom:custom63">
     <div class="slds-m-around_medium">
-      <div class="slds-grid">
-        <div class="slds-size_3-of-12">
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_3-of-12">
           <c-workout-div
             workoutid={beginnerId}
             date={workoutDate}
@@ -11,7 +11,7 @@
           >
           </c-workout-div>
         </div>
-        <div class="slds-size_3-of-12">
+        <div class="slds-col slds-size_3-of-12">
           <c-workout-div
             workoutid={intermediateId}
             date={workoutDate}
@@ -20,7 +20,7 @@
           >
           </c-workout-div>
         </div>
-        <div class="slds-size_3-of-12">
+        <div class="slds-col slds-size_3-of-12">
           <c-workout-div
             workoutid={advancedId}
             date={workoutDate}
@@ -29,7 +29,7 @@
           >
           </c-workout-div>
         </div>
-        <div class="slds-size_3-of-12">
+        <div class="slds-col slds-size_3-of-12">
           <c-workout-div
             workoutid={eliteId}
             date={workoutDate}
@@ -38,14 +38,22 @@
           >
           </c-workout-div>
         </div>
+        <lightning-input
+          class="slds-col slds-size_3-of-12"
+          type="date"
+          label="Workout Date"
+          name="workoutDate"
+          onchange={handleChange}
+        ></lightning-input>
+        <div class="slds-col slds-size_6-of-12"></div>
+        <lightning-input
+          class="slds-col slds-size_3-of-12 slds-float_right"
+          label="Find Movement"
+          type="text"
+          name="gifs"
+          onchange={handleChange}
+        ></lightning-input>
       </div>
-      <lightning-input
-        class="slds-size_3-of-12"
-        type="date"
-        label="Workout Date"
-        name="date"
-        onchange={handleChange}
-      ></lightning-input>
     </div>
   </lightning-card>
 </template>
