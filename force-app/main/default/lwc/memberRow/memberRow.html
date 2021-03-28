@@ -1,15 +1,15 @@
 <template>
-    <div class="slds-grid slds-wrap">
-        <div class="slds-col slds-large-size--4-of-12">
-            <a href="#" onclick={handleSelect} key={member.Id} value={member}>
-              {member.Name}</a
-            >
-          </div>
-          <div class="slds-col slds-large-size--4-of-12">
-            {member.Fitness_Level__c}
-          </div>
-          <div class="slds-col slds-large-size--4-of-12">
-            {member.Training_Class__c}
-          </div> 
-    </div>      
+  <div class="slds-grid slds-wrap">
+    <div class="slds-col slds-large-size--4-of-12">
+      <a href="#" onclick={handleSelect} key={member.Id} value={member}>
+        {member.Name}</a
+      >
+    </div>
+    <div class="slds-col slds-large-size--4-of-12">
+      {member.Fitness_Level__c}
+    </div>
+    <div class="slds-col slds-large-size--4-of-12">
+      {member.Training_Class__c}
+    </div>
+  </div>
 </template>

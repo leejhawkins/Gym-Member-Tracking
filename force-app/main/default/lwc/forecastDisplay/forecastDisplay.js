@@ -1,7 +1,8 @@
-import { LightningElement, track} from 'lwc';
-import getWeatherForCity from '@salesforce/apex/WebServiceLWC.getWeatherForCity';
+import { LightningElement, track } from "lwc";
+import getWeatherForCity from "@salesforce/apex/WebServiceLWC.getWeatherForCity";
 
 export default class ForecastDisplay extends LightningElement {
+
     @track result;
     @track todaydata = [];
     @track tomorrowdata = [];
@@ -18,7 +19,6 @@ export default class ForecastDisplay extends LightningElement {
 
         }).catch(err => console.log(err));
 
-    }
 
     get getTodayData() {
         if (this.result) {
@@ -38,8 +38,16 @@ export default class ForecastDisplay extends LightningElement {
             return this.tomorrowdata;
         } else {
             return '--'
+
         }
+      ];
+
+      return this.todaydata;
+    } else {
+      return "--";
     }
+  }
+
 
     get getNextDayData() {
         if (this.result) {
@@ -48,8 +56,15 @@ export default class ForecastDisplay extends LightningElement {
             return this.nextdaydata;
         } else {
             return '--'
+
         }
+      ];
+
+      return this.tomorrowdata;
+    } else {
+      return "--";
     }
+
     
     get getFourthDayData() {
         if (this.result) {
@@ -58,8 +73,15 @@ export default class ForecastDisplay extends LightningElement {
             return this.fourthdaydata;
         } else {
             return '--'
+
         }
+      ];
+
+      return this.nextdaydata;
+    } else {
+      return "--";
     }
+
     
     get getFifthDayData() {
         if (this.result) {
@@ -68,16 +90,39 @@ export default class ForecastDisplay extends LightningElement {
             return this.fifthdaydata;
         } else {
             return '--'
-        }
-    }
-   
-    get getCityName() {
-        if (this.result) {
-            return this.result.Today[0];
-        } else {
-            return '---'
-        }
-    }
-    
 
+        }
+      ];
+
+      return this.fourthdaydata;
+    } else {
+      return "--";
+    }
+  }
+
+  get getFifthDayData() {
+    if (this.result) {
+      this.fifthdaydata = [
+        {
+          key: 5,
+          temp: this.result.Fifth_Day[1],
+          icon: this.result.Fifth_Day[2],
+          description: this.result.Fifth_Day[3]
+        }
+      ];
+      // eslint-disable-next-line no-console
+      console.log("@@@(this.result.fifthdaydata)", this.fifthdaydata);
+      return this.fifthdaydata;
+    } else {
+      return "--";
+    }
+  }
+
+  get getCityName() {
+    if (this.result) {
+      return this.result.Today[0];
+    } else {
+      return "---";
+    }
+  }
 }
