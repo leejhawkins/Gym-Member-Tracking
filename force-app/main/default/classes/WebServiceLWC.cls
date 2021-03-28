@@ -11,7 +11,7 @@ public class WebServiceLWC {
 
   @AuraEnabled(cacheable=true)
   public static map<String, List<String>> getWeatherForCity() {
-    string city = '&q=Denver';
+    string city = '&q=Mclean';
     string ndays = '&cnt=40';
     String units = '&units=imperial';
     map<String, List<String>> forecastData = new Map<String, List<String>>();
@@ -43,12 +43,4 @@ public class WebServiceLWC {
     System.debug('result : ' + result);
     return result;
   }
-
-  
-@AuraEnabled(cacheable=true)
-public static Datetime getNextDay(){
-    return system.now().addDays(1);
-}
-  
-
 }

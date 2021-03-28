@@ -42,10 +42,7 @@
     </template>
     <template if:true={monthlyProgressLineGraph}>
       <div class="slds-m-around_medium">
-        <div class="slds-grid slds-wrap">
-          <c-sample-line-chart-monthly class="slds-col slds-size_12-of-12">
-          </c-sample-line-chart-monthly>
-        </div>
+        <div class="chart slds-grid slds-wrap"></div>
       </div>
     </template>
     <template if:true={currentProgressBarGraph}>

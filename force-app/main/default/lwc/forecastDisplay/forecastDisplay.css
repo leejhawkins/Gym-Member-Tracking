@@ -3,14 +3,14 @@
   flex-direction: column;
   align-items: center;
   height: 100px;
-  margin-bottom: .75rem;
+  margin-bottom: 0.75rem;
   padding: 1rem 1.5rem;
-  border: 1px  #ebedef;
+  border: 1px #ebedef;
   border-radius: 10px;
   text-align: center;
 }
 
 .svg {
-    margin-top: -.75rem;
-    border: 1px silver;
-  }
+  margin-top: -0.75rem;
+  border: 1px silver;
+}
