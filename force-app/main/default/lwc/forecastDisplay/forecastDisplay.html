@@ -6,7 +6,7 @@
             <div class="slds-text-align_center">
                 <template for:each={getTodayData} for:item="today">
                     <div key={today.temp}>
-                        <p class="">&nbsp;<strong>{today.dateTime}</strong></p>
+                        <p class="">&nbsp;<strong>Today:</strong></p>
                         <p class=""><img class="slds-icon slds-icon_large svg" src={today.icon} alt="failed"></img>
                             &nbsp;{today.temp}°F</p>
                         <p><strong>&nbsp;Condition:</strong></p>
@@ -19,7 +19,7 @@
             <div class="slds-text-align_center">
                 <template for:each={getTomorrowData} for:item="tom">
                     <div key={tom.temp}>
-                        <p class=""><strong>{tom.dateTime}</strong></p>
+                        <p class=""><strong>Tomorrow:</strong></p>
                         <p class=""><img class="slds-icon slds-icon_large svg" src={tom.icon} alt="failed"></img> &nbsp;{tom.temp}°F</p>
                         <p><strong>&nbsp;Condition:</strong></p>
                         <p>{tom.description}</p>
@@ -31,7 +31,7 @@
             <div class="slds-text-align_center">
                 <template for:each={getNextDayData} for:item="nextday">
                     <div key={nextday.temp}>
-                        <p class=""><strong>{nextday.dateTime}</strong></p>
+                        <p class=""><strong>Next Day:</strong></p>
                         <p class=""><img class="slds-icon slds-icon_large svg" src={nextday.icon}
                                 alt="failed"></img>&nbsp;{nextday.temp}°F</p>
                         <p><strong>&nbsp;Condition:</strong></p>
@@ -44,7 +44,7 @@
             <div class="slds-text-align_center">
                 <template for:each={getFourthDayData} for:item="fourthday">
                     <div key={fourthday.temp}>
-                        <p class=""><strong>{fourthday.dateTime}</strong></p>
+                        <p class=""><strong>Fourth Day:</strong></p>
                         <p class=""><img class="slds-icon slds-icon_large svg" src={fourthday.icon}
                                 alt="failed"></img>&nbsp;{fourthday.temp}°F</p>
                         <p><strong>&nbsp;Condition:</strong></p>
@@ -57,7 +57,7 @@
             <div class="slds-text-align_center">
                 <template for:each={getFifthDayData} for:item="fifthday">
                     <div key={fifthday.temp}>
-                        <p class=""><strong>{fifthday.dateTime}</strong></p>
+                        <p class=""><strong>Fifth Day:</strong></p>
                         <p class=""><img class="slds-icon slds-icon_large svg" src={fifthday.icon}
                                 alt="failed"></img>&nbsp;{fifthday.temp}°F
                         </p>
@@ -67,7 +67,6 @@
                 </template>
             </div>
         </div>
-    </div>
-
+    </div>   
 </lightning-card>
 </template>

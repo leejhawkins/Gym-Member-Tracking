@@ -1,0 +1,45 @@
+<template>
+  <div class="slds-scrollable_y" style="height: 20rem">
+    <lightning-card title="Find Member">
+      <div class="slds-var-m-around_medium">
+        <lightning-input
+          type="search"
+          onchange={handleKeyChange}
+          class="slds-var-m-bottom_small"
+          label="Search"
+          value={searchKey}
+        ></lightning-input>
+        <div class="slds-grid slds-wrap">
+          <div
+            class="slds-col slds-size_4-of-12"
+            style="border-bottom: solid 3px"
+          >
+            <span>Member Name</span>
+          </div>
+          <div
+            class="slds-col slds-size_4-of-12"
+            style="border-bottom: solid 3px"
+          >
+            <span>Fitness Level</span>
+          </div>
+          <div
+            class="slds-col slds-size_4-of-12"
+            style="border-bottom: solid 3px"
+          >
+            <span>Program</span>
+          </div>
+        </div>
+        <template if:true={members.data}>
+          <template for:each={members.data} for:item="member">
+            <c-member-row
+              key={member.Id}
+              member={member}
+              onmemberselect={handleContactSelect}
+            >
+            </c-member-row>
+          </template>
+        </template>
+      </div>
+    </lightning-card>
+  </div>
+</template>
