@@ -48,9 +48,5 @@ public class WebServiceLWC {
     return result;
   }
   
-@AuraEnabled(cacheable=true)
-public static Datetime getNextDay(){
-    return system.now().addDays(1);
-}
   
 }

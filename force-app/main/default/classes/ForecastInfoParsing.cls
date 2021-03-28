@@ -41,15 +41,15 @@ public class ForecastInfoParsing {
             }
             
             
-            System.debug('$$$$cityName : '+cityName);
-            System.debug('$$$$temp_list : '+temp_list);
-            System.debug('$$$$icon_list : '+icon_list);
-            System.debug('$$$$description_list : '+description_list);
-            System.debug('$$$$dt_txt_list : '+dt_txt_list);
+            //System.debug('$$$$cityName : '+cityName);
+            //System.debug('$$$$temp_list : '+temp_list);
+            //System.debug('$$$$icon_list : '+icon_list);
+            //System.debug('$$$$description_list : '+description_list);
+            //System.debug('$$$$dt_txt_list : '+dt_txt_list);
             
             forecastData = createForecastInfoList(cityName,temp_list,icon_list,description_list,dt_txt_list,allthreedays);
         }
-        System.debug('$$$$forecastData : '+forecastData);
+        //System.debug('$$$$forecastData : '+forecastData);
         return forecastData;
         
     }
@@ -58,14 +58,14 @@ public class ForecastInfoParsing {
         List<String> threeDays = new  List<String>();
         List<Date> dateStored = new  List<Date>();
         String[] datefrom = fromDate.split(' '); //2021-03-20
-        System.debug('$$$$datefrom[0] : '+datefrom); 
+        //System.debug('$$$$datefrom[0] : '+datefrom); 
         Date currentDate = Date.valueOf(datefrom[0]);
         for(integer i=0;i<5;i++){
             Date daysCount = currentDate.addDays(i);  
             dateStored.add(daysCount);
         }
         
-        System.debug('$$$$dateStored : '+dateStored);
+        //System.debug('$$$$dateStored : '+dateStored);
         
         for(Date ds : dateStored){
             Datetime dateTimeConvert = Datetime.newInstance(ds.year(), ds.month(),ds.day());  
@@ -93,6 +93,7 @@ public class ForecastInfoParsing {
                      currentFCList.add(temp_list[i]);
                      currentFCList.add('http://openweathermap.org/img/w/'+icon_list[i]+'.png');
                      currentFCList.add(description_list[i]);
+                     currentFCList.add(allthreedays[dataCount]);
                      forecastDatamap.put(DaysName[dataCount],currentFCList);
                      dataCount++;
                  }
