@@ -1,6 +1,8 @@
 import { LightningElement, wire } from "lwc";
 import { getSObjectValue } from "@salesforce/apex";
 import { subscribe, MessageContext } from "lightning/messageService";
+import chartjs from "@salesforce/resourceUrl/chartJs";
+import { loadScript, loadStyle } from "lightning/platformResourceLoader";
 import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected__c";
 import getBenchmarks from "@salesforce/apex/BenchmarkController.getBenchmarks";
 import getAnnualProgress from "@salesforce/apex/BenchmarkController.getAnnualProgress";
@@ -20,6 +22,7 @@ export default class MemberDetails extends LightningElement {
   annualProgressLineGraph;
   monthlyProgressLineGraph;
   currentProgressBarGraph;
+  chart;
 
   subscription = null;
 
@@ -50,6 +53,40 @@ export default class MemberDetails extends LightningElement {
   error;
   recordId;
   Name;
+  config = {
+    type: "line",
+    data: {
+      labels: ["2/16", "2/23", "3/2", "3/9", "3/16"],
+      datasets: [
+        {
+          data: [86, 87, 87, 88, 88],
+          label: "Bench Press",
+          borderColor: "rgb(0, 0, 0)"
+        },
+        {
+          data: [81, 81, 82, 83, 84],
+          label: "Back Squat",
+          borderColor: "rgb(0, 255, 255)"
+        },
+        {
+          data: [78, 79, 80, 80, 81],
+          label: "Deadlift",
+          borderColor: "rgb(128, 128, 128)"
+        },
+        {
+          data: [91, 91, 92, 92, 93],
+          label: "Shoulder Press",
+          borderColor: "rgb(0,115,255)"
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: "Lift Progress as a Ratio to Goal Weight"
+      }
+    }
+  };
 
   handleMessage(message) {
     this.recordId = message.recordId;
@@ -70,18 +107,15 @@ export default class MemberDetails extends LightningElement {
       this.eli = 0;
 
       data.forEach((member) => {
-        console.log(member);
         switch (getSObjectValue(member, LEVEL_FIELD)) {
           case "Beginner":
             this.beg++;
-            console.log(this.beg);
             break;
           case "Novice":
             this.nov++;
             break;
           case "Intermediate":
             this.int++;
-            console.log(this.int);
             break;
           case "Advanced":
             this.adv++;
@@ -146,15 +180,16 @@ export default class MemberDetails extends LightningElement {
     console.log("hello line 138");
     getMonthlyProgress({ memberId: this.recordId })
       .then((data) => {
-        console.log(data);
-        let goalData = data.Goal;
-        let goalBenchpress = getSObjectValue(goalData[0], BENCHPRESS_FIELD);
-        let goalBackSquat = getSObjectValue(goalData[0], BACKSQUAT_FIELD);
-        let goalDeadlift = getSObjectValue(goalData[0], DEADLIFT_FIELD);
-        let goalShoulderPress = getSObjectValue(
-          goalData[0],
-          SHOULDERPRESS_FIELD
-        );
+        // console.log(data);
+        // let goalData = data.Goal;
+        // let goalBenchpress = getSObjectValue(goalData[0], BENCHPRESS_FIELD);
+        // let goalBackSquat = getSObjectValue(goalData[0], BACKSQUAT_FIELD);
+        // let goalDeadlift = getSObjectValue(goalData[0], DEADLIFT_FIELD);
+        // let goalShoulderPress = getSObjectValue(
+        //   goalData[0],
+        //   SHOULDERPRESS_FIELD
+        // );
+
         let monthlyBenchPress = [];
         let monthlyBackSquat = [];
         let monthlyDeadlift = [];
@@ -172,20 +207,24 @@ export default class MemberDetails extends LightningElement {
           dates.push(getSObjectValue(benchmark, DATE_FIELD));
         });
         console.log(dates);
-        if (
-          this.template
-            .querySelector("c-sample-line-chart-monthly")
-            .chartCreated()
-        ) {
-          this.template
-            .querySelector("c-sample-line-chart-monthly")
-            .updateChart(
-              monthlyBackSquat,
-              monthlyDeadlift,
-              monthlyBenchPress,
-              monthlyShoulderPress,
-              dates
-            );
+        if (!this.chart) {
+          const canvas = document.createElement("canvas");
+          this.config.data.datasets[0].data = monthlyBenchPress;
+          this.config.data.datasets[1].data = monthlyBackSquat;
+          this.config.data.datasets[2].data = monthlyDeadlift;
+          this.config.data.datasets[3].data = monthlyShoulderPress;
+          this.config.data.labels = dates;
+          this.template.querySelector("div.chart").appendChild(canvas);
+          const ctx = canvas.getContext("2d");
+          this.chart = new window.Chart(ctx, this.config);
+        } else {
+          this.chart.data.datasets[0].data = monthlyBenchPress;
+          this.chart.data.datasets[1].data = monthlyBackSquat;
+          this.chart.data.datasets[2].data = monthlyDeadlift;
+          this.chart.data.datasets[3].data = monthlyShoulderPress;
+          this.chart.data.labels = dates;
+          console.log(this.chart.data.labels);
+          this.chart.update();
         }
       })
       .catch((error) => {
@@ -286,6 +325,25 @@ export default class MemberDetails extends LightningElement {
   connectedCallback() {
     this.subscribeToMessageChannel();
   }
+  renderedCallback() {
+    if (this.chartjsInitialized) {
+      return;
+    }
+    this.chartjsInitialized = true;
+    console.log("making chart..");
+    Promise.all([
+      loadScript(this, chartjs + "/Chart.min.js"),
+      loadStyle(this, chartjs + "/Chart.min.css")
+    ])
+      .then(() => {
+        // disable Chart.js CSS injection
+        window.Chart.platform.disableCSSInjection = true;
+      })
+      .catch((error) => {
+        console.log(error);
+        this.error = error;
+      });
+  }
 
   handleSelect(event) {
     console.log(event.target.value);
@@ -316,6 +374,8 @@ export default class MemberDetails extends LightningElement {
         this.annualProgressLineGraph = false;
         this.monthlyProgressLineGraph = false;
         this.currentProgressBarGraph = true;
+        this.chart = null;
+        this.template.querySelector("div.chart").removeChild();
         this.generateBarChart();
         break;
       default:
