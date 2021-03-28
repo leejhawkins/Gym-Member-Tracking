@@ -4,112 +4,118 @@
 
 @IsTest
 public class JSON2ApexTest {
-	
-	// This test method should give 100% coverage
-	static testMethod void testParse() {
-		String json = '{'+
-		'    \"coord\": {'+
-		'        \"lon\": -0.1257,'+
-		'        \"lat\": 51.5085'+
-		'    },'+
-		'    \"weather\": ['+
-		'        {'+
-		'            \"id\": 804,'+
-		'            \"main\": \"Clouds\",'+
-		'            \"description\": \"overcast clouds\",'+
-		'            \"icon\": \"04n\"'+
-		'        }'+
-		'    ],'+
-		'    \"base\": \"stations\",'+
-		'    \"main\": {'+
-		'        \"temp\": 277.59,'+
-		'        \"feels_like\": 270.7,'+
-		'        \"temp_min\": 276.48,'+
-		'        \"temp_max\": 278.71,'+
-		'        \"pressure\": 1002,'+
-		'        \"humidity\": 65'+
-		'    },'+
-		'    \"visibility\": 10000,'+
-		'    \"wind\": {'+
-		'        \"speed\": 6.69,'+
-		'        \"deg\": 250'+
-		'    },'+
-		'    \"clouds\": {'+
-		'        \"all\": 100'+
-		'    },'+
-		'    \"dt\": 1615666850,'+
-		'    \"sys\": {'+
-		'        \"type\": 1,'+
-		'        \"id\": 1414,'+
-		'        \"country\": \"GB\",'+
-		'        \"sunrise\": 1615616341,'+
-		'        \"sunset\": 1615658463'+
-		'    },'+
-		'    \"timezone\": 0,'+
-		'    \"id\": 2643743,'+
-		'    \"name\": \"London\",'+
-		'    \"cod\": 200'+
-		'}';
-		JSON2Apex r = JSON2Apex.parse(json);
-		System.assert(r != null);
+  // This test method should give 100% coverage
+  static testMethod void testParse() {
+    String json =
+      '{' +
+      '    \"coord\": {' +
+      '        \"lon\": -0.1257,' +
+      '        \"lat\": 51.5085' +
+      '    },' +
+      '    \"weather\": [' +
+      '        {' +
+      '            \"id\": 804,' +
+      '            \"main\": \"Clouds\",' +
+      '            \"description\": \"overcast clouds\",' +
+      '            \"icon\": \"04n\"' +
+      '        }' +
+      '    ],' +
+      '    \"base\": \"stations\",' +
+      '    \"main\": {' +
+      '        \"temp\": 277.59,' +
+      '        \"feels_like\": 270.7,' +
+      '        \"temp_min\": 276.48,' +
+      '        \"temp_max\": 278.71,' +
+      '        \"pressure\": 1002,' +
+      '        \"humidity\": 65' +
+      '    },' +
+      '    \"visibility\": 10000,' +
+      '    \"wind\": {' +
+      '        \"speed\": 6.69,' +
+      '        \"deg\": 250' +
+      '    },' +
+      '    \"clouds\": {' +
+      '        \"all\": 100' +
+      '    },' +
+      '    \"dt\": 1615666850,' +
+      '    \"sys\": {' +
+      '        \"type\": 1,' +
+      '        \"id\": 1414,' +
+      '        \"country\": \"GB\",' +
+      '        \"sunrise\": 1615616341,' +
+      '        \"sunset\": 1615658463' +
+      '    },' +
+      '    \"timezone\": 0,' +
+      '    \"id\": 2643743,' +
+      '    \"name\": \"London\",' +
+      '    \"cod\": 200' +
+      '}';
+    JSON2Apex r = JSON2Apex.parse(json);
+    System.assert(r != null);
 
-		json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
-		JSON2Apex.Weather objWeather = new JSON2Apex.Weather(System.JSON.createParser(json));
-		System.assert(objWeather != null);
-		System.assert(objWeather.id == null);
-		System.assert(objWeather.main == null);
-		System.assert(objWeather.description == null);
-		System.assert(objWeather.icon == null);
+    json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
+    JSON2Apex.Weather objWeather = new JSON2Apex.Weather(
+      System.JSON.createParser(json)
+    );
+    System.assert(objWeather != null);
+    System.assert(objWeather.id == null);
+    System.assert(objWeather.main == null);
+    System.assert(objWeather.description == null);
+    System.assert(objWeather.icon == null);
 
-		json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
-		JSON2Apex.Coord objCoord = new JSON2Apex.Coord(System.JSON.createParser(json));
-		System.assert(objCoord != null);
-		System.assert(objCoord.lon == null);
-		System.assert(objCoord.lat == null);
+    json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
+    JSON2Apex.Coord objCoord = new JSON2Apex.Coord(
+      System.JSON.createParser(json)
+    );
+    System.assert(objCoord != null);
+    System.assert(objCoord.lon == null);
+    System.assert(objCoord.lat == null);
 
-		json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
-		JSON2Apex.Wind objWind = new JSON2Apex.Wind(System.JSON.createParser(json));
-		System.assert(objWind != null);
-		System.assert(objWind.speed == null);
-		System.assert(objWind.deg == null);
+    json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
+    JSON2Apex.Wind objWind = new JSON2Apex.Wind(System.JSON.createParser(json));
+    System.assert(objWind != null);
+    System.assert(objWind.speed == null);
+    System.assert(objWind.deg == null);
 
-		json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
-		JSON2Apex objJSON2Apex = new JSON2Apex(System.JSON.createParser(json));
-		System.assert(objJSON2Apex != null);
-		System.assert(objJSON2Apex.coord == null);
-		System.assert(objJSON2Apex.weather == null);
-		System.assert(objJSON2Apex.base == null);
-		System.assert(objJSON2Apex.main == null);
-		System.assert(objJSON2Apex.visibility == null);
-		System.assert(objJSON2Apex.wind == null);
-		System.assert(objJSON2Apex.clouds == null);
-		System.assert(objJSON2Apex.dt == null);
-		System.assert(objJSON2Apex.sys == null);
-		System.assert(objJSON2Apex.id == null);
-		System.assert(objJSON2Apex.name == null);
-		System.assert(objJSON2Apex.cod == null);
+    json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
+    JSON2Apex objJSON2Apex = new JSON2Apex(System.JSON.createParser(json));
+    System.assert(objJSON2Apex != null);
+    System.assert(objJSON2Apex.coord == null);
+    System.assert(objJSON2Apex.weather == null);
+    System.assert(objJSON2Apex.base == null);
+    System.assert(objJSON2Apex.main == null);
+    System.assert(objJSON2Apex.visibility == null);
+    System.assert(objJSON2Apex.wind == null);
+    System.assert(objJSON2Apex.clouds == null);
+    System.assert(objJSON2Apex.dt == null);
+    System.assert(objJSON2Apex.sys == null);
+    System.assert(objJSON2Apex.id == null);
+    System.assert(objJSON2Apex.name == null);
+    System.assert(objJSON2Apex.cod == null);
 
-		json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
-		JSON2Apex.Clouds objClouds = new JSON2Apex.Clouds(System.JSON.createParser(json));
-		System.assert(objClouds != null);
-		System.assert(objClouds.all == null);
+    json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
+    JSON2Apex.Clouds objClouds = new JSON2Apex.Clouds(
+      System.JSON.createParser(json)
+    );
+    System.assert(objClouds != null);
+    System.assert(objClouds.all == null);
 
-		json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
-		JSON2Apex.Sys objSys = new JSON2Apex.Sys(System.JSON.createParser(json));
-		System.assert(objSys != null);
-		System.assert(objSys.type_Z == null);
-		System.assert(objSys.id == null);
-		System.assert(objSys.country == null);
-		System.assert(objSys.sunrise == null);
-		System.assert(objSys.sunset == null);
+    json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
+    JSON2Apex.Sys objSys = new JSON2Apex.Sys(System.JSON.createParser(json));
+    System.assert(objSys != null);
+    System.assert(objSys.type_Z == null);
+    System.assert(objSys.id == null);
+    System.assert(objSys.country == null);
+    System.assert(objSys.sunrise == null);
+    System.assert(objSys.sunset == null);
 
-		json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
-		JSON2Apex.Main objMain = new JSON2Apex.Main(System.JSON.createParser(json));
-		System.assert(objMain != null);
-		System.assert(objMain.temp == null);
-		System.assert(objMain.temp_min == null);
-		System.assert(objMain.temp_max == null);
-		System.assert(objMain.pressure == null);
-		System.assert(objMain.humidity == null);
-	}
+    json = '{\"TestAMissingObject\": { \"TestAMissingArray\": [ { \"TestAMissingProperty\": \"Some Value\" } ] } }';
+    JSON2Apex.Main objMain = new JSON2Apex.Main(System.JSON.createParser(json));
+    System.assert(objMain != null);
+    System.assert(objMain.temp == null);
+    System.assert(objMain.temp_min == null);
+    System.assert(objMain.temp_max == null);
+    System.assert(objMain.pressure == null);
+    System.assert(objMain.humidity == null);
+  }
 }

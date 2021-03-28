@@ -2,7 +2,6 @@ import { LightningElement, api } from "lwc";
 import { loadScript, loadStyle } from "lightning/platformResourceLoader";
 import chartjs from "@salesforce/resourceUrl/chartJs";
 export default class MemberBarChart extends LightningElement {
-
   error;
   chart;
   chartjsInitialized = false;
@@ -41,7 +40,6 @@ export default class MemberBarChart extends LightningElement {
           fontSize: 8,
           boxWidth: 15
         }
-
       },
 
       options: {
