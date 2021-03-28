@@ -1,5 +1,5 @@
 public inherited sharing class MemberTriggerUtility {
-    /*
+  /*
     public static void lookupOnInsert(List<Member__c> members){
         for(Member__c m : members){
             if(m.Goal_Benchmark__c != null){
