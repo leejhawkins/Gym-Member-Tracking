@@ -4,6 +4,7 @@ export default class WorkoutDiv extends LightningElement {
   @api workoutid;
   @api date;
   @api name;
+  workoutDes = "";
   edit = false;
 
   handleSuccess(event) {
@@ -19,5 +20,17 @@ export default class WorkoutDiv extends LightningElement {
   }
   get workoutName() {
     return `${this.name} Workout for ${this.date}`.trim();
+  }
+  allowGifDrop(event) {
+    event.preventDefault();
+  }
+  dropGif(event) {
+    event.preventDefault();
+    let data = event.dataTransfer.getData("text");
+    const image = `<img src=${data} alt="Workout Gif" style="width:100px" />`;
+    this.workoutDes = this.workoutDes + image;
+  }
+  handleChange(event) {
+    this.workoutDes = event.target.value;
   }
 }
