@@ -6,7 +6,6 @@ import { loadScript, loadStyle } from "lightning/platformResourceLoader";
 import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected__c";
 import getBenchmarks from "@salesforce/apex/BenchmarkController.getBenchmarks";
 import getAnnualProgress from "@salesforce/apex/BenchmarkController.getAnnualProgress";
-import getMembershipMonths from "@salesforce/apex/BenchmarkController.getMembershipMonths";
 import getMonthlyProgress from "@salesforce/apex/BenchmarkController.getMonthlyProgress";
 import findMembers from "@salesforce/apex/MemberController.findMembers";
 import BACKSQUAT_FIELD from "@salesforce/schema/Benchmark__c.Back_Squat__c";
@@ -19,6 +18,7 @@ import LEVEL_FIELD from "@salesforce/schema/Member__c.Fitness_Level__c";
 export default class MemberDetails extends LightningElement {
   //Fields for conditional rendering
   fitnessLevelPieChart;
+  lineGraph;
   annualProgressLineGraph;
   monthlyProgressLineGraph;
   currentProgressBarGraph;
@@ -36,13 +36,6 @@ export default class MemberDetails extends LightningElement {
   goalBenchPress = 0;
   goalShoulderPress = 0;
 
-  //Fields for Line Graph
-  bp;
-  bs;
-  dl;
-  sp;
-  months;
-
   //Fields for pie chart
   beg = 0;
   nov = 0;
@@ -53,6 +46,7 @@ export default class MemberDetails extends LightningElement {
   error;
   recordId;
   Name;
+
   config = {
     type: "line",
     data: {
@@ -87,7 +81,7 @@ export default class MemberDetails extends LightningElement {
       }
     }
   };
-
+  
   handleMessage(message) {
     this.recordId = message.recordId;
     if (this.annualProgressLineGraph) {
@@ -131,48 +125,55 @@ export default class MemberDetails extends LightningElement {
         .chartConfig(this.beg, this.nov, this.int, this.adv, this.eli);
     });
   }
-  async generateAnnualLineChart() {
-    await getMembershipMonths({ memberId: this.recordId })
-      .then((data) => {
-        this.months = data;
-      })
-      .catch((error) => {
-        console.log("BAD");
-        this.error = error;
-      });
-    await getAnnualProgress({ memberId: this.recordId })
-      .then((data) => {
-        this.bp = data["Bench Press"] != null ? data["Bench Press"] : [];
-        console.log(this.bp);
-        this.bs = data["Back Squat"] != null ? data["Back Squat"] : [];
-        console.log(this.bs);
-        this.dl = data["Deadlift"] != null ? data["Deadlift"] : [];
-        console.log(this.dl);
-        this.sp = data["Shoulder Press"] != null ? data["Shoulder Press"] : [];
-        console.log(this.sp);
 
-        if (
-          this.template.querySelector("c-benchmark-line-chart").chartCreated()
-        ) {
-          this.template
-            .querySelector("c-benchmark-line-chart")
-            .updateChart(this.bp, this.bs, this.dl, this.sp, this.months);
+  generateAnnualLineChart() {
+    getAnnualProgress({ memberId: this.recordId })
+      .then((data) => {
+        console.log(data);
+        let goalData = data.Goal;
+        let goalBenchPress = getSObjectValue(goalData[0], BENCHPRESS_FIELD);
+        let goalBackSquat = getSObjectValue(goalData[0], BACKSQUAT_FIELD);
+        let goalDeadlift = getSObjectValue(goalData[0], DEADLIFT_FIELD);
+        let goalShoulderPress = getSObjectValue(goalData[0], SHOULDERPRESS_FIELD);
+
+        let annualBenchPress = [];
+        let annualBackSquat = [];
+        let annualDeadlift = [];
+        let annualShoulderPress = [];
+        let dates = [];
+        let benchmarks = data["Benchmarks"];
+        console.log(benchmarks);
+        benchmarks.forEach((benchmark) => {
+          annualBenchPress.push(getSObjectValue(benchmark, BENCHPRESS_FIELD)/goalBenchPress);
+          annualBackSquat.push(getSObjectValue(benchmark, BACKSQUAT_FIELD)/goalBackSquat);
+          annualDeadlift.push(getSObjectValue(benchmark, DEADLIFT_FIELD)/goalDeadlift);
+          annualShoulderPress.push(getSObjectValue(benchmark, SHOULDERPRESS_FIELD)/goalShoulderPress);
+          dates.push(getSObjectValue(benchmark, DATE_FIELD));
+        });
+        console.log(dates);
+        if (!this.chart) {
+          const canvas = document.createElement("canvas");
+          this.config.data.datasets[0].data = annualBenchPress;
+          this.config.data.datasets[1].data = annualBackSquat;
+          this.config.data.datasets[2].data = annualDeadlift;
+          this.config.data.datasets[3].data = annualShoulderPress;
+          this.config.data.labels = dates;
+          this.template.querySelector("div.chart").appendChild(canvas);
+          const ctx = canvas.getContext("2d");
+          this.chart = new window.Chart(ctx, this.config);
+        } else {
+          this.chart.data.datasets[0].data = annualBenchPress;
+          this.chart.data.datasets[1].data = annualBackSquat;
+          this.chart.data.datasets[2].data = annualDeadlift;
+          this.chart.data.datasets[3].data = annualShoulderPress;
+          this.chart.data.labels = dates;
+          console.log(this.chart.data.labels);
+          this.chart.update();
         }
       })
       .catch((error) => {
-        console.log("ALSO BAD");
+        console.log(error);
         this.error = error;
-        this.bp = [];
-        this.bs = [];
-        this.dl = [];
-        this.sp = [];
-        if (
-          this.template.querySelector("c-benchmark-line-chart").chartCreated()
-        ) {
-          this.template
-            .querySelector("c-benchmark-line-chart")
-            .updateChart(this.bp, this.bs, this.dl, this.sp, this.months);
-        }
       });
   }
 
@@ -180,15 +181,11 @@ export default class MemberDetails extends LightningElement {
     console.log("hello line 138");
     getMonthlyProgress({ memberId: this.recordId })
       .then((data) => {
-        // console.log(data);
-        // let goalData = data.Goal;
-        // let goalBenchpress = getSObjectValue(goalData[0], BENCHPRESS_FIELD);
-        // let goalBackSquat = getSObjectValue(goalData[0], BACKSQUAT_FIELD);
-        // let goalDeadlift = getSObjectValue(goalData[0], DEADLIFT_FIELD);
-        // let goalShoulderPress = getSObjectValue(
-        //   goalData[0],
-        //   SHOULDERPRESS_FIELD
-        // );
+        let goalData = data.Goal;
+        let goalBenchPress = getSObjectValue(goalData[0], BENCHPRESS_FIELD);
+        let goalBackSquat = getSObjectValue(goalData[0], BACKSQUAT_FIELD);
+        let goalDeadlift = getSObjectValue(goalData[0], DEADLIFT_FIELD);
+        let goalShoulderPress = getSObjectValue(goalData[0], SHOULDERPRESS_FIELD);
 
         let monthlyBenchPress = [];
         let monthlyBackSquat = [];
@@ -198,12 +195,10 @@ export default class MemberDetails extends LightningElement {
         let benchmarks = data["Benchmarks"];
         console.log(benchmarks);
         benchmarks.forEach((benchmark) => {
-          monthlyBenchPress.push(getSObjectValue(benchmark, BENCHPRESS_FIELD));
-          monthlyBackSquat.push(getSObjectValue(benchmark, BACKSQUAT_FIELD));
-          monthlyDeadlift.push(getSObjectValue(benchmark, DEADLIFT_FIELD));
-          monthlyShoulderPress.push(
-            getSObjectValue(benchmark, SHOULDERPRESS_FIELD)
-          );
+          monthlyBenchPress.push(getSObjectValue(benchmark, BENCHPRESS_FIELD)/goalBenchPress);
+          monthlyBackSquat.push(getSObjectValue(benchmark, BACKSQUAT_FIELD)/goalBackSquat);
+          monthlyDeadlift.push(getSObjectValue(benchmark, DEADLIFT_FIELD)/goalDeadlift);
+          monthlyShoulderPress.push(getSObjectValue(benchmark, SHOULDERPRESS_FIELD)/goalShoulderPress);
           dates.push(getSObjectValue(benchmark, DATE_FIELD));
         });
         console.log(dates);
@@ -350,6 +345,7 @@ export default class MemberDetails extends LightningElement {
     switch (event.target.value) {
       case "fitnessLevelPieChart":
         this.fitnessLevelPieChart = true;
+        this.lineGraph = false;
         this.annualProgressLineGraph = false;
         this.monthlyProgressLineGraph = false;
         this.currentProgressBarGraph = false;
@@ -357,6 +353,7 @@ export default class MemberDetails extends LightningElement {
         break;
       case "annualProgressLineGraph":
         this.fitnessLevelPieChart = false;
+        this.lineGraph = true;
         this.annualProgressLineGraph = true;
         this.monthlyProgressLineGraph = false;
         this.currentProgressBarGraph = false;
@@ -364,6 +361,7 @@ export default class MemberDetails extends LightningElement {
         break;
       case "monthlyProgressLineGraph":
         this.fitnessLevelPieChart = false;
+        this.lineGraph = true;
         this.annualProgressLineGraph = false;
         this.monthlyProgressLineGraph = true;
         this.currentProgressBarGraph = false;
@@ -371,15 +369,16 @@ export default class MemberDetails extends LightningElement {
         break;
       case "currentProgressBarGraph":
         this.fitnessLevelPieChart = false;
+        this.lineGraph = false;
         this.annualProgressLineGraph = false;
         this.monthlyProgressLineGraph = false;
         this.currentProgressBarGraph = true;
         this.chart = null;
-        this.template.querySelector("div.chart").removeChild();
         this.generateBarChart();
         break;
       default:
         this.fitnessLevelPieChart = false;
+        this.lineGraph = false;
         this.annualProgressLineGraph = false;
         this.monthlyProgressLineGraph = false;
         this.currentProgressBarGraph = false;

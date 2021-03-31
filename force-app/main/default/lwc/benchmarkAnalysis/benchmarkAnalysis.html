@@ -25,22 +25,7 @@
         </select>
       </div>
     </div>
-    <template if:true={annualProgressLineGraph}>
-      <div class="slds-m-around_medium">
-        <div class="slds-grid slds-wrap">
-          <c-benchmark-line-chart
-            bp={bp}
-            bs={bs}
-            dl={dl}
-            sp={sp}
-            months={months}
-            class="slds-col slds-size_12-of-12"
-          >
-          </c-benchmark-line-chart>
-        </div>
-      </div>
-    </template>
-    <template if:true={monthlyProgressLineGraph}>
+    <template if:true={lineGraph}>
       <div class="slds-m-around_medium">
         <div class="chart slds-grid slds-wrap"></div>
       </div>
