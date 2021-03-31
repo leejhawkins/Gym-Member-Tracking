@@ -3,7 +3,7 @@
     <div class="slds-text-heading_medium">
       <strong>&nbsp;Location: </strong>{getCityName}
     </div>
-    <div class="slds-grid slds-wrap">
+    <div class="slds-m-around_medium">
       <div class="slds-grid slds-wrap">
         <div class="slds-size_1-of-5">
           <div class="slds-text-align_center">
@@ -81,18 +81,18 @@
         </div>
         <div class="slds-size_1-of-5">
           <div class="slds-text-align_center">
-            <template for:each={getFifthDayData} for:item="fifthday">
-              <div key={fifthday.temp}>
-                <p class=""><strong>{fifthday.dateTime}</strong></p>
+            <template if:true={getFifthDayData}>
+              <div key={getFifthDayData.temp}>
+                <p class=""><strong>{getFifthDayData.dateTime}</strong></p>
                 <p class="">
                   <img
                     class="slds-icon slds-icon_large svg"
-                    src={fifthday.icon}
+                    src={getFifthDayData.icon}
                     alt="failed"
-                  />&nbsp;{fifthday.temp}°F
+                  />&nbsp;{getFifthDayData.temp}°F
                 </p>
                 <p><strong>&nbsp;Condition:</strong></p>
-                <p>&nbsp;{fifthday.description}</p>
+                <p>&nbsp;{getFifthDayData.description}</p>
               </div>
             </template>
           </div>

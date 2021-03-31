@@ -76,15 +76,13 @@ export default class ForecastDisplay extends LightningElement {
 
   get getFifthDayData() {
     return this.result
-      ? [
-          {
-            key: 5,
-            temp: this.result.Fifth_Day[1],
-            icon: this.result.Fifth_Day[2],
-            description: this.result.Fifth_Day[3],
-            dateTime: this.result.Fifth_Day[4].substring(0, 10)
-          }
-        ]
+      ? {
+          key: 5,
+          temp: this.result.Fifth_Day[1],
+          icon: this.result.Fifth_Day[2],
+          description: this.result.Fifth_Day[3],
+          dateTime: this.result.Fifth_Day[4].substring(0, 10)
+        }
       : "--";
   }
 

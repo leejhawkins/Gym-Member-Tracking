@@ -146,7 +146,7 @@ export default class MemberDetails extends LightningElement {
         console.log(this.bp);
         this.bs = data["Back Squat"] != null ? data["Back Squat"] : [];
         console.log(this.bs);
-        this.dl = data["Deadlift"] != null ? data["Deadlift"] : [];
+        this.dl = data.Deadlift != null ? data.Deadlift : [];
         console.log(this.dl);
         this.sp = data["Shoulder Press"] != null ? data["Shoulder Press"] : [];
         console.log(this.sp);
@@ -195,7 +195,7 @@ export default class MemberDetails extends LightningElement {
         let monthlyDeadlift = [];
         let monthlyShoulderPress = [];
         let dates = [];
-        let benchmarks = data["Benchmarks"];
+        let benchmarks = data.Benchmarks;
         console.log(benchmarks);
         benchmarks.forEach((benchmark) => {
           monthlyBenchPress.push(getSObjectValue(benchmark, BENCHPRESS_FIELD));
@@ -223,7 +223,6 @@ export default class MemberDetails extends LightningElement {
           this.chart.data.datasets[2].data = monthlyDeadlift;
           this.chart.data.datasets[3].data = monthlyShoulderPress;
           this.chart.data.labels = dates;
-          console.log(this.chart.data.labels);
           this.chart.update();
         }
       })
@@ -245,9 +244,9 @@ export default class MemberDetails extends LightningElement {
     this.goalShoulderPress = 0;
     getBenchmarks({ memberId: this.recordId })
       .then((data) => {
-        let curBen = data["Current"];
+        let curBen = data.Current;
         console.log(curBen);
-        let goalBen = data["Goal"];
+        let goalBen = data.Goal;
         console.log(goalBen);
         this.currentBackSquat =
           getSObjectValue(curBen, BACKSQUAT_FIELD) != null
