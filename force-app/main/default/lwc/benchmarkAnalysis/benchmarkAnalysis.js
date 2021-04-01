@@ -206,7 +206,7 @@ export default class MemberDetails extends LightningElement {
         let monthlyDeadlift = [];
         let monthlyShoulderPress = [];
         let dates = [];
-        let benchmarks = data.Benchmarks;
+        let benchmarks = data["Benchmarks"];
         console.log(benchmarks);
         benchmarks.forEach((benchmark) => {
           monthlyBenchPress.push(
