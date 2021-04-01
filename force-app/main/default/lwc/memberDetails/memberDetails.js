@@ -63,57 +63,69 @@ export default class MemberDetails extends LightningElement {
     if (error) {
       this.dispatchToast(error);
     } else if (data) {
-      let curBen = data.Current;
-      let goalBen = data.Goal;
-      console.log(goalBen);
-      this.currentBackSquat =
-        getSObjectValue(curBen, BACKSQUAT_FIELD) != null
-          ? getSObjectValue(curBen, BACKSQUAT_FIELD)
-          : 0;
-      this.currentDeadlift =
-        getSObjectValue(curBen, DEADLIFT_FIELD) != null
-          ? getSObjectValue(curBen, DEADLIFT_FIELD)
-          : 0;
-      this.currentBenchPress =
-        getSObjectValue(curBen, BENCHPRESS_FIELD) != null
-          ? getSObjectValue(curBen, BENCHPRESS_FIELD)
-          : 0;
-      this.currentShoulderPress =
-        getSObjectValue(curBen, SHOULDERPRESS_FIELD) != null
-          ? getSObjectValue(curBen, SHOULDERPRESS_FIELD)
-          : 0;
-      this.goalBackSquat =
-        getSObjectValue(goalBen, BACKSQUAT_FIELD) != null
-          ? getSObjectValue(goalBen, BACKSQUAT_FIELD)
-          : 0;
-      this.goalDeadlift =
-        getSObjectValue(goalBen, DEADLIFT_FIELD) != null
-          ? getSObjectValue(goalBen, DEADLIFT_FIELD)
-          : 0;
-      this.goalBenchPress =
-        getSObjectValue(goalBen, BENCHPRESS_FIELD) != null
-          ? getSObjectValue(goalBen, BENCHPRESS_FIELD)
-          : 0;
-      this.goalShoulderPress =
-        getSObjectValue(goalBen, SHOULDERPRESS_FIELD) != null
-          ? getSObjectValue(goalBen, SHOULDERPRESS_FIELD)
-          : 0;
-      this.nextLevel = getSObjectValue(goalBen, LEVEL_FIELD);
-      if (this.template.querySelector("c-member-bar-chart").chartCreated()) {
-        this.template
-          .querySelector("c-member-bar-chart")
-          .updateChart(
-            this.currentBackSquat,
-            this.goalBackSquat,
-            this.currentDeadlift,
-            this.goalDeadlift,
-            this.currentBenchPress,
-            this.goalBenchPress,
-            this.currentShoulderPress,
-            this.goalShoulderPress
-          );
-      }
+      this.updateBenchmarkChart(data);
     }
+  }
+  updateBenchmarkChart(data) {
+    let curBen = data.Current;
+    let goalBen = data.Goal;
+    this.currentBackSquat =
+      getSObjectValue(curBen, BACKSQUAT_FIELD) != null
+        ? getSObjectValue(curBen, BACKSQUAT_FIELD)
+        : 0;
+    this.currentDeadlift =
+      getSObjectValue(curBen, DEADLIFT_FIELD) != null
+        ? getSObjectValue(curBen, DEADLIFT_FIELD)
+        : 0;
+    this.currentBenchPress =
+      getSObjectValue(curBen, BENCHPRESS_FIELD) != null
+        ? getSObjectValue(curBen, BENCHPRESS_FIELD)
+        : 0;
+    this.currentShoulderPress =
+      getSObjectValue(curBen, SHOULDERPRESS_FIELD) != null
+        ? getSObjectValue(curBen, SHOULDERPRESS_FIELD)
+        : 0;
+    this.goalBackSquat =
+      getSObjectValue(goalBen, BACKSQUAT_FIELD) != null
+        ? getSObjectValue(goalBen, BACKSQUAT_FIELD)
+        : 0;
+    this.goalDeadlift =
+      getSObjectValue(goalBen, DEADLIFT_FIELD) != null
+        ? getSObjectValue(goalBen, DEADLIFT_FIELD)
+        : 0;
+    this.goalBenchPress =
+      getSObjectValue(goalBen, BENCHPRESS_FIELD) != null
+        ? getSObjectValue(goalBen, BENCHPRESS_FIELD)
+        : 0;
+    this.goalShoulderPress =
+      getSObjectValue(goalBen, SHOULDERPRESS_FIELD) != null
+        ? getSObjectValue(goalBen, SHOULDERPRESS_FIELD)
+        : 0;
+    this.nextLevel = getSObjectValue(goalBen, LEVEL_FIELD);
+    if (this.template.querySelector("c-member-bar-chart").chartCreated()) {
+      this.template
+        .querySelector("c-member-bar-chart")
+        .updateChart(
+          this.currentBackSquat,
+          this.goalBackSquat,
+          this.currentDeadlift,
+          this.goalDeadlift,
+          this.currentBenchPress,
+          this.goalBenchPress,
+          this.currentShoulderPress,
+          this.goalShoulderPress
+        );
+    }
+  }
+  handleRecord() {
+    console.log("lift recorded");
+    getBenchmarks({ memberId: this.recordId })
+      .then((data) => {
+        this.updateBenchmarkChart(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   get toBSNextLevel() {
