@@ -1,14 +1,13 @@
-import { LightningElement } from "lwc";
+import { LightningElement, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class RecordLift extends LightningElement {
+  @api memberid;
   date = new Date();
   reps;
   benchmarkAPI;
   benchmarkField;
-  memberName;
   weight;
-  showForm = false;
 
   handleSelect(event) {
     this.benchmarkAPI = event.target.value;
@@ -38,11 +37,9 @@ export default class RecordLift extends LightningElement {
   handleSuccess() {
     this.date = new Date();
     this.reps = null;
-    this.benchmarkAPI = null;
+    this.benchmarkAPI = "Choose Lift";
     this.benchmarkField = null;
-    this.memberName = null;
     this.weight = null;
-    this.showForm = false;
     this.dispatchEvent(
       new ShowToastEvent({
         title: "Success",
@@ -50,7 +47,8 @@ export default class RecordLift extends LightningElement {
         variant: "success"
       })
     );
-    window.location.reload();
+    const recordLift = new CustomEvent("record", { id: this.memberid });
+    this.dispatchEvent(recordLift);
   }
 
   get benchmarkName() {

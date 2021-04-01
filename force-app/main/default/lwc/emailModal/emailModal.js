@@ -13,13 +13,14 @@ export default class EmailModal extends LightningElement {
   @api memberid;
 
   @wire(getMemberWorkout, { memberId: "$memberid", workoutDate: null })
-  workout;
-
-  get workoutDes() {
-    return this.workout.data
-      ? getSObjectValue(this.workout.data, DESCRIPTION_FIELD)
-      : "";
+  wiredWorkout({ error, data }) {
+    if (error) {
+      this.dispatchToast(error);
+    } else if (data) {
+      this.workoutdes = getSObjectValue(data, DESCRIPTION_FIELD);
+    }
   }
+
   handleChange(event) {
     this.workoutdes = event.target.value;
   }
