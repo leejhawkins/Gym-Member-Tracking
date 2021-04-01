@@ -189,7 +189,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Member__c.Premium_User__c</field>
+      <field>Member__c.Premium_User__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
