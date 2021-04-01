@@ -80,6 +80,7 @@ public inherited sharing class BenchmarkTriggerUtility {
         ];
         String oldFitnessLevel = m.Fitness_Level__c;
         m.Fitness_Level__c = b.Fitness_Level__c;
+        m.Current_Benchmark__c = b.Id;
         if (
           (oldFitnessLevel == 'Beginner' &&
           (m.Fitness_Level__c == 'Novice' ||

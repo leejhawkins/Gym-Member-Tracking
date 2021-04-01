@@ -79,10 +79,6 @@ export default class BenchmarkLineChart extends LightningElement {
         // disable Chart.js CSS injection
         window.Chart.platform.disableCSSInjection = true;
         this.config.data.labels = this.months;
-        console.log(this.bp);
-        console.log(this.bs);
-        console.log(this.dl);
-        console.log(this.sp);
         this.config.data.datasets[0].data = this.bs;
         this.config.data.datasets[1].data = this.bp;
         this.config.data.datasets[2].data = this.dl;

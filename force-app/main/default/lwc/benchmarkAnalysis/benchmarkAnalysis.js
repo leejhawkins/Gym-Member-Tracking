@@ -7,13 +7,12 @@ import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected_
 import getBenchmarks from "@salesforce/apex/BenchmarkController.getBenchmarks";
 import getAnnualProgress from "@salesforce/apex/BenchmarkController.getAnnualProgress";
 import getMonthlyProgress from "@salesforce/apex/BenchmarkController.getMonthlyProgress";
-import findMembers from "@salesforce/apex/MemberController.findMembers";
+
 import BACKSQUAT_FIELD from "@salesforce/schema/Benchmark__c.Back_Squat__c";
 import DEADLIFT_FIELD from "@salesforce/schema/Benchmark__c.Deadlift__c";
 import BENCHPRESS_FIELD from "@salesforce/schema/Benchmark__c.Bench_Press__c";
 import SHOULDERPRESS_FIELD from "@salesforce/schema/Benchmark__c.Shoulder_Press__c";
 import DATE_FIELD from "@salesforce/schema/Benchmark__c.Date__c";
-import LEVEL_FIELD from "@salesforce/schema/Member__c.Fitness_Level__c";
 
 export default class MemberDetails extends LightningElement {
   //Fields for conditional rendering
@@ -35,13 +34,6 @@ export default class MemberDetails extends LightningElement {
   goalDeadlift = 0;
   goalBenchPress = 0;
   goalShoulderPress = 0;
-
-  //Fields for pie chart
-  beg = 0;
-  nov = 0;
-  int = 0;
-  adv = 0;
-  eli = 0;
 
   error;
   recordId;
@@ -91,39 +83,6 @@ export default class MemberDetails extends LightningElement {
     } else if (this.currentProgressBarGraph) {
       this.generateBarChart();
     }
-  }
-  generatePieChart() {
-    findMembers({ searchKey: "" }).then((data) => {
-      this.beg = 0;
-      this.nov = 0;
-      this.int = 0;
-      this.adv = 0;
-      this.eli = 0;
-
-      data.forEach((member) => {
-        switch (getSObjectValue(member, LEVEL_FIELD)) {
-          case "Beginner":
-            this.beg++;
-            break;
-          case "Novice":
-            this.nov++;
-            break;
-          case "Intermediate":
-            this.int++;
-            break;
-          case "Advanced":
-            this.adv++;
-            break;
-          case "Elite":
-            this.eli++;
-            break;
-          default:
-        }
-      });
-      this.template
-        .querySelector("c-sample-pie-chart")
-        .chartConfig(this.beg, this.nov, this.int, this.adv, this.eli);
-    });
   }
 
   generateAnnualLineChart() {
