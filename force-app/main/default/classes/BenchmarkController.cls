@@ -90,7 +90,7 @@ public inherited sharing class BenchmarkController {
       FROM Benchmark__c
       WHERE
         Member__c = :memberId
-        AND Date__c >= :Date.today().toStartOfMonth()
+        AND Date__c >= : Date.today().addMonths(-1)
         AND Goal_Benchmarks__c = FALSE
       ORDER BY Date__c
     ];
