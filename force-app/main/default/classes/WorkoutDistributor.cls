@@ -41,7 +41,7 @@ public class WorkoutDistributor implements Schedulable {
   public static Workout__c getProgram(Member__c m, List<Workout__c> workouts) {
     for (Workout__c w : workouts) {
       if (
-        (w.Training_Class__c == m.Training_Class__c) &&
+        (w.Training_Class__c == m.Training_Class__c || (w.Training_Class__c == 'Beginner' && m.Training_Class__c == 'Novice')) &&
         (w.Fitness_Level__c == m.Fitness_Level__c) &&
         (w.Issues__c == m.Issues__c)
       ) {
