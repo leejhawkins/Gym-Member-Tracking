@@ -42,7 +42,7 @@ public class WorkoutDistributor implements Schedulable {
     for (Workout__c w : workouts) {
       if (
         (w.Training_Class__c == m.Training_Class__c) &&
-        (w.Fitness_Level__c == m.Fitness_Level__c) &&
+        (w.Fitness_Level__c == m.Fitness_Level__c  || (w.Fitness_Level__c == 'Beginner' && m.Fitness_Level__c == 'Novice')) &&
         (w.Issues__c == m.Issues__c)
       ) {
         return w;
