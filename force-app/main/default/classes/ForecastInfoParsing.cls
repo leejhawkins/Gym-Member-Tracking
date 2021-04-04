@@ -46,7 +46,6 @@ public class ForecastInfoParsing {
           dt_txt_list.add(String.valueOf(parser.getText()));
           if (firstDateCount == 0) {
             allthreedays = toDateCalculate(String.valueOf(parser.getText()));
-            System.debug('allthreedays : ' + allthreedays);
           }
           firstDateCount++;
         }
@@ -68,14 +67,13 @@ public class ForecastInfoParsing {
     List<String> threeDays = new List<String>();
     List<Date> dateStored = new List<Date>();
     String[] datefrom = fromDate.split(' '); //2021-03-20
-    //System.debug('$$$$datefrom[0] : '+datefrom);
+
     Date currentDate = Date.valueOf(datefrom[0]);
     for (integer i = 0; i < 5; i++) {
       Date daysCount = currentDate.addDays(i);
       dateStored.add(daysCount);
     }
 
-    //System.debug('$$$$dateStored : '+dateStored);
 
     for (Date ds : dateStored) {
       Datetime dateTimeConvert = Datetime.newInstance(

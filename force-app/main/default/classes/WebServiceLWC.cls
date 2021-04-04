@@ -1,17 +1,17 @@
 /*
     a class to make a GET Api call to the openweathermap api. Method performs a get callout, 
     gets the response from the weatherAPI. The API key is stored in a custom 
-    label named 'Forecast_API_Key' and used by this class. Using a named credintial to specify 
+    label named 'Forecast_API_Key' as well as the location of the Gym. and used by this class. Using a named credintial to specify 
     callout endpoint. 
 */
 public class WebServiceLWC {
   public static String apiURL = '/forecast?';
   public static String apiKey = 'appid=' + system.label.Forecast_API_Key;
-  //String weatherUrl = 'http://api.openweathermap.org/data/2.5/forecast?appid=51c1be289b953d986f0f0559f3614165&cnt=24&units=imperial&q={City}';
+  public static String city = '&q=' + system.label.City;
 
   @AuraEnabled(cacheable=true)
   public static map<String, List<String>> getWeatherForCity() {
-    string city = '&q=Denver';
+    
     string ndays = '&cnt=40';
     String units = '&units=imperial';
     map<String, List<String>> forecastData = new Map<String, List<String>>();
