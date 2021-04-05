@@ -1,30 +1,38 @@
 [
     {
-        "Name":"Burpee",
+        "Name": "Burpee",
         "Address": "https://thumbs.gfycat.com/FondAntiqueCuckoo-size_restricted.gif"
     },
     {
-        "Name":"Kettlebell Swings",
+        "Name": "Kettlebell Swings",
         "Address": "https://thumbs.gfycat.com/SpectacularMinorCygnet-size_restricted.gif"
-    },{
-        "Name":"Clean and Jerk",
+    },
+    {
+        "Name": "Clean and Jerk",
         "Address": "https://thumbs.gfycat.com/ExhaustedDisfiguredBighornedsheep-size_restricted.gif"
     },
     {
-        "Name":"Burpee over Bar",
-        "Address":"https://i.makeagif.com/media/9-30-2015/d6BZrj.gif"
+        "Name": "Burpee over Bar",
+        "Address": "https://i.makeagif.com/media/9-30-2015/d6BZrj.gif"
     },
     {
-        "Name":"Sumo Deadlift High Pull",
-        "Address":"https://i.pinimg.com/originals/58/23/8d/58238d7b19c75356ada0f5e90da67f8a.gif"
+        "Name": "Sumo Deadlift High Pull",
+        "Address": "https://i.pinimg.com/originals/58/23/8d/58238d7b19c75356ada0f5e90da67f8a.gif"
     },
     {
-        "Name":"Push Press",
+        "Name": "Push Press",
         "Address": "https://jensinkler.com/wp-content/uploads/2019/06/Barbell_Push_Press_out.gif"
     },
     {
-        "Name":"Hang Power Clean",
+        "Name": "Hang Power Clean",
         "Address": "https://i.makeagif.com/media/9-22-2016/m5TmDo.gif"
+    },
+    {
+        "Name": "Wall Ball",
+        "Address": "https://i.makeagif.com/media/7-13-2017/GTe6K_.gif"
+    },
+    {
+        "Name":"Power Snatch",
+        "Address":"https://i.makeagif.com/media/4-26-2015/ie0y6G.gif"
     }
-
-]  
+]

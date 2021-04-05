@@ -1,19 +1,35 @@
 public inherited sharing class BenchmarkController {
   @AuraEnabled(cacheable=true)
-  public static Map<String, Benchmark__c> getBenchmarks(Id memberId) {
+  public static Map<String, Benchmark__c> getBenchmarks(
+    Id benchmarkId,
+    String gender
+  ) {
     Map<String, Benchmark__c> bens = new Map<String, Benchmark__c>();
-    Member__c gender = [SELECT Gender__c FROM Member__c WHERE Id = :memberId] !=
-      null
-      ? [SELECT Gender__c FROM Member__c WHERE Id = :memberId]
-      : new Member__c(Gender__c = 'Male');
-    Benchmark__c currentBenchmark = BenchmarkTriggerUtility.getMostRecent(
-      memberId,
-      Date.Today()
-    );
+
+    Benchmark__c currentBenchmark = benchmarkId != null
+      ? [
+          SELECT
+            Back_Squat__c,
+            Deadlift__c,
+            Bench_Press__c,
+            Shoulder_Press__c,
+            Weight__c,
+            Fitness_Level__c
+          FROM Benchmark__c
+          WHERE Id = :benchmarkId
+        ]
+      : new Benchmark__c(
+          Back_Squat__c = 0,
+          Deadlift__c = 0,
+          Bench_Press__c = 0,
+          Shoulder_Press__c = 0,
+          Weight__c = 0,
+          Fitness_Level__c = 'Beginner'
+        );
     bens.put('Current', currentBenchmark);
     Benchmark__c gb = LiftStandardsController.getNextLevel(
       currentBenchmark,
-      gender.Gender__c
+      gender
     );
     bens.put('Goal', gb);
     return bens;
@@ -90,7 +106,7 @@ public inherited sharing class BenchmarkController {
       FROM Benchmark__c
       WHERE
         Member__c = :memberId
-        AND Date__c >= : Date.today().addMonths(-1)
+        AND Date__c >= :Date.today().toStartOfMonth()
         AND Goal_Benchmarks__c = FALSE
       ORDER BY Date__c
     ];

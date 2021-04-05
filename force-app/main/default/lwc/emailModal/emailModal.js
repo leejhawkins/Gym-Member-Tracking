@@ -11,11 +11,12 @@ export default class EmailModal extends LightningElement {
   @api email;
   @api level;
   @api memberid;
+  workoutdes;
 
   @wire(getMemberWorkout, { memberId: "$memberid", workoutDate: null })
   wiredWorkout({ error, data }) {
     if (error) {
-      this.dispatchToast(error);
+      console.log(error);
     } else if (data) {
       this.workoutdes = getSObjectValue(data, DESCRIPTION_FIELD);
     }

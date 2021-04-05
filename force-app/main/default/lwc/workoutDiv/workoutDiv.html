@@ -7,6 +7,10 @@
           object-api-name="Workout__c"
           record-id={workoutid}
           fields="Workout_Description__c"
+          ondrop={dropGif}
+          ondragover={allowGifDrop}
+          value={workoutDes}
+          onchange={handleChange}
         ></lightning-record-form>
       </div>
     </template>
