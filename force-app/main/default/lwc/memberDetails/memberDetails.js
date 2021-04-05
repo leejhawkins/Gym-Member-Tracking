@@ -10,8 +10,9 @@ import NAME_FIELD from "@salesforce/schema/Member__c.Name";
 import LEVEL_FIELD from "@salesforce/schema/Member__c.Fitness_Level__c";
 import EMAIL_FIELD from "@salesforce/schema/Member__c.Email__c";
 import PICTURE_FIELD from "@salesforce/schema/Member__c.Picture__c";
-import ISSUES_FIELD from "@salesforce/schema/Member__c.Issues__c";
+import CURRENT_BENCHMARK_FIELD from "@salesforce/schema/Member__c.Current_Benchmark__c";
 import BACKSQUAT_FIELD from "@salesforce/schema/Benchmark__c.Back_Squat__c";
+import GENDER_FIELD from "@salesforce/schema/Member__c.Gender__c";
 import DEADLIFT_FIELD from "@salesforce/schema/Benchmark__c.Deadlift__c";
 import BENCHPRESS_FIELD from "@salesforce/schema/Benchmark__c.Bench_Press__c";
 import SHOULDERPRESS_FIELD from "@salesforce/schema/Benchmark__c.Shoulder_Press__c";
@@ -21,7 +22,8 @@ const fields = [
   LEVEL_FIELD,
   EMAIL_FIELD,
   PICTURE_FIELD,
-  ISSUES_FIELD
+  CURRENT_BENCHMARK_FIELD,
+  GENDER_FIELD
 ];
 
 export default class MemberDetails extends LightningElement {
@@ -40,7 +42,8 @@ export default class MemberDetails extends LightningElement {
   Email__c;
   Fitness_Level__c;
   Picture__c;
-  Issues__c;
+  Current_Benchmark__c;
+  Gender__c;
 
   @wire(getRecord, { recordId: "$recordId", fields })
   wiredRecord({ error, data }) {
@@ -58,7 +61,10 @@ export default class MemberDetails extends LightningElement {
       );
     }
   }
-  @wire(getBenchmarks, { memberId: "$recordId" })
+  @wire(getBenchmarks, {
+    benchmarkId: "$Current_Benchmark__c",
+    gender: "$Gender__c"
+  })
   wiredBenchmarks({ error, data }) {
     if (error) {
       this.dispatchToast(error);
@@ -118,7 +124,6 @@ export default class MemberDetails extends LightningElement {
     }
   }
   handleRecord() {
-    console.log("lift recorded");
     getBenchmarks({ memberId: this.recordId })
       .then((data) => {
         this.updateBenchmarkChart(data);
