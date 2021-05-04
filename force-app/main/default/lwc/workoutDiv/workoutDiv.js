@@ -5,7 +5,9 @@ export default class WorkoutDiv extends LightningElement {
   @api date;
   @api name;
   workoutDes = "";
+  type = "";
   edit = false;
+  fields = ["Type__c", "Workout_Description__c"];
 
   handleSuccess(event) {
     this.edit = false;
