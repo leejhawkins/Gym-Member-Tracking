@@ -1,7 +1,7 @@
 <template>
   <lightning-card>
     <div class="slds-grid slds-wrap">
-      <div class="slds-col slds-size_6-of-12">
+      <div class="slds-col slds-size_5-of-12">
         <div class="slds-select_container">
           <select
             class="slds-select"
@@ -34,6 +34,7 @@
             object-api-name="Score__c"
             record-id={scoreId}
             fields={fields}
+            columns="2"
           ></lightning-record-form>
         </template>
         <template if:false={scoreId}>
@@ -68,23 +69,26 @@
                   value={scoreName}
                 ></lightning-input-field>
               </div>
+              <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_5-of-12">
+                  <lightning-input-field
+                    field-name={fieldOne}
+                    value={minutes}
+                    name="minutes"
+                    onchange={handleChange}
+                  ></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_2-of-12"></div>
+                <div class="slds-col slds-size_5-of-12">
+                  <lightning-input-field
+                    field-name={fieldTwo}
+                    value={seconds}
+                    name="seconds"
+                    onchange={handleChange}
+                  ></lightning-input-field>
+                </div>
+              </div>
 
-              <div>
-                <lightning-input-field
-                  field-name={fieldOne}
-                  value={minutes}
-                  name="minutes"
-                  onchange={handleChange}
-                ></lightning-input-field>
-              </div>
-              <div>
-                <lightning-input-field
-                  field-name={fieldTwo}
-                  value={seconds}
-                  name="seconds"
-                  onchange={handleChange}
-                ></lightning-input-field>
-              </div>
               <lightning-button
                 type="submit"
                 variant="brand"
@@ -93,12 +97,10 @@
               ></lightning-button>
             </lightning-record-edit-form>
           </template>
-          <template if:false={workoutId}>
-            <p>There is not a workout for this fitness level and date</p>
-          </template>
         </template>
       </div>
-      <div class="slds-col slds-size_6-of-12">
+      <div class="slds-col slds-size_2-of-12"></div>
+      <div class="slds-col slds-size_5-of-12">
         <template if:true={workoutId}>
           <div class="slds-scrollable_y" style="height: 15rem">
             <lightning-record-view-form
@@ -113,6 +115,9 @@
               </div>
             </lightning-record-view-form>
           </div>
+        </template>
+        <template if:false={workoutId}>
+          <h1>There is not a workout for this fitness level and date</h1>
         </template>
       </div>
     </div>
