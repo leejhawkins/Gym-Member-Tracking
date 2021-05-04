@@ -67,11 +67,12 @@ export default class MemberDetails extends LightningElement {
   })
   wiredBenchmarks({ error, data }) {
     if (error) {
-      this.dispatchToast(error);
+      console.log(data);
     } else if (data) {
       this.updateBenchmarkChart(data);
     }
   }
+
   updateBenchmarkChart(data) {
     let curBen = data.Current;
     let goalBen = data.Goal;
@@ -178,12 +179,9 @@ export default class MemberDetails extends LightningElement {
     this.recordId = message.recordId;
   }
 
-  // By using the MessageContext @wire adapter, unsubscribe will be called
-  // implicitly during the component descruction lifecycle.
   @wire(MessageContext)
   messageContext;
 
-  // Encapsulate logic for LMS subscribe.
   subscribeToMessageChannel() {
     this.subscription = subscribe(
       this.messageContext,
@@ -191,7 +189,6 @@ export default class MemberDetails extends LightningElement {
       (message) => this.handleMessage(message)
     );
   }
-  // Standard lifecycle hooks used to sub/unsub to message channel
   connectedCallback() {
     this.subscribeToMessageChannel();
   }

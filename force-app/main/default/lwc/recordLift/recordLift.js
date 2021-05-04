@@ -3,6 +3,7 @@ import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class RecordLift extends LightningElement {
   @api memberid;
+  @api membername;
   date = new Date();
   reps;
   benchmarkAPI;
@@ -56,7 +57,7 @@ export default class RecordLift extends LightningElement {
   }
 
   get benchmarkName() {
-    return `${this.benchmarkField} ${this.reps} x  Rep Max`.trim();
+    return `${this.membername} ${this.benchmarkField} ${this.reps} x  Rep Max`.trim();
   }
   get computedWeight() {
     return parseInt(this.weight * (36 / (37 - this.reps)));

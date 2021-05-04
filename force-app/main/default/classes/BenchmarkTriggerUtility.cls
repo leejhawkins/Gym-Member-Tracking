@@ -101,13 +101,15 @@ public inherited sharing class BenchmarkTriggerUtility {
             b,
             m.Gender__c
           );
-          EmailController.sendCongratulationsEmail(
-            m.Name,
-            m.Email__c,
-            oldFitnessLevel,
-            b.Fitness_Level__c,
-            nextLevel
-          );
+          if (m.Email__c != null) {
+            EmailController.sendCongratulationsEmail(
+              m.Name,
+              m.Email__c,
+              oldFitnessLevel,
+              b.Fitness_Level__c,
+              nextLevel
+            );
+          }
         }
         m.BMI__c = b.BMI__c;
         update m;

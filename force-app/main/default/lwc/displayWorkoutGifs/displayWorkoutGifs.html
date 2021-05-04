@@ -2,7 +2,7 @@
   <lightning-card title="Movement Gifs" if:true={searchKey}>
     <div class="slds-scrollable_y" style="height: 10rem">
       <div class="slds-m-around_medium slds-grid slds-wrap">
-        <template for:each={gifs} for:item="gif">
+        <template for:each={gifs} for:item="gif" if:true={matches}>
           <div class="slds-col slds-size_1-of-3" key={gif.Address}>
             <span>{gif.Name}</span>
             <lightning-layout-item>
@@ -15,6 +15,11 @@
               />
             </lightning-layout-item>
           </div>
+        </template>
+        <template if:false={matches}>
+          <h1 style="font-size: 24px; font-style: oblique">
+            There are no matches for {searchKey}
+          </h1>
         </template>
       </div>
     </div>

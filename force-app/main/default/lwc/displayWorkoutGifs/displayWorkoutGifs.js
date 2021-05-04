@@ -7,6 +7,7 @@ export default class DisplayWorkoutGifs extends LightningElement {
   gifs;
   searchKey;
   allGifs;
+  matches;
   connectedCallback() {
     let request = new XMLHttpRequest();
     request.open("GET", workoutGifs, false);
@@ -30,6 +31,7 @@ export default class DisplayWorkoutGifs extends LightningElement {
       (gif) =>
         gif.Name.toLowerCase().indexOf(this.searchKey.toLowerCase()) !== -1
     );
+    this.matches = this.gifs.length > 0 ? true : false;
   }
   dragGif(event) {
     console.log(event.target.name);

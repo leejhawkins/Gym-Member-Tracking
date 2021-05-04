@@ -7,11 +7,10 @@
 public class WebServiceLWC {
   public static String apiURL = '/forecast?';
   public static String apiKey = 'appid=' + system.label.Forecast_API_Key;
-  public static String city = '&q=' + system.label.City;
+  public static String city = '&q=Denver';
 
   @AuraEnabled(cacheable=true)
   public static map<String, List<String>> getWeatherForCity() {
-    
     string ndays = '&cnt=40';
     String units = '&units=imperial';
     map<String, List<String>> forecastData = new Map<String, List<String>>();
