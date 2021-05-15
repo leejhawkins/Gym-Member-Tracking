@@ -13,7 +13,7 @@ public inherited sharing class TestDataFactory {
       m.Date_of_Birth__c = Date.today();
       members.add(m);
     }
-    //insert members;
+    
 
     return members;
   }
@@ -29,7 +29,7 @@ public inherited sharing class TestDataFactory {
       i += 1;
     }
 
-    //insert workouts;
+    
 
     return workouts;
   }
@@ -48,7 +48,7 @@ public inherited sharing class TestDataFactory {
       benchmarks.add(b);
     }
 
-    //insert benchmarks;
+    
 
     return benchmarks;
   }
@@ -72,7 +72,7 @@ public inherited sharing class TestDataFactory {
       member.Training_Class__c = trainingClass;
       members.add(member);
     }
-    //insert members;
+    
     return members;
   }
 
@@ -97,11 +97,12 @@ public inherited sharing class TestDataFactory {
       workouts.add(workout);
     }
 
-    //insert workouts;
+    
 
     return workouts;
   }
 
+  //Avoid DML statements in this class since its a costly transaction 
   public static void generateBenchmarks(
     Member__c member,
     Integer numBenchMarks
