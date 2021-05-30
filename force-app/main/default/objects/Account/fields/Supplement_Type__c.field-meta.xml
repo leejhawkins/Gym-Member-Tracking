@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Supplement_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Supplement Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Vitamins</fullName>
+                <default>false</default>
+                <label>Vitamins</label>
+            </value>
+            <value>
+                <fullName>Protein</fullName>
+                <default>false</default>
+                <label>Protein</label>
+            </value>
+            <value>
+                <fullName>Drinks</fullName>
+                <default>false</default>
+                <label>Drinks</label>
+            </value>
+            <value>
+                <fullName>Food</fullName>
+                <default>false</default>
+                <label>Food</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

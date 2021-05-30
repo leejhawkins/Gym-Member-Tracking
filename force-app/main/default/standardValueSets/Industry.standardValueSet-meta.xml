@@ -22,6 +22,16 @@
         <label>Nutrition Supplements</label>
     </standardValue>
     <standardValue>
+        <fullName>Trainer</fullName>
+        <default>false</default>
+        <label>Trainer</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Member</fullName>
+        <default>false</default>
+        <label>Member</label>
+    </standardValue>
+    <standardValue>
         <fullName>Meal_Plans</fullName>
         <default>false</default>
         <label>Meal Plans</label>
@@ -30,16 +40,6 @@
         <fullName>Retail</fullName>
         <default>false</default>
         <label>Retail</label>
-    </standardValue>
-    <standardValue>
-        <fullName>Member</fullName>
-        <default>false</default>
-        <label>Member</label>
-    </standardValue>
-    <standardValue>
-        <fullName>Trainer</fullName>
-        <default>false</default>
-        <label>Trainer</label>
     </standardValue>
     <standardValue>
         <fullName>Media</fullName>

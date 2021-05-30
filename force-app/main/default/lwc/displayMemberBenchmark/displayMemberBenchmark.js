@@ -18,6 +18,7 @@ export default class DisplayMemberBenchmark extends LightningElement {
   // Get the current and goal data
   _goalData;
   _benchmarkData;
+  _pounds = " lb's";
 
   //directly assigned what comes back from server payload (this._goalData) to your template bound variable
   async connectedCallback() {
@@ -28,17 +29,17 @@ export default class DisplayMemberBenchmark extends LightningElement {
       console.error(error);
     }
     if (this._goalData) {
-      this.backsquatGoal = this._goalData.Back_Squat__c + " lb's";
-      this.deadliftGoal = this._goalData.Deadlift__c + " lb's";
-      this.benchpressGoal = this._goalData.Bench_Press__c + " lb's";
-      this.shoulderpressGoal = this._goalData.Shoulder_Press__c + " lb's";
+      this.backsquatGoal = this._goalData.Back_Squat__c + this._pounds;
+      this.deadliftGoal = this._goalData.Deadlift__c + this._pounds;
+      this.benchpressGoal = this._goalData.Bench_Press__c + this._pounds;
+      this.shoulderpressGoal = this._goalData.Shoulder_Press__c + this._pounds;
     }
     if (this._benchmarkData) {
-      this.backsquatCurrent = this._benchmarkData.Back_Squat__c + " lb's";
-      this.deadliftCurrent = this._benchmarkData.Deadlift__c + " lb's";
-      this.benchpressCurrent = this._benchmarkData.Bench_Press__c + " lb's";
+      this.backsquatCurrent = this._benchmarkData.Back_Squat__c + this._pounds;
+      this.deadliftCurrent = this._benchmarkData.Deadlift__c + this._pounds;
+      this.benchpressCurrent = this._benchmarkData.Bench_Press__c + this._pounds;
       this.shoulderpressCurrent =
-        this._benchmarkData.Shoulder_Press__c + " lb's";
+        this._benchmarkData.Shoulder_Press__c + this._pounds;
     }
   }
 }
