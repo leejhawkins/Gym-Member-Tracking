@@ -13,7 +13,7 @@ export default class MemberOperations extends LightningElement {
 
   handleContactSelect(event) {
     event.preventDefault();
-    const payload = { recordId: event.target.member.Id };
+    const payload = { recordid: event.target.member.Id };
     publish(this.messageContext, RECORD_SELECTED_CHANNEL, payload);
   }
 
