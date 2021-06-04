@@ -1,4 +1,4 @@
-import { LightningElement, wire } from "lwc";
+import { LightningElement, wire, api } from "lwc";
 import { getSObjectValue } from "@salesforce/apex";
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 
@@ -36,7 +36,9 @@ export default class MemberDetails extends LightningElement {
   goalDeadlift = 0;
   goalBenchPress = 0;
   goalShoulderPress = 0;
-  recordId;
+
+  @api
+  recordid;
 
   Name;
   Email__c;
@@ -45,7 +47,7 @@ export default class MemberDetails extends LightningElement {
   Current_Benchmark__c;
   Gender__c;
 
-  @wire(getRecord, { recordId: "$recordId", fields })
+  @wire(getRecord, { recordId: "$recordid", fields })
   wiredRecord({ error, data }) {
     if (error) {
       this.dispatchToast(error);
@@ -125,7 +127,7 @@ export default class MemberDetails extends LightningElement {
     }
   }
   handleRecord() {
-    getBenchmarks({ memberId: this.recordId })
+    getBenchmarks({ memberId: this.recordid })
       .then((data) => {
         this.updateBenchmarkChart(data);
       })
@@ -176,7 +178,7 @@ export default class MemberDetails extends LightningElement {
   }
 
   handleMessage(message) {
-    this.recordId = message.recordId;
+    this.recordid = message.recordid;
   }
 
   @wire(MessageContext)
