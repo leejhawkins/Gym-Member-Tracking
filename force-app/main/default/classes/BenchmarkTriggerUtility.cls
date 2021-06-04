@@ -1,10 +1,21 @@
+/**
+ * @description       : 
+ * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @group             : 
+ * @last modified on  : 06-04-2021
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * Modifications Log 
+ * Ver   Date         Author                               Modification
+ * 1.0   06-03-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+**/
 public inherited sharing class BenchmarkTriggerUtility {
+
   public static void setBenchmarkEmptyFields(List<Benchmark__c> bens) {
     for (Benchmark__c b : bens) {
       try {
         b.Date__c = b.Date__c == null ? Date.Today() : b.Date__c;
         Benchmark__c mRecent = BenchmarkTriggerUtility.getMostRecent(
-          b.Member__c,
+          b.Gym_Member__c,
           b.Date__c
         );
 
@@ -28,15 +39,15 @@ public inherited sharing class BenchmarkTriggerUtility {
   }
 
   public static void fitnessLevel(List<Benchmark__c> bens) {
-    List<Member__c> members = [
+    List<Contact> members = [
       SELECT Id, Weight__c, Gender__c
-      FROM Member__c
-      WHERE Active__c = TRUE
+      FROM Contact
+      WHERE Active__c = TRUE AND RecordTypeId = '0121F000003askXQAQ'
     ];
-    Map<Benchmark__c, Member__c> bmMap = new Map<Benchmark__c, Member__c>();
+    Map<Benchmark__c, Contact> bmMap = new Map<Benchmark__c, Contact>();
     for (Benchmark__c b : bens) {
-      for (Member__c m : members) {
-        if (b.Member__c == m.Id) {
+      for (Contact m : members) {
+        if (b.Gym_Member__c == m.Id) {
           bmMap.put(b, m);
         }
       }
@@ -49,12 +60,13 @@ public inherited sharing class BenchmarkTriggerUtility {
     }
   }
   public static void BMICalculator(List<Benchmark__c> bens) {
+   
     for (Benchmark__c b : bens) {
       if (b.Weight__c != null) {
-        Member__c m = [
+        Contact m = [
           SELECT Height_Feet__c, Height_Inches__c
-          FROM Member__c
-          WHERE Id = :b.Member__c
+          FROM Contact
+          WHERE Id = :b.Gym_Member__c
         ];
         if (m.Height_Feet__c != null && m.Height_Inches__c != null) {
           Double weightInKilos = b.Weight__c * 0.453592;
@@ -69,14 +81,14 @@ public inherited sharing class BenchmarkTriggerUtility {
   public static void isCurrentBenchmark(List<Benchmark__c> bens) {
     for (Benchmark__c b : bens) {
       Benchmark__c mRecent = BenchmarkTriggerUtility.getMostRecent(
-        b.Member__c,
+        b.Gym_Member__c,
         Date.today()
       );
       if (mRecent.Id == b.id) {
-        Member__c m = [
-          SELECT Id, Fitness_Level__c, Name, Email__c, Gender__c
-          FROM Member__c
-          WHERE Id = :b.Member__c
+        Contact m = [
+          SELECT Id, Fitness_Level__c, Name, Email, Gender__c
+          FROM Contact
+          WHERE Id = :b.Gym_Member__c
         ];
         String oldFitnessLevel = m.Fitness_Level__c;
         m.Fitness_Level__c = b.Fitness_Level__c;
@@ -103,7 +115,7 @@ public inherited sharing class BenchmarkTriggerUtility {
           );
           EmailController.sendCongratulationsEmail(
             m.Name,
-            m.Email__c,
+            m.Email,
             oldFitnessLevel,
             b.Fitness_Level__c,
             nextLevel
@@ -120,7 +132,7 @@ public inherited sharing class BenchmarkTriggerUtility {
       FROM Benchmark__c
       WHERE
         Date__c <= :targetDate
-        AND Member__c = :memberId
+        AND Gym_Member__c = :memberId
         AND Goal_Benchmarks__c = FALSE
     ];
     List<Benchmark__c> recentBs = new List<Benchmark__c>();
@@ -147,7 +159,7 @@ public inherited sharing class BenchmarkTriggerUtility {
         FROM Benchmark__c
         WHERE
           Date__c <= :targetDate
-          AND Member__c = :memberId
+          AND Gym_Member__c = :memberId
           AND Goal_Benchmarks__c = FALSE
         ORDER BY Date__c DESC
         LIMIT 10

@@ -6,7 +6,7 @@
 
 public class LiftStandardsController {
   //Verify that weight falls into proper range and use other methods to determine level in each lift
-  public static String getFitnessLevel(Benchmark__c b, Member__c m) {
+  public static String getFitnessLevel(Benchmark__c b, Contact m) {
     if (b.Weight__c == null) {
       return 'Beginner';
     }
@@ -63,7 +63,7 @@ public class LiftStandardsController {
   //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
   public static Integer getBenchPressLevel(
     Benchmark__c b,
-    Member__c m,
+    Contact m,
     Decimal bp
   ) {
     if (m.Gender__c == 'Female') {
@@ -105,7 +105,7 @@ public class LiftStandardsController {
   //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
   public static Integer getBackSquatLevel(
     Benchmark__c b,
-    Member__c m,
+    Contact m,
     Decimal bs
   ) {
     if (m.Gender__c == 'Female') {
@@ -147,7 +147,7 @@ public class LiftStandardsController {
   //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
   public static Integer getDeadliftLevel(
     Benchmark__c b,
-    Member__c m,
+    Contact m,
     Decimal dl
   ) {
     if (m.Gender__c == 'Female') {
@@ -189,7 +189,7 @@ public class LiftStandardsController {
   //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
   public static Integer getShoulderPressLevel(
     Benchmark__c b,
-    Member__c m,
+    Contact m,
     Decimal sp
   ) {
     if (m.Gender__c == 'Female') {

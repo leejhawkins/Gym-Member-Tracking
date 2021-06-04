@@ -3,11 +3,12 @@
    A class with the trigger logic to send an email to a member, gets invoked when member is inserted
 */
 public with sharing class MailToNewMember {
+  /*
   //first create the email template
-  public static Messaging.SingleEmailMessage makeEmail(Member__c m) {
+  public static Messaging.SingleEmailMessage makeEmail(Contact m) {
     Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
     email.setSenderDisplayName('Gym Owner');
-    email.setToAddresses(new List<String>{ m.Email__c });
+    email.setToAddresses(new List<String>{ m.Email });
     email.setHtmlBody(
       '<p>Hello ' +
       m.Name +
@@ -19,13 +20,14 @@ public with sharing class MailToNewMember {
   }
 
   //send email to new member
-  public static void sendWelcomeEmail(List<Member__c> members) {
+  public static void sendWelcomeEmail(List<Contact> members) {
     List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
-    for (Member__c m : members) {
-      if (m.Email__c != null && m.Name != null) {
+    for (Contact m : members) {
+      if (m.Email != null && m.LastName != null && m.FirstName = null!) {
         emails.add(makeEmail(m));
       }
     }
     List<Messaging.SendEmailResult> results = Messaging.sendEmail(emails);
   }
+  */
 }

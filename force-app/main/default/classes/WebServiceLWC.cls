@@ -5,9 +5,11 @@
     callout endpoint. 
 */
 public class WebServiceLWC {
+  public static String appID = 'appid=';
+  public static String andQ = '&q=';
   public static String apiURL = '/forecast?';
-  public static String apiKey = 'appid=' + system.label.Forecast_API_Key;
-  public static String city = '&q=' + system.label.City;
+  public static String apiKey =  appID + system.label.Forecast_API_Key;
+  public static String city =  andQ + system.label.City;
 
   @AuraEnabled(cacheable=true)
   public static map<String, List<String>> getWeatherForCity() {
@@ -17,9 +19,9 @@ public class WebServiceLWC {
     map<String, List<String>> forecastData = new Map<String, List<String>>();
     String weatherUrl = apiURL + apiKey + ndays + units + city;
 
-    String JSONResponse = getForecastJSON(weatherUrl);
+    String jSONResponse = getForecastJSON(weatherUrl);
 
-    forecastData = ForecastInfoParsing.forecastJsonParse(JSONResponse);
+    forecastData = ForecastInfoParsing.forecastJsonParse(jSONResponse);
     return forecastData;
   }
 

@@ -1,11 +1,21 @@
+/**
+ * @description       : 
+ * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @group             : 
+ * @last modified on  : 06-04-2021
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * Modifications Log 
+ * Ver   Date         Author                               Modification
+ * 1.0   06-04-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+**/
 public inherited sharing class WorkoutController {
   @AuraEnabled(cacheable=true)
   public static Workout__c getMemberWorkout(Id memberId, Date workoutDate) {
     try {
       workoutDate = workoutDate != null ? workoutDate : Date.today();
-      Member__c m = [
+      Contact m = [
         SELECT Fitness_Level__c
-        FROM Member__c
+        FROM Contact
         WHERE Id = :memberId
         LIMIT 1
       ];
