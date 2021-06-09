@@ -2,7 +2,7 @@
  * @description       : Create member records each time a member object is inserted.
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-04-2021
+ * @last modified on  : 06-07-2021
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -10,15 +10,18 @@
 **/
 public with sharing class ContactController {
      @AuraEnabled(cacheable=true)
-     public static List<Contact> findMembers(String searchKey) {
+     public static Map<Id, Contact> findMembers(String searchKey) {
          Id devRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Gym_Member').getRecordTypeId();
          String key = '%' + searchKey + '%';
-
-         return [
+         
+         Map<Id, Contact> results = new Map<Id, Contact>([
            SELECT Id, Name, Fitness_Level__c, Training_Class__c
            FROM Contact
            WHERE Name LIKE :key AND RecordTypeId =: devRecordTypeId
-         ];
+         ]); 
+         
+         
+         return results;
       }
 }
 
