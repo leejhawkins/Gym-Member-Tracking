@@ -1,4 +1,7 @@
-import { LightningElement, wire } from "lwc";
+
+import { LightningElement, wire, api } from "lwc";
+import { getSObjectValue } from "@salesforce/apex";
+
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 
 import { subscribe, MessageContext } from "lightning/messageService";
@@ -38,6 +41,11 @@ export default class MemberDetails extends LightningElement {
   goalDeadlift = 0;
   goalShoulderPress = 0;
 
+
+  @api
+  recordid;
+
+
   Name;
   Email__c;
   Fitness_Level__c;
@@ -49,7 +57,7 @@ export default class MemberDetails extends LightningElement {
   Gender__c;
   Weight__c;
 
-  @wire(getRecord, { recordId: "$recordId", fields })
+  @wire(getRecord, { recordId: "$recordid", fields })
   wiredRecord({ error, data }) {
     if (error) {
       this.dispatchToast(error);
@@ -101,6 +109,17 @@ export default class MemberDetails extends LightningElement {
     }
   }
 
+  handleRecord() {
+    getBenchmarks({ memberId: this.recordid })
+      .then((data) => {
+        this.updateBenchmarkChart(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+
   get toBSNextLevel() {
     return this.Back_Squat__c >= this.goalBackSquat
       ? `Achieved!✔️`
@@ -143,7 +162,7 @@ export default class MemberDetails extends LightningElement {
   }
 
   handleMessage(message) {
-    this.recordId = message.recordId;
+    this.recordid = message.recordid;
   }
   handleRecordScore(event) {
     this.recordId = null;
