@@ -34,7 +34,7 @@
             object-api-name="Score__c"
             record-id={scoreId}
             fields={fields}
-            columns="2"
+            onsubmit={handleSubmit}
           ></lightning-record-form>
         </template>
         <template if:false={scoreId}>
@@ -70,6 +70,15 @@
                 ></lightning-input-field>
               </div>
               <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_6-of-12">
+                  <lightning-input-field
+                    field-name="Weight__c"
+                    value={weight}
+                    name="weight"
+                    onchange={handleChange}
+                  ></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_6-of-12"></div>
                 <div class="slds-col slds-size_5-of-12">
                   <lightning-input-field
                     field-name={fieldOne}
@@ -108,6 +117,10 @@
               object-api-name="Workout__c"
             >
               <div class="slds-box">
+                <lightning-output-field field-name="Strength__c">
+                </lightning-output-field>
+                <lightning-output-field field-name="Reps__c">
+                </lightning-output-field>
                 <lightning-output-field field-name="Type__c">
                 </lightning-output-field>
                 <lightning-output-field field-name="Workout_Description__c">

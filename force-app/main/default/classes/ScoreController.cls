@@ -2,14 +2,11 @@ public inherited sharing class ScoreController {
   @AuraEnabled(cacheable=true)
   public static Map<String, Id> getScoreRecordTypes() {
     try {
-      List<RecordType> types = [
-        SELECT Id, Name
-        FROM RecordType
-        WHERE SObjectType = 'Score__c'
-      ];
+      List<Schema.RecordTypeInfo> rt = Score__c.SObjectType.getDescribe()
+        .getRecordTypeInfos();
       Map<String, Id> scoreMap = new Map<String, Id>();
-      for (RecordType rt : types) {
-        scoreMap.put(rt.Name, rt.Id);
+      for (Schema.RecordTypeInfo r : rt) {
+        scoreMap.put(r.getName(), r.getRecordTypeId());
       }
       return scoreMap;
     } catch (Exception e) {

@@ -161,7 +161,6 @@ public inherited sharing class BenchmarkTriggerUtility {
           recentDate = b.Date__c;
           recentModified = b.LastModifiedDate;
           currentBenchmark = b;
-          System.debug(b);
         }
       }
     }
