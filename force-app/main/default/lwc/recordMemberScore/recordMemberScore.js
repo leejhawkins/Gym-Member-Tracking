@@ -26,10 +26,12 @@ export default class RecordMemberScore extends LightningElement {
   workoutType;
   fieldOne;
   fieldTwo;
+  weight;
   connectedCallback() {
     getScoreRecordTypes()
       .then((data) => {
         this.scoreRecordTypes = data;
+        console.log(data);
       })
       .catch((err) => console.log(err));
 
@@ -88,7 +90,6 @@ export default class RecordMemberScore extends LightningElement {
     this.scoreId = event.detail.id;
     this.minutes = null;
     this.seconds = null;
-
     this.dispatchEvent(
       new ShowToastEvent({
         title: "Success",
@@ -96,6 +97,16 @@ export default class RecordMemberScore extends LightningElement {
         variant: "success"
       })
     );
+    const recordLift = new CustomEvent("recordscore", {
+      detail: { id: this.memberid }
+    });
+    this.dispatchEvent(recordLift);
+  }
+  handleSubmit() {
+    const recordLift = new CustomEvent("recordscore", {
+      detail: { id: this.memberid }
+    });
+    this.dispatchEvent(recordLift);
   }
   getWorkout() {
     this.workouts.forEach((workout) => {
@@ -113,7 +124,7 @@ export default class RecordMemberScore extends LightningElement {
           this.workoutType === "For Time" ? "Minutes__c" : "Rounds__c";
         this.fieldTwo =
           this.workoutType === "For Time" ? "Seconds__c" : "Reps__c";
-        this.fields = [this.fieldOne, this.fieldTwo];
+        this.fields = ["Weight__c", this.fieldOne, this.fieldTwo];
       }
     });
   }

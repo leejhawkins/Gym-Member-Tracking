@@ -7,7 +7,9 @@ export default class WorkoutDiv extends LightningElement {
   workoutDes = "";
   type = "";
   edit = false;
-  fields = ["Type__c", "Workout_Description__c"];
+  fields = ["Strength__c", "Reps__c", "Type__c", "Workout_Description__c"];
+  strength;
+  reps;
 
   handleSuccess(event) {
     this.edit = false;
@@ -33,6 +35,6 @@ export default class WorkoutDiv extends LightningElement {
     this.workoutDes = this.workoutDes + image;
   }
   handleChange(event) {
-    this.workoutDes = event.target.value;
+    this[event.target.name] = event.target.value;
   }
 }

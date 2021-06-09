@@ -42,6 +42,16 @@
             ></lightning-input-field>
           </div>
           <lightning-input-field
+            field-name="Strength__c"
+            value={strength}
+            name="strength"
+          ></lightning-input-field>
+          <lightning-input-field
+            field-name="Reps__c"
+            value={reps}
+            name="reps"
+          ></lightning-input-field>
+          <lightning-input-field
             field-name="Type__c"
             value={type}
           ></lightning-input-field>
@@ -50,7 +60,7 @@
             ondrop={dropGif}
             ondragover={allowGifDrop}
             value={workoutDes}
-            name={name}
+            name="workoutDes"
             onchange={handleChange}
           ></lightning-input-field>
           <div class="slds-hide">
