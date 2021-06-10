@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-04-2021
+ * @last modified on  : 06-10-2021
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -42,7 +42,7 @@ public inherited sharing class BenchmarkTriggerUtility {
     List<Contact> members = [
       SELECT Id, Weight__c, Gender__c
       FROM Contact
-      WHERE Active__c = TRUE AND RecordTypeId = '0121F000003askXQAQ'
+      WHERE Active__c = TRUE AND RecordType.Name = 'Gym Member'
     ];
     Map<Benchmark__c, Contact> bmMap = new Map<Benchmark__c, Contact>();
     for (Benchmark__c b : bens) {
