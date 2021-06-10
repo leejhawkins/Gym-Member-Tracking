@@ -12,6 +12,7 @@ public with sharing class ScoreTriggerUtility {
     for (Score__c s : scores) {
       memberIds.add(s.Member__c);
     }
+    System.debug(scores);
     for (AggregateResult a : [
       SELECT Member__r.Id, Max(Weight__c) MaxWeight, Strength_Type__c
       FROM Score__c
@@ -21,6 +22,7 @@ public with sharing class ScoreTriggerUtility {
         AND Workout_Date__c >= :Date.Today().addDays(-90)
       GROUP BY Strength_Type__c, Member__r.Id
     ]) {
+      System.debug(a);
       Member__c m = memberMap.containsKey(a.Id)
         ? memberMap.get(a.Id)
         : new Member__c(Id = a.Id);
@@ -36,8 +38,14 @@ public with sharing class ScoreTriggerUtility {
         WHERE Id IN :scores
       ]
     );
+    System.debug(memberMap);
     for (Score__c s : scores) {
-      Member__c member = memberMap.get(s.Member__c);
+      Member__c member = new Member__c();
+      if (memberMap.get(s.Member__c) != null) {
+        member = memberMap.get(s.Member__c);
+      } else {
+        member.put('Id', s.Member__c);
+      }
       Score__c relatedWorkoutInfo = relatedWorkoutMap.get(s.Id);
       String liftField = liftMap.get(relatedWorkoutInfo.Workout__r.Strength__c);
       Decimal reps = relatedWorkoutInfo.Workout__r.Reps__c;

@@ -27,9 +27,17 @@ public inherited sharing class BenchmarkController {
           Fitness_Level__c = 'Beginner'
         );
     bens.put('Current', currentBenchmark);
-    Benchmark__c gb = LiftStandardsController.getNextLevel(
-      currentBenchmark,
-      gender
+    Member__c gMember = LiftStandardsController.getNextLevel(
+      currentBenchmark.Fitness_Level__c,
+      gender,
+      currentBenchmark.Weight__c
+    );
+    Benchmark__c gb = new Benchmark__c(
+      Back_Squat__c = gMember.Back_Squat__c,
+      Deadlift__c = gMember.Deadlift__c,
+      Bench_Press__c = gMember.Bench_Press__c,
+      Shoulder_Press__c = gMember.Shoulder_Press__c,
+      Fitness_Level__c = 'Beginner'
     );
     bens.put('Goal', gb);
     return bens;

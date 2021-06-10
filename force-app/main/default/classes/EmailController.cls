@@ -28,7 +28,7 @@ public inherited sharing class EmailController {
     String email,
     String oldLevel,
     String newLevel,
-    Benchmark__c nextLevel
+    Member__c nextLevel
   ) {
     List<Messaging.SingleEmailMessage> messages = new List<Messaging.SingleEmailMessage>();
     Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();

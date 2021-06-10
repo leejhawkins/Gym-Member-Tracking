@@ -31,7 +31,6 @@ export default class RecordMemberScore extends LightningElement {
     getScoreRecordTypes()
       .then((data) => {
         this.scoreRecordTypes = data;
-        console.log(data);
       })
       .catch((err) => console.log(err));
 
