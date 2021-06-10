@@ -43,7 +43,6 @@ public inherited sharing class BenchmarkTriggerUtility {
     }
     for (Benchmark__c b : bens) {
       b.Fitness_Level__c = LiftStandardsController.getFitnessLevel(
-        b,
         bmMap.get(b)
       );
     }
@@ -97,9 +96,10 @@ public inherited sharing class BenchmarkTriggerUtility {
           (oldFitnessLevel == 'Advanced' &&
           m.Fitness_Level__c == 'Elite')
         ) {
-          Benchmark__c nextLevel = LiftStandardsController.getNextLevel(
-            b,
-            m.Gender__c
+          Member__c nextLevel = LiftStandardsController.getNextLevel(
+            m.Fitness_Level__c,
+            m.Gender__c,
+            b.Weight__c
           );
           if (m.Email__c != null) {
             EmailController.sendCongratulationsEmail(

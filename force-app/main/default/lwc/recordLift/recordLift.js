@@ -6,9 +6,11 @@ export default class RecordLift extends LightningElement {
   @api membername;
   date = new Date();
   reps;
-  benchmarkAPI;
-  benchmarkField;
+  strength;
+  type;
   weight;
+  workoutDescription;
+  showForm = false;
 
   handleSelect(event) {
     this.benchmarkAPI = event.target.value;
@@ -34,16 +36,11 @@ export default class RecordLift extends LightningElement {
   }
   handleChange(event) {
     this[event.target.name] = event.target.value;
-    console.log(this.benchmarkAPI);
   }
   handleSuccess() {
     this.date = new Date();
-    this.benchmarkAPI = "";
     this.reps = null;
-    this.benchmarkField = null;
     this.weight = null;
-    this.template.querySelector("select").value = this.benchmarkAPI;
-    this.template.querySelector("select").text = "Choose Lift";
 
     this.dispatchEvent(
       new ShowToastEvent({

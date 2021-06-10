@@ -1,13 +1,10 @@
-
-import { LightningElement, wire, api } from "lwc";
-import { getSObjectValue } from "@salesforce/apex";
+import { LightningElement, wire } from "lwc";
 
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 
 import { subscribe, MessageContext } from "lightning/messageService";
 import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected__c";
 import getNextLevel from "@salesforce/apex/LiftStandardsController.getNextLevel";
-
 import NAME_FIELD from "@salesforce/schema/Member__c.Name";
 import LEVEL_FIELD from "@salesforce/schema/Member__c.Fitness_Level__c";
 import EMAIL_FIELD from "@salesforce/schema/Member__c.Email__c";
@@ -41,11 +38,6 @@ export default class MemberDetails extends LightningElement {
   goalDeadlift = 0;
   goalShoulderPress = 0;
 
-
-  @api
-  recordid;
-
-
   Name;
   Email__c;
   Fitness_Level__c;
@@ -57,7 +49,7 @@ export default class MemberDetails extends LightningElement {
   Gender__c;
   Weight__c;
 
-  @wire(getRecord, { recordId: "$recordid", fields })
+  @wire(getRecord, { recordId: "$recordId", fields })
   wiredRecord({ error, data }) {
     if (error) {
       this.dispatchToast(error);
@@ -109,17 +101,6 @@ export default class MemberDetails extends LightningElement {
     }
   }
 
-  handleRecord() {
-    getBenchmarks({ memberId: this.recordid })
-      .then((data) => {
-        this.updateBenchmarkChart(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-
   get toBSNextLevel() {
     return this.Back_Squat__c >= this.goalBackSquat
       ? `Achieved!✔️`
@@ -162,7 +143,7 @@ export default class MemberDetails extends LightningElement {
   }
 
   handleMessage(message) {
-    this.recordid = message.recordid;
+    this.recordId = message.recordId;
   }
   handleRecordScore(event) {
     this.recordId = null;
@@ -181,6 +162,7 @@ export default class MemberDetails extends LightningElement {
       (message) => this.handleMessage(message)
     );
   }
+
   connectedCallback() {
     this.subscribeToMessageChannel();
   }

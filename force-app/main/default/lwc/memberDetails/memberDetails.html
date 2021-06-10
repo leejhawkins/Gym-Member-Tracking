@@ -23,7 +23,7 @@
               variant="brand"
             >
             </lightning-button>
-            <c-record-lift memberid={recordid} membername={Name}>
+            <c-record-lift memberid={recordId} membername={Name}>
             </c-record-lift>
           </div>
           <div class="slds-col slds-size_7-of-12">
@@ -68,14 +68,13 @@
             membername={Name}
             onrecordscore={handleRecordScore}
           >
-
           </c-record-member-score>
 
           <c-email-modal
             name={Name}
             level={Fitness_Level__c}
             email={Email__c}
-            memberid={recordid}
+            memberid={recordId}
           >
             <div slot="footer">
               <lightning-button
