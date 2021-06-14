@@ -7,9 +7,9 @@ import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected_
 import getBenchmarks from "@salesforce/apex/BenchmarkController.getBenchmarks";
 
 import getMemberWorkout from "@salesforce/apex/WorkoutController.getMemberWorkout";
-import NAME_FIELD from "@salesforce/schema/Member__c.Name";
-import LEVEL_FIELD from "@salesforce/schema/Member__c.Fitness_Level__c";
-import EMAIL_FIELD from "@salesforce/schema/Member__c.Email__c";
+import NAME_FIELD from "@salesforce/schema/Contact.Name";
+import LEVEL_FIELD from "@salesforce/schema/Contact.Fitness_Level__c";
+import EMAIL_FIELD from "@salesforce/schema/Contact.Email";
 import BACKSQUAT_FIELD from "@salesforce/schema/Benchmark__c.Back_Squat__c";
 import DEADLIFT_FIELD from "@salesforce/schema/Benchmark__c.Deadlift__c";
 import BENCHPRESS_FIELD from "@salesforce/schema/Benchmark__c.Bench_Press__c";

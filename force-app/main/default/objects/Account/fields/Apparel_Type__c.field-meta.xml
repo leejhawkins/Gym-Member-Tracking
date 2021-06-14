@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Apparel_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Apparel Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Shirts</fullName>
+                <default>false</default>
+                <label>Shirts</label>
+            </value>
+            <value>
+                <fullName>Tank-tops</fullName>
+                <default>false</default>
+                <label>Tank-tops</label>
+            </value>
+            <value>
+                <fullName>Shorts</fullName>
+                <default>false</default>
+                <label>Shorts</label>
+            </value>
+            <value>
+                <fullName>Hoodie</fullName>
+                <default>false</default>
+                <label>Hoodie</label>
+            </value>
+            <value>
+                <fullName>Pants</fullName>
+                <default>false</default>
+                <label>Pants</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>
