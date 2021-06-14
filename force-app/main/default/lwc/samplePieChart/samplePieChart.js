@@ -1,7 +1,7 @@
 import { LightningElement } from "lwc";
 import chartjs from "@salesforce/resourceUrl/chartJs";
 import { loadScript, loadStyle } from "lightning/platformResourceLoader";
-import findMembers from "@salesforce/apex/ContactController.findMembers";
+import findMembers from "@salesforce/apex/MemberController.findMembers";
 import LEVEL_FIELD from "@salesforce/schema/Workout__c.Fitness_Level__c";
 import { getSObjectValue } from "@salesforce/apex";
 

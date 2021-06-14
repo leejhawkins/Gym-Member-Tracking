@@ -1,5 +1,5 @@
 import { LightningElement, wire } from "lwc";
-import findMembers from "@salesforce/apex/ContactController.findMembers";
+import findMembers from "@salesforce/apex/MemberController.findMembers";
 import { publish, MessageContext } from "lightning/messageService";
 import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected__c";
 const DELAY = 100;

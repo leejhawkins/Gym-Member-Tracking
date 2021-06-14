@@ -1,85 +1,66 @@
-/**
- * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
- * @group             : 
- * @last modified on  : 06-04-2021
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
- * Modifications Log 
- * Ver   Date         Author                               Modification
- * 1.0   06-04-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
-**/
 @isTest
 public class WorkoutDistributorTest {
-  /*
   @TestSetup
   public static void makeData() {
     //Add Members
-    List<Contact> members = new List<Contact>{
-      new Contact(
-        FirstName = 'George',
-        LastName = 'Costanza',
-        Email = 'gcost@smoothstack.com',
+    List<Member__c> members = new List<Member__c>{
+      new Member__c(
+        Name = 'George Costanza',
+        Email__c = 'gcost@smoothstack.com',
         Issues__c = 'Knee',
         Training_Class__c = 'Basic',
         Fitness_Level__c = 'Beginner',
         Active__c = true,
-        Birthdate = Date.today()
+        Date_of_Birth__c = Date.today()
       ),
-      new Contact(
-        FirstName = 'Jerry',
-        LastName = 'Seinfeld',
-        Email = 'jsein@smoothstack.com',
+      new Member__c(
+        Name = 'Jerry Seinfeld',
+        Email__c = 'jsein@smoothstack.com',
         Training_Class__c = 'Bodybuilding',
         Fitness_Level__c = 'Beginner',
         Active__c = true,
-        Birthdate = Date.today()
+        Date_of_Birth__c = Date.today()
       ),
-      new Contact(
-        FirstName = 'Cosmo',
-        LastName = 'Kramer',
-        Email = 'ckram@smoothstack.com',
+      new Member__c(
+        Name = 'Cosmo Kramer',
+        Email__c = 'ckram@smoothstack.com',
         Issues__c = 'Shoulder',
         Training_Class__c = 'Cross-Training',
         Fitness_Level__c = 'Intermediate',
         Active__c = true,
-        Birthdate = Date.today()
+        Date_of_Birth__c = Date.today()
       ),
-      new Contact(
-        FirstName = 'Elaine',
-        LastName = 'Benes',
-        Email = 'eben@smoothstack.com',
+      new Member__c(
+        Name = 'Elaine Benes',
+        Email__c = 'eben@smoothstack.com',
         Training_Class__c = 'Bodybuilding',
         Fitness_Level__c = 'Elite',
         Active__c = true,
-        Birthdate = Date.today()
+        Date_of_Birth__c = Date.today()
       ),
-      new Contact(
-        FirstName = 'George',
-        LastName = 'Costanza'
+      new Member__c(
         Name = 'Newman',
-        Email = 'newman@smoothstack.com',
+        Email__c = 'newman@smoothstack.com',
         Issues__c = 'Knee;Shoulder',
         Training_Class__c = 'Cross-Training',
         Fitness_Level__c = 'Advanced',
         Active__c = true,
-        Birthdate = Date.today()
+        Date_of_Birth__c = Date.today()
       ),
-      new Contact(
-        FirstName = 'Extra',
-        LastName = '1',
+      new Member__c(
+        Name = 'Extra 1',
         Training_Class__c = 'Bodybuilding',
         Fitness_Level__c = 'Elite',
         Active__c = true,
-        Birthdate = Date.today()
+        Date_of_Birth__c = Date.today()
       ),
-      new Contact(
-        FirstName = 'Extra',
-        LastName = '2'
-        Email = 'extra2@smoothstack.com',
+      new Member__c(
+        Name = 'Extra 2',
+        Email__c = 'extra2@smoothstack.com',
         Training_Class__c = 'Bodybuilding',
         Fitness_Level__c = 'Elite',
         Active__c = false,
-        Birthdate = Date.today()
+        Date_of_Birth__c = Date.today()
       )
     };
     insert members;
@@ -157,10 +138,10 @@ public class WorkoutDistributorTest {
       System.assert(false);
       System.debug(e.getMessage());
     }
-    List<Contact> members = [
-      SELECT Name, Email, Training_Class__c, Fitness_Level__c, Issues__c
-      FROM Contact
-      WHERE Active__c = TRUE AND Email != NULL
+    List<Member__c> members = [
+      SELECT Name, Email__c, Training_Class__c, Fitness_Level__c, Issues__c
+      FROM Member__c
+      WHERE Active__c = TRUE AND Email__c != NULL
     ];
     List<Workout__c> workouts = [
       SELECT
@@ -172,7 +153,7 @@ public class WorkoutDistributorTest {
       FROM Workout__c
       WHERE Date__c = TODAY
     ];
-    Map<Contact, Workout__c> assignments = WorkoutDistributor.getAssignments(
+    Map<Member__c, Workout__c> assignments = WorkoutDistributor.getAssignments(
       members,
       workouts
     );
@@ -183,5 +164,4 @@ public class WorkoutDistributorTest {
       System.assert(r.isSuccess());
     }
   }
-  */
 }

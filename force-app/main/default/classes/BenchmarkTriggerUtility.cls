@@ -1,21 +1,10 @@
-/**
- * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
- * @group             : 
- * @last modified on  : 06-14-2021
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
- * Modifications Log 
- * Ver   Date         Author                               Modification
- * 1.0   06-03-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
-**/
 public inherited sharing class BenchmarkTriggerUtility {
-
   public static void setBenchmarkEmptyFields(List<Benchmark__c> bens) {
     for (Benchmark__c b : bens) {
       try {
         b.Date__c = b.Date__c == null ? Date.Today() : b.Date__c;
         Benchmark__c mRecent = BenchmarkTriggerUtility.getMostRecent(
-          b.Gym_Member__c,
+          b.Member__c,
           b.Date__c
         );
 
@@ -39,15 +28,15 @@ public inherited sharing class BenchmarkTriggerUtility {
   }
 
   public static void fitnessLevel(List<Benchmark__c> bens) {
-    List<Contact> members = [
+    List<Member__c> members = [
       SELECT Id, Weight__c, Gender__c
-      FROM Contact
-      WHERE Active__c = TRUE AND RecordType.Name = 'Gym Member'
+      FROM Member__c
+      WHERE Active__c = TRUE
     ];
-    Map<Benchmark__c, Contact> bmMap = new Map<Benchmark__c, Contact>();
+    Map<Benchmark__c, Member__c> bmMap = new Map<Benchmark__c, Member__c>();
     for (Benchmark__c b : bens) {
-      for (Contact m : members) {
-        if (b.Gym_Member__c == m.Id) {
+      for (Member__c m : members) {
+        if (b.Member__c == m.Id) {
           bmMap.put(b, m);
         }
       }
@@ -59,13 +48,12 @@ public inherited sharing class BenchmarkTriggerUtility {
     }
   }
   public static void BMICalculator(List<Benchmark__c> bens) {
-   
     for (Benchmark__c b : bens) {
       if (b.Weight__c != null) {
-        Contact m = [
+        Member__c m = [
           SELECT Height_Feet__c, Height_Inches__c
-          FROM Contact
-          WHERE Id = :b.Gym_Member__c
+          FROM Member__c
+          WHERE Id = :b.Member__c
         ];
         if (m.Height_Feet__c != null && m.Height_Inches__c != null) {
           Double weightInKilos = b.Weight__c * 0.453592;
@@ -80,14 +68,14 @@ public inherited sharing class BenchmarkTriggerUtility {
   public static void isCurrentBenchmark(List<Benchmark__c> bens) {
     for (Benchmark__c b : bens) {
       Benchmark__c mRecent = BenchmarkTriggerUtility.getMostRecent(
-        b.Gym_Member__c,
+        b.Member__c,
         Date.today()
       );
       if (mRecent.Id == b.id) {
-        Contact m = [
-          SELECT Id, Fitness_Level__c, Name, Email, Gender__c
-          FROM Contact
-          WHERE Id = :b.Gym_Member__c
+        Member__c m = [
+          SELECT Id, Fitness_Level__c, Name, Email__c, Gender__c
+          FROM Member__c
+          WHERE Id = :b.Member__c
         ];
         String oldFitnessLevel = m.Fitness_Level__c;
         m.Fitness_Level__c = b.Fitness_Level__c;
@@ -108,15 +96,15 @@ public inherited sharing class BenchmarkTriggerUtility {
           (oldFitnessLevel == 'Advanced' &&
           m.Fitness_Level__c == 'Elite')
         ) {
-          Contact nextLevel = LiftStandardsController.getNextLevel(
+          Member__c nextLevel = LiftStandardsController.getNextLevel(
             m.Fitness_Level__c,
             m.Gender__c,
             b.Weight__c
           );
-          if (m.Email != null) {
+          if (m.Email__c != null) {
             EmailController.sendCongratulationsEmail(
               m.Name,
-              m.Email,
+              m.Email__c,
               oldFitnessLevel,
               b.Fitness_Level__c,
               nextLevel
@@ -134,7 +122,7 @@ public inherited sharing class BenchmarkTriggerUtility {
       FROM Benchmark__c
       WHERE
         Date__c <= :targetDate
-        AND Gym_Member__c = :memberId
+        AND Member__c = :memberId
         AND Goal_Benchmarks__c = FALSE
     ];
     List<Benchmark__c> recentBs = new List<Benchmark__c>();
@@ -161,7 +149,7 @@ public inherited sharing class BenchmarkTriggerUtility {
         FROM Benchmark__c
         WHERE
           Date__c <= :targetDate
-          AND Gym_Member__c = :memberId
+          AND Member__c = :memberId
           AND Goal_Benchmarks__c = FALSE
         ORDER BY Date__c DESC
         LIMIT 10

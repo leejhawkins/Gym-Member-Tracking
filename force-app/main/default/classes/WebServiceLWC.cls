@@ -5,11 +5,9 @@
     callout endpoint. 
 */
 public class WebServiceLWC {
-  public static String appID = 'appid=';
-  public static String andQ = '&q=';
   public static String apiURL = '/forecast?';
-  public static String apiKey =  appID + system.label.Forecast_API_Key;
-  public static String city =  andQ + system.label.City;
+  public static String apiKey = 'appid=' + system.label.Forecast_API_Key;
+  public static String city = '&q=Denver';
 
   @AuraEnabled(cacheable=true)
   public static map<String, List<String>> getWeatherForCity() {
@@ -18,9 +16,9 @@ public class WebServiceLWC {
     map<String, List<String>> forecastData = new Map<String, List<String>>();
     String weatherUrl = apiURL + apiKey + ndays + units + city;
 
-    String jSONResponse = getForecastJSON(weatherUrl);
+    String JSONResponse = getForecastJSON(weatherUrl);
 
-    forecastData = ForecastInfoParsing.forecastJsonParse(jSONResponse);
+    forecastData = ForecastInfoParsing.forecastJsonParse(JSONResponse);
     return forecastData;
   }
 
@@ -29,7 +27,6 @@ public class WebServiceLWC {
     String result = null;
 
     Http htp = new Http();
-    
     // Instantiate a new HTTP request, specify the method (GET) as well as the endpoint
     HttpRequest req = new HttpRequest();
     req.setEndpoint('callout:Forecast_API' + url);
