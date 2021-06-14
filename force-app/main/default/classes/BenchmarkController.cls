@@ -1,4 +1,5 @@
 /**
+<<<<<<< Updated upstream
  * @description       : Updated Member__c field to Gym_Member__c Contact RecTypeId
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
@@ -7,6 +8,16 @@
  * Modifications Log 
  * Ver   Date         Author                               Modification
  * 1.0   06-03-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+=======
+ * @description       : 
+ * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @group             : 
+ * @last modified on  : 06-14-2021
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * Modifications Log 
+ * Ver   Date         Author                               Modification
+ * 1.0   06-14-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+>>>>>>> Stashed changes
 **/
 public inherited sharing class BenchmarkController {
   // FROM Member__c to Gym_Member__c
@@ -60,7 +71,12 @@ public inherited sharing class BenchmarkController {
     return [
       SELECT Back_Squat__c, Deadlift__c, Bench_Press__c, Shoulder_Press__c
       FROM Benchmark__c
+<<<<<<< Updated upstream
       WHERE Gym_Member__c = :memberId AND Goal_Benchmarks__c = TRUE
+=======
+      
+      WHERE Member__c = :memberId AND Goal_Benchmarks__c = TRUE
+>>>>>>> Stashed changes
       LIMIT 1
     ];
   }
