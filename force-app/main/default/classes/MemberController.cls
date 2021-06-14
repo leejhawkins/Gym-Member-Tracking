@@ -13,5 +13,5 @@ public inherited sharing class MemberController {
       WHERE Name LIKE :key
     ];
   }
-  */
+*/
 }

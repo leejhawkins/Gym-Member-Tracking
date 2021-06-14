@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>Gym_Tracker_App</application>
@@ -520,6 +520,26 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Score__c.Minutes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Score__c.Reps__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Score__c.Rounds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Score__c.Seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Workout__c.Date__c</field>
         <readable>false</readable>
@@ -533,6 +553,16 @@
         <editable>false</editable>
         <field>Workout__c.Issues__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Workout__c.Reps__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Workout__c.Strength__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -593,6 +623,17 @@
         <layout>Member__c-Member Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Score__c-AMRAP</layout>
+        <recordType>Score__c.AMRAP</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Score__c-For Time</layout>
+        <recordType>Score__c.For_Time</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Score__c-Score Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Workout__c-Workout Layout</layout>
     </layoutAssignments>
     <objectPermissions>
@@ -612,6 +653,11 @@
     <recordTypeVisibilities>
         <default>true</default>
         <recordType>Account.Gym_Account</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>Score__c.AMRAP</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
@@ -649,6 +695,11 @@
         <recordType>Contact.Gym_Trainer</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
+        <recordTypeVisibilities>
+            <default>false</default>
+        <recordType>Score__c.For_Time</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
     <tabVisibilities>
         <tab>Benchmark__c</tab>
         <visibility>Hidden</visibility>
@@ -664,6 +715,14 @@
     <tabVisibilities>
         <tab>standard-Contact</tab>
         <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Score__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Workout__c</tab>
+        <visibility>Hidden</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>
     <userPermissions>

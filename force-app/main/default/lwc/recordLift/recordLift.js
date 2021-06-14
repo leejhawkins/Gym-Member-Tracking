@@ -3,11 +3,14 @@ import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class RecordLift extends LightningElement {
   @api memberid;
+  @api membername;
   date = new Date();
   reps;
-  benchmarkAPI;
-  benchmarkField;
+  strength;
+  type;
   weight;
+  workoutDescription;
+  showForm = false;
 
   handleSelect(event) {
     this.benchmarkAPI = event.target.value;
@@ -33,16 +36,11 @@ export default class RecordLift extends LightningElement {
   }
   handleChange(event) {
     this[event.target.name] = event.target.value;
-    console.log(this.benchmarkAPI);
   }
   handleSuccess() {
     this.date = new Date();
-    this.benchmarkAPI = "";
     this.reps = null;
-    this.benchmarkField = null;
     this.weight = null;
-    this.template.querySelector("select").value = this.benchmarkAPI;
-    this.template.querySelector("select").text = "Choose Lift";
 
     this.dispatchEvent(
       new ShowToastEvent({
@@ -56,7 +54,7 @@ export default class RecordLift extends LightningElement {
   }
 
   get benchmarkName() {
-    return `${this.benchmarkField} ${this.reps} x  Rep Max`.trim();
+    return `${this.membername} ${this.benchmarkField} ${this.reps} x  Rep Max`.trim();
   }
   get computedWeight() {
     return parseInt(this.weight * (36 / (37 - this.reps)));

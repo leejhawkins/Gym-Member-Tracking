@@ -2,7 +2,7 @@
  * @description       : Create member records each time a member object is inserted.
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-07-2021
+ * @last modified on  : 06-14-2021
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -23,6 +23,19 @@ public with sharing class ContactController {
          
          return results;
       }
+
+       @AuraEnabled(cacheable=true)
+  public static Contact getMember(Id userId){
+    User u = [
+     SELECT Id, Email
+     FROM User 
+     WHERE Id=: userId Limit 1];
+    return [
+      SELECT Id, Name 
+      FROM Contact
+      WHERE Email =:u.Email Limit 1
+    ];
+  }
 }
 
   

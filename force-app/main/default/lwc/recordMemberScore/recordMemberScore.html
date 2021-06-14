@@ -1,0 +1,138 @@
+<template>
+  <lightning-card>
+    <div class="slds-grid slds-wrap">
+      <div class="slds-col slds-size_5-of-12">
+        <div class="slds-select_container">
+          <select
+            class="slds-select"
+            name="fitnessLevel"
+            label="Select Fitness Level"
+            onchange={handleSelect}
+            value={fitnessLevel}
+            required
+          >
+            <option value="" required="">Choose Fitness Level</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+            <option value="Elite">Elite</option>
+          </select>
+        </div>
+        <div>
+          <lightning-input
+            type="date"
+            name="workoutDate"
+            label="Date"
+            value={workoutDate}
+            onchange={handleChange}
+            required
+          ></lightning-input>
+        </div>
+
+        <template if:true={scoreId}>
+          <lightning-record-form
+            object-api-name="Score__c"
+            record-id={scoreId}
+            fields={fields}
+            onsubmit={handleSubmit}
+          ></lightning-record-form>
+        </template>
+        <template if:false={scoreId}>
+          <template if:true={workoutId}>
+            <lightning-record-edit-form
+              object-api-name="Score__c"
+              record-type-id={recordTypeId}
+              onsuccess={handleSuccess}
+            >
+              <div class="slds-hide">
+                <lightning-input-field
+                  field-name="Workout__c"
+                  value={workoutId}
+                  onchange={handleChange}
+                  name="workoutId"
+                >
+                </lightning-input-field>
+              </div>
+              <div class="slds-hide">
+                <lightning-input-field
+                  field-name="Member__c"
+                  value={memberid}
+                  name="memberid"
+                  onchange={handleChange}
+                  required
+                >
+                </lightning-input-field>
+              </div>
+              <div class="slds-hide">
+                <lightning-input-field
+                  field-name="Name"
+                  value={scoreName}
+                ></lightning-input-field>
+              </div>
+              <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_6-of-12">
+                  <lightning-input-field
+                    field-name="Weight__c"
+                    value={weight}
+                    name="weight"
+                    onchange={handleChange}
+                  ></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_6-of-12"></div>
+                <div class="slds-col slds-size_5-of-12">
+                  <lightning-input-field
+                    field-name={fieldOne}
+                    value={minutes}
+                    name="minutes"
+                    onchange={handleChange}
+                  ></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_2-of-12"></div>
+                <div class="slds-col slds-size_5-of-12">
+                  <lightning-input-field
+                    field-name={fieldTwo}
+                    value={seconds}
+                    name="seconds"
+                    onchange={handleChange}
+                  ></lightning-input-field>
+                </div>
+              </div>
+
+              <lightning-button
+                type="submit"
+                variant="brand"
+                name="save"
+                label="Record Score"
+              ></lightning-button>
+            </lightning-record-edit-form>
+          </template>
+        </template>
+      </div>
+      <div class="slds-col slds-size_2-of-12"></div>
+      <div class="slds-col slds-size_5-of-12">
+        <template if:true={workoutId}>
+          <div class="slds-scrollable_y" style="height: 15rem">
+            <lightning-record-view-form
+              record-id={workoutId}
+              object-api-name="Workout__c"
+            >
+              <div class="slds-box">
+                <lightning-output-field field-name="Strength__c">
+                </lightning-output-field>
+                <lightning-output-field field-name="Reps__c">
+                </lightning-output-field>
+                <lightning-output-field field-name="Type__c">
+                </lightning-output-field>
+                <lightning-output-field field-name="Workout_Description__c">
+                </lightning-output-field>
+              </div>
+            </lightning-record-view-form>
+          </div>
+        </template>
+        <template if:false={workoutId}>
+          <h1>There is not a workout for this fitness level and date</h1>
+        </template>
+      </div>
+    </div>
+  </lightning-card>
+</template>

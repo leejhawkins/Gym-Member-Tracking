@@ -102,7 +102,6 @@ export default class MemberBarChart extends LightningElement {
   @api
   chartCreated() {
     if (this.chart) {
-      console.log(true);
       return true;
     }
     return false;

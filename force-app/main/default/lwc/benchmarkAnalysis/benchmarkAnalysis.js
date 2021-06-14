@@ -1,4 +1,4 @@
-import { LightningElement, wire } from "lwc";
+import { LightningElement, wire, api } from "lwc";
 import { getSObjectValue } from "@salesforce/apex";
 import { subscribe, MessageContext } from "lightning/messageService";
 import chartjs from "@salesforce/resourceUrl/chartJs";
@@ -36,8 +36,9 @@ export default class MemberDetails extends LightningElement {
   goalShoulderPress = 0;
 
   error;
-  recordId;
-  Name;
+
+  @api
+  recordid;
 
   config = {
     type: "line",
@@ -75,7 +76,7 @@ export default class MemberDetails extends LightningElement {
   };
 
   handleMessage(message) {
-    this.recordId = message.recordId;
+    this.recordid = message.recordid;
     if (this.annualProgressLineGraph) {
       this.generateAnnualLineChart();
     } else if (this.monthlyProgressLineGraph) {
@@ -86,7 +87,7 @@ export default class MemberDetails extends LightningElement {
   }
 
   generateAnnualLineChart() {
-    getAnnualProgress({ memberId: this.recordId })
+    getAnnualProgress({ memberId: this.recordid })
       .then((data) => {
         console.log(data);
         let goalData = data.Goal;
@@ -149,7 +150,7 @@ export default class MemberDetails extends LightningElement {
 
   generateMonthlyLineChart() {
     console.log("hello line 138");
-    getMonthlyProgress({ memberId: this.recordId })
+    getMonthlyProgress({ memberId: this.recordid })
       .then((data) => {
         let goalData = data.Goal;
         let goalBenchPress = getSObjectValue(goalData[0], BENCHPRESS_FIELD);
@@ -218,7 +219,7 @@ export default class MemberDetails extends LightningElement {
     this.goalDeadlift = 0;
     this.goalBenchPress = 0;
     this.goalShoulderPress = 0;
-    getBenchmarks({ memberId: this.recordId })
+    getBenchmarks({ memberId: this.recordid })
       .then((data) => {
         let curBen = data.Current;
         console.log(curBen);

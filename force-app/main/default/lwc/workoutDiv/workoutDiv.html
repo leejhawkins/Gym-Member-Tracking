@@ -6,10 +6,11 @@
         <lightning-record-form
           object-api-name="Workout__c"
           record-id={workoutid}
-          fields="Workout_Description__c"
+          fields={fields}
           ondrop={dropGif}
           ondragover={allowGifDrop}
           value={workoutDes}
+          name={name}
           onchange={handleChange}
         ></lightning-record-form>
       </div>
@@ -40,13 +41,26 @@
               value={workoutName}
             ></lightning-input-field>
           </div>
-
+          <lightning-input-field
+            field-name="Strength__c"
+            value={strength}
+            name="strength"
+          ></lightning-input-field>
+          <lightning-input-field
+            field-name="Reps__c"
+            value={reps}
+            name="reps"
+          ></lightning-input-field>
+          <lightning-input-field
+            field-name="Type__c"
+            value={type}
+          ></lightning-input-field>
           <lightning-input-field
             field-name="Workout_Description__c"
             ondrop={dropGif}
             ondragover={allowGifDrop}
             value={workoutDes}
-            name={name}
+            name="workoutDes"
             onchange={handleChange}
           ></lightning-input-field>
           <div class="slds-hide">

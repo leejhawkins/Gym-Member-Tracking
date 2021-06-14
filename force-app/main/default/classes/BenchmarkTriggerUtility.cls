@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-10-2021
+ * @last modified on  : 06-14-2021
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -54,7 +54,6 @@ public inherited sharing class BenchmarkTriggerUtility {
     }
     for (Benchmark__c b : bens) {
       b.Fitness_Level__c = LiftStandardsController.getFitnessLevel(
-        b,
         bmMap.get(b)
       );
     }
@@ -109,17 +108,20 @@ public inherited sharing class BenchmarkTriggerUtility {
           (oldFitnessLevel == 'Advanced' &&
           m.Fitness_Level__c == 'Elite')
         ) {
-          Benchmark__c nextLevel = LiftStandardsController.getNextLevel(
-            b,
-            m.Gender__c
+          Contact nextLevel = LiftStandardsController.getNextLevel(
+            m.Fitness_Level__c,
+            m.Gender__c,
+            b.Weight__c
           );
-          EmailController.sendCongratulationsEmail(
-            m.Name,
-            m.Email,
-            oldFitnessLevel,
-            b.Fitness_Level__c,
-            nextLevel
-          );
+          if (m.Email != null) {
+            EmailController.sendCongratulationsEmail(
+              m.Name,
+              m.Email,
+              oldFitnessLevel,
+              b.Fitness_Level__c,
+              nextLevel
+            );
+          }
         }
         m.BMI__c = b.BMI__c;
         update m;
@@ -171,7 +173,6 @@ public inherited sharing class BenchmarkTriggerUtility {
           recentDate = b.Date__c;
           recentModified = b.LastModifiedDate;
           currentBenchmark = b;
-          System.debug(b);
         }
       }
     }

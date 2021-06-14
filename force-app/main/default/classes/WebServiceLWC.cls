@@ -13,7 +13,6 @@ public class WebServiceLWC {
 
   @AuraEnabled(cacheable=true)
   public static map<String, List<String>> getWeatherForCity() {
-    
     string ndays = '&cnt=40';
     String units = '&units=imperial';
     map<String, List<String>> forecastData = new Map<String, List<String>>();

@@ -59,6 +59,7 @@ export default class EmailModal extends LightningElement {
 
   @api hide() {
     this.showModal = false;
+    this.workoutdes = "";
   }
   handleDialogClose() {
     //Let parent know that dialog is closed (mainly by that cross button) so it can set proper variables if needed

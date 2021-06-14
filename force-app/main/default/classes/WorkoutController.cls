@@ -36,7 +36,7 @@ public inherited sharing class WorkoutController {
   public static List<Workout__c> getAllWorkoutsForDay(Date workoutDate) {
     try {
       return [
-        SELECT Workout_Description__c, Fitness_Level__c, Id, Date__c
+        SELECT Workout_Description__c, Fitness_Level__c, Id, Date__c, Type__c
         FROM Workout__c
         WHERE Date__c = :workoutDate
       ];

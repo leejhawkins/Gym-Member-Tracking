@@ -23,14 +23,15 @@
               variant="brand"
             >
             </lightning-button>
-            <c-record-lift memberid={recordId}> </c-record-lift>
+            <c-record-lift memberid={recordId} membername={Name}>
+            </c-record-lift>
           </div>
           <div class="slds-col slds-size_7-of-12">
             <c-member-bar-chart
-              cbs={currentBackSquat}
-              cdl={currentDeadlift}
-              cbp={currentBenchPress}
-              csp={currentShoulderPress}
+              cbs={Back_Squat__c}
+              cdl={Deadlift__c}
+              cbp={Bench_Press__c}
+              csp={Should_Press__c}
               gbs={goalBackSquat}
               gdl={goalDeadlift}
               gbp={goalBenchPress}
@@ -61,6 +62,13 @@
               </div>
             </div>
           </div>
+
+          <c-record-member-score
+            memberid={recordId}
+            membername={Name}
+            onrecordscore={handleRecordScore}
+          >
+          </c-record-member-score>
 
           <c-email-modal
             name={Name}
