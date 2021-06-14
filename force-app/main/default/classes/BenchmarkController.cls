@@ -1,26 +1,4 @@
-/**
-<<<<<<< Updated upstream
- * @description       : Updated Member__c field to Gym_Member__c Contact RecTypeId
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
- * @group             : 
- * @last modified on  : 06-14-2021
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
- * Modifications Log 
- * Ver   Date         Author                               Modification
- * 1.0   06-03-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
-=======
- * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
- * @group             : 
- * @last modified on  : 06-14-2021
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
- * Modifications Log 
- * Ver   Date         Author                               Modification
- * 1.0   06-14-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
->>>>>>> Stashed changes
-**/
 public inherited sharing class BenchmarkController {
-  // FROM Member__c to Gym_Member__c
   @AuraEnabled(cacheable=true)
   public static Map<String, Benchmark__c> getBenchmarks(
     Id benchmarkId,
@@ -70,7 +48,7 @@ public inherited sharing class BenchmarkController {
     return [
       SELECT Back_Squat__c, Deadlift__c, Bench_Press__c, Shoulder_Press__c
       FROM Benchmark__c
-      WHERE Gym_Member__c = :memberId AND Goal_Benchmarks__c != TRUE
+      WHERE Member__c = :memberId AND Goal_Benchmarks__c != TRUE
       LIMIT 1
     ];
   }
@@ -79,7 +57,6 @@ public inherited sharing class BenchmarkController {
     return [
       SELECT Back_Squat__c, Deadlift__c, Bench_Press__c, Shoulder_Press__c
       FROM Benchmark__c
-      
       WHERE Member__c = :memberId AND Goal_Benchmarks__c = TRUE
       LIMIT 1
     ];
@@ -95,7 +72,7 @@ public inherited sharing class BenchmarkController {
         Shoulder_Press__c,
         Date__c
       FROM Benchmark__c
-      WHERE Gym_Member__c = :memberId AND Goal_Benchmarks__c = TRUE
+      WHERE Member__c = :memberId AND Goal_Benchmarks__c = TRUE
       LIMIT 1
     ];
     List<Benchmark__c> cbList = new List<Benchmark__c>();
@@ -107,7 +84,7 @@ public inherited sharing class BenchmarkController {
         Shoulder_Press__c,
         Date__c
       FROM Benchmark__c
-      WHERE Gym_Member__c = :memberId AND Goal_Benchmarks__c = FALSE
+      WHERE Member__c = :memberId AND Goal_Benchmarks__c = FALSE
       ORDER BY Date__c
     ];
     cbList.add(cbListTemp[0]);
@@ -136,7 +113,7 @@ public inherited sharing class BenchmarkController {
         Date__c
       FROM Benchmark__c
       WHERE
-        Gym_Member__c = :memberId
+        Member__c = :memberId
         AND Date__c >= :Date.today().addMonths(-1)
         AND Goal_Benchmarks__c = FALSE
       ORDER BY Date__c
@@ -144,7 +121,7 @@ public inherited sharing class BenchmarkController {
     List<Benchmark__c> gb = [
       SELECT Back_Squat__c, Bench_Press__c, Deadlift__c, Shoulder_Press__c
       FROM Benchmark__c
-      WHERE Gym_Member__c = :memberId AND Goal_Benchmarks__c = TRUE
+      WHERE Member__c = :memberId AND Goal_Benchmarks__c = TRUE
       LIMIT 1
     ];
 
@@ -159,7 +136,7 @@ public inherited sharing class BenchmarkController {
     List<Benchmark__c> cbList = [
       SELECT Date__c
       FROM Benchmark__c
-      WHERE Gym_Member__c = :memberId AND Goal_Benchmarks__c = FALSE
+      WHERE Member__c = :memberId AND Goal_Benchmarks__c = FALSE
       ORDER BY Date__c
     ];
     for (Benchmark__c b : cbList) {
@@ -174,7 +151,7 @@ public inherited sharing class BenchmarkController {
     List<Benchmark__c> cbList = [
       SELECT Date__c
       FROM Benchmark__c
-      WHERE Gym_Member__c = :memberId AND Goal_Benchmarks__c = FALSE
+      WHERE Member__c = :memberId AND Goal_Benchmarks__c = FALSE
       ORDER BY Date__c
     ];
     for (Benchmark__c b : cbList) {

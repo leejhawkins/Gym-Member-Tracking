@@ -3,7 +3,6 @@
    a class to get the details of the members from the org to the Gym manager
 */
 public inherited sharing class MemberController {
-  /*
   @AuraEnabled(cacheable=true)
   public static List<Member__c> findMembers(String searchKey) {
     String key = '%' + searchKey + '%';
@@ -13,5 +12,18 @@ public inherited sharing class MemberController {
       WHERE Name LIKE :key
     ];
   }
-*/
+
+  @AuraEnabled(cacheable=true)
+  public static Member__c getMember(Id userId){
+    User u = [
+     SELECT Id, Email
+     FROM User 
+     WHERE Id=: userId Limit 1];
+    return [
+      SELECT Id, Name 
+      FROM Member__c
+      WHERE Email__c =:u.Email Limit 1
+    ];
+  }
+
 }

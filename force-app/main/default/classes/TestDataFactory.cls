@@ -5,18 +5,16 @@
 @isTest
 public inherited sharing class TestDataFactory {
   //methods to create records and populate the required fields
-  public static List<Contact> generateContacts(String recTypeName, Integer numOfMembers) {
-    Id devRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get(recTypeName).getRecordTypeId();
-    List<Contact> members = new List<Contact>();
+  public static List<Member__c> generateMembers(Integer numOfMembers) {
+    List<Member__c> members = new List<Member__c>();
     for (Integer i = 0; i < numOfMembers; i++) {
-        Contact member = new Contact();
-        member.LastName = 'Member ' + i;
-        member.FirstName = 'Test';
-        member.Birthdate = Date.today();
-        member.RecordTypeId = devRecordTypeId;
-        members.add(member);
+      Member__c m = new Member__c();
+      m.Name = 'Test member ' + i;
+      m.Date_of_Birth__c = Date.today();
+      members.add(m);
     }
-    
+    //insert members;
+
     return members;
   }
 
@@ -31,65 +29,50 @@ public inherited sharing class TestDataFactory {
       i += 1;
     }
 
-    
+    //insert workouts;
 
     return workouts;
   }
 
   public static List<Benchmark__c> generateBenchmarks(
     Integer numOfBenchMarks,
-    Contact member
+    Member__c member
   ) {
     List<Benchmark__c> benchmarks = new List<Benchmark__c>();
 
     for (Integer j = 1; j < numOfBenchMarks; j++) {
       Benchmark__c b = new Benchmark__c();
       b.Name = 'Test benchmark ' + j;
-      b.Gym_Member__c = member.Name;
+      b.Member__c = member.Name;
       b.Date__c = Date.today();
       benchmarks.add(b);
     }
 
-    
+    //insert benchmarks;
 
     return benchmarks;
   }
 
-  public static List<Account> generateAccounts(String recTypeName, Integer numAccts) {
-    Id devRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get(recTypeName).getRecordTypeId();
-    List<Account> accounts = new List<Account>();
-
-    for(Integer i = 0; i < numAccts; i++) {
-       Account a = new Account();
-       a.Name = 'Test-Account ' + i;
-       accounts.add(a);
-    }
-
-    return accounts;
-  }
- 
   //methods to create records with specified fields
-  public static List<Contact> generateMembers(
+  public static List<Member__c> generateMembers(
     String email,
     String fitnessLevel,
     String trainingClass,
     String issues,
     Integer membersNum
   ) {
-    Id devRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Gym Member').getRecordTypeId();
-    List<Contact> members = new List<Contact>();
+    List<Member__c> members = new List<Member__c>();
     for (Integer i = 0; i < membersNum; i++) {
-      Contact member = new Contact();
-      member.LastName = 'Test-Member ' + i;
-      member.FirstName = 'Robust-';
-      member.Birthdate = Date.today();
-      member.Email = email;
+      Member__c member = new Member__c();
+      member.Name = 'Robust-Test-Member ' + i;
+      member.Date_of_Birth__c = Date.today();
+      member.Email__c = email;
       member.Issues__c = issues;
       member.Fitness_Level__c = fitnessLevel;
       member.Training_Class__c = trainingClass;
       members.add(member);
     }
-    
+    //insert members;
     return members;
   }
 
@@ -114,12 +97,13 @@ public inherited sharing class TestDataFactory {
       workouts.add(workout);
     }
 
+    //insert workouts;
+
     return workouts;
   }
 
-  //Avoid DML statements in this class since its a costly transaction 
   public static void generateBenchmarks(
-    Contact member,
+    Member__c member,
     Integer numBenchMarks
   ) {
     List<Benchmark__c> benchmarks = new List<Benchmark__c>();
@@ -131,16 +115,10 @@ public inherited sharing class TestDataFactory {
       b.Shoulder_Press__c = 175 + i;
       b.Back_Squat__c = 350 + i;
       b.Name = 'Robust-Benchmark ' + i;
-      b.Gym_Member__c = member.Id;
+      b.Member__c = member.Id;
       b.Date__c = Date.today().addDays(-i);
       benchmarks.add(b);
-      insertBenchmark(b);
+      insert b;
     }
   }
-  //helper function to insert benchmarks
-  public static void insertBenchmark(Benchmark__c b) {
-        insert b;
-  }
-
-
 }

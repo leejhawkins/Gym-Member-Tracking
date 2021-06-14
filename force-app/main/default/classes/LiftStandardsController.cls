@@ -6,7 +6,7 @@
 
 public class LiftStandardsController {
   //Verify that weight falls into proper range and use other methods to determine level in each lift
-  public static String getFitnessLevel(Contact m) {
+  public static String getFitnessLevel(Member__c m) {
     if (m.Weight__c == null) {
       return 'Beginner';
     }
@@ -65,7 +65,7 @@ public class LiftStandardsController {
     return resourceMap;
   }
   //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
-  public static Integer getBenchPressLevel(Contact m) {
+  public static Integer getBenchPressLevel(Member__c m) {
     if (m.Gender__c == 'Female') {
       Map<String, Integer> standards = createMap('FemaleBenchPressStandards');
       Decimal w = m.Weight__c / 10;
@@ -103,7 +103,7 @@ public class LiftStandardsController {
     }
   }
   //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
-  public static Integer getBackSquatLevel(Contact m) {
+  public static Integer getBackSquatLevel(Member__c m) {
     if (m.Gender__c == 'Female') {
       Map<String, Integer> standards = createMap('FemaleBackSquatStandards');
       Decimal w = m.Weight__c / 10;
@@ -141,7 +141,7 @@ public class LiftStandardsController {
     }
   }
   //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
-  public static Integer getDeadliftLevel(Contact m) {
+  public static Integer getDeadliftLevel(Member__c m) {
     if (m.Gender__c == 'Female') {
       Map<String, Integer> standards = createMap('FemaleDeadliftStandards');
       Decimal w = m.Weight__c / 10;
@@ -179,7 +179,7 @@ public class LiftStandardsController {
     }
   }
   //Returns numeric representation of Fitness Level for this lift from 1 (Beginner) to 5 (Elite)
-  public static Integer getShoulderPressLevel(Contact m) {
+  public static Integer getShoulderPressLevel(Member__c m) {
     if (m.Gender__c == 'Female') {
       Map<String, Integer> standards = createMap(
         'FemaleShoulderPressStandards'
@@ -219,14 +219,14 @@ public class LiftStandardsController {
     }
   }
   @AuraEnabled(cacheable=true)
-  public static Contact getNextLevel(
+  public static Member__c getNextLevel(
     String fitnessLevel,
     String gender,
     Decimal weight
   ) {
     Decimal w = weight != null ? weight / 10 : 15;
     Integer memberWeight = w.round().intValue() * 10;
-    Contact nextLevel = new Contact();
+    Member__c nextLevel = new Member__c();
     List<List<String>> liftList = new List<List<String>>{
       new List<String>{
         'FemaleBenchPressStandards',
