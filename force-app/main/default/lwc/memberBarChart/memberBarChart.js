@@ -99,11 +99,4 @@ export default class MemberBarChart extends LightningElement {
     this.chart.data.datasets[1].data[3] = gSP;
     this.chart.update();
   }
-  @api
-  chartCreated() {
-    if (this.chart) {
-      return true;
-    }
-    return false;
-  }
 }

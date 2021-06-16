@@ -11,7 +11,37 @@
       </lightning-button>
     </template>
     <template if:true={showForm}>
-      <div class="slds-m-around_medium">
+      <div class="slds-var-m-around_medium">
+        <lightning-record-edit-form object-api-name="Score__c">
+          <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_6-of-12">
+              <lightning-input-field
+                field-name="Weight__c"
+                value={weight}
+                name="weight"
+                onchange={handleChange}
+              ></lightning-input-field>
+            </div>
+            <div class="slds-col slds-size_6-of-12"></div>
+            <div class="slds-col slds-size_5-of-12">
+              <lightning-input-field
+                field-name={fieldOne}
+                value={minutes}
+                name="minutes"
+                onchange={handleChange}
+              ></lightning-input-field>
+            </div>
+            <div class="slds-col slds-size_2-of-12"></div>
+            <div class="slds-col slds-size_5-of-12">
+              <lightning-input-field
+                field-name={fieldTwo}
+                value={seconds}
+                name="seconds"
+                onchange={handleChange}
+              ></lightning-input-field>
+            </div>
+          </div>
+        </lightning-record-edit-form>
         <lightning-record-edit-form
           object-api-name="Workout__c"
           onsuccess={handleSuccess}
@@ -22,10 +52,6 @@
               value={workoutName}
             ></lightning-input-field>
           </div>
-          <lightning-input-field
-            field-name="Fitness_Level__c"
-            value={name}
-          ></lightning-input-field>
           <lightning-input-field
             field-name="Strength__c"
             value={strength}
@@ -40,6 +66,8 @@
           <lightning-input-field
             field-name="Type__c"
             value={type}
+            name="type"
+            onchange={handleSelect}
           ></lightning-input-field>
           <lightning-input-field
             field-name="Workout_Description__c"

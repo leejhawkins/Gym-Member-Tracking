@@ -21,8 +21,6 @@ export default class RecordMemberScore extends LightningElement {
   recordTypeId;
   minutes;
   seconds;
-  rounds;
-  reps;
   workoutType;
   fieldOne;
   fieldTwo;
@@ -33,7 +31,6 @@ export default class RecordMemberScore extends LightningElement {
         this.scoreRecordTypes = data;
       })
       .catch((err) => console.log(err));
-
     if (this.momentjsInitialized) {
       return;
     }
@@ -114,7 +111,6 @@ export default class RecordMemberScore extends LightningElement {
       if (this.fitnessLevel === fitnessLevel) {
         this.workoutId = getSObjectValue(workout, ID_FIELD);
         this.recordTypeId = this.scoreRecordTypes[this.workoutType];
-        console.log(this.scores);
         this.scoreId =
           this.scores[this.workoutId] !== undefined
             ? this.scores[this.workoutId]

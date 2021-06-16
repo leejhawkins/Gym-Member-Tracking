@@ -23,7 +23,11 @@
               variant="brand"
             >
             </lightning-button>
-            <c-record-lift memberid={recordId} membername={Name}>
+            <c-record-lift
+              memberid={recordId}
+              membername={Name}
+              onrecord={handleRecordScore}
+            >
             </c-record-lift>
           </div>
           <div class="slds-col slds-size_7-of-12">
