@@ -34,7 +34,7 @@
             object-api-name="Score__c"
             record-id={scoreId}
             fields={fields}
-            onsubmit={handleSubmit}
+            onsuccess={handleSubmit}
           ></lightning-record-form>
         </template>
         <template if:false={scoreId}>
@@ -42,7 +42,7 @@
             <lightning-record-edit-form
               object-api-name="Score__c"
               record-type-id={recordTypeId}
-              onsuccess={handleSuccess}
+              onsubmit={handleSuccess}
             >
               <div class="slds-hide">
                 <lightning-input-field

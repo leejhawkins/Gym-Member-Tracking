@@ -1,35 +1,45 @@
 import { LightningElement, api } from "lwc";
+import { loadScript } from "lightning/platformResourceLoader";
+import MOMENT_JS from "@salesforce/resourceUrl/moment";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-
+import getScoreRecordTypes from "@salesforce/apex/ScoreController.getScoreRecordTypes";
+import insertScoreMemberWorkout from "@salesforce/apex/ScoreController.insertScoreMemberWorkout";
 export default class RecordLift extends LightningElement {
   @api memberid;
   @api membername;
   date = new Date();
+  recordTypeId;
   reps;
   strength;
   type;
+  minutes;
+  seconds;
   weight;
   workoutDescription;
   showForm = false;
-
-  handleSelect(event) {
-    this.benchmarkAPI = event.target.value;
-    switch (this.benchmarkAPI) {
-      case "Back_Squat__c":
-        this.benchmarkField = "Back Squat";
-        break;
-      case "Deadlift__c":
-        this.benchmarkField = "Deadlift";
-        break;
-      case "Bench_Press__c":
-        this.benchmarkField = "Bench Press";
-        break;
-      case "Shoulder_Press__c":
-        this.benchmarkField = "Shoulder Press";
-        break;
-      default:
-        this.benchmarkField = null;
+  connectedCallback() {
+    getScoreRecordTypes()
+      .then((data) => {
+        this.scoreRecordTypes = data;
+      })
+      .catch((err) => console.log(err));
+    if (this.momentjsInitialized) {
+      return;
     }
+    this.momentjsInitialized = true;
+    loadScript(this, MOMENT_JS)
+      .then(() => {
+        this.workoutDate = moment().format("YYYY-MM-DD");
+      })
+      .catch((error) => {
+        this.error = error;
+      });
+  }
+  handleSelect(event) {
+    this.type = event.target.value;
+    this.recordTypeId = this.scoreRecordTypes[this.type];
+    this.fieldOne = this.type === "For Time" ? "Minutes__c" : "Rounds__c";
+    this.fieldTwo = this.type === "For Time" ? "Seconds__c" : "Reps__c";
   }
   handleClick() {
     this.showForm = !this.showForm;
@@ -37,26 +47,46 @@ export default class RecordLift extends LightningElement {
   handleChange(event) {
     this[event.target.name] = event.target.value;
   }
-  handleSuccess() {
-    this.date = new Date();
-    this.reps = null;
-    this.weight = null;
-
-    this.dispatchEvent(
-      new ShowToastEvent({
-        title: "Success",
-        message: "Lift added",
-        variant: "success"
-      })
-    );
-    const recordLift = new CustomEvent("record", { id: this.memberid });
-    this.dispatchEvent(recordLift);
+  get workoutName() {
+    return `${this.membername} Workout for ${this.date}`.trim();
   }
 
-  get benchmarkName() {
-    return `${this.membername} ${this.benchmarkField} ${this.reps} x  Rep Max`.trim();
-  }
-  get computedWeight() {
-    return parseInt(this.weight * (36 / (37 - this.reps)));
+  handleSuccess(event) {
+    const scoreName = this.workoutName + " Score";
+    insertScoreMemberWorkout({
+      name: scoreName,
+      memberId: this.memberid,
+      workoutId: event.detail.id,
+      weight: this.weight,
+      key1: this.fieldOne,
+      value1: this.minutes,
+      key2: this.fieldTwo,
+      value2: this.seconds,
+      recordType: this.recordTypeId
+    }).then(() => {
+      const inputFields = this.template.querySelectorAll(
+        "lightning-input-field"
+      );
+      if (inputFields) {
+        inputFields.forEach((field) => {
+          field.reset();
+        });
+      }
+      this.date = new Date();
+      this.reps = null;
+      this.weight = null;
+      this.showForm = false;
+      this.dispatchEvent(
+        new ShowToastEvent({
+          title: "Success",
+          message: "Workout for " + this.membername + " was recorded",
+          variant: "success"
+        })
+      );
+      const recordLift = new CustomEvent("record", {
+        detail: { id: this.memberid }
+      });
+      this.dispatchEvent(recordLift);
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { LightningElement, wire } from "lwc";
+import { LightningElement, wire, api } from "lwc";
 
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 
@@ -32,7 +32,8 @@ const fields = [
 export default class MemberDetails extends LightningElement {
   subscription = null;
   nextLevel;
-  recordId;
+
+  @api recordId;
   goalBackSquat = 0;
   goalBenchPress = 0;
   goalDeadlift = 0;
@@ -50,7 +51,7 @@ export default class MemberDetails extends LightningElement {
   Weight__c;
 
   @wire(getRecord, { recordId: "$recordId", fields })
-  wiredRecord({ error, data }) {
+  wiredGetRecord({ error, data }) {
     if (error) {
       this.dispatchToast(error);
     } else if (data) {
@@ -85,7 +86,7 @@ export default class MemberDetails extends LightningElement {
   }
 
   updateBenchmarkChart() {
-    if (this.template.querySelector("c-member-bar-chart").chartCreated()) {
+    if (this.template.querySelector("c-member-bar-chart").isConnected) {
       this.template
         .querySelector("c-member-bar-chart")
         .updateChart(
@@ -143,12 +144,12 @@ export default class MemberDetails extends LightningElement {
   }
 
   handleMessage(message) {
+    // eslint-disable-next-line @lwc/lwc/no-api-reassignments
     this.recordId = message.recordId;
   }
   handleRecordScore(event) {
     this.recordId = null;
     this.recordId = event.detail.id;
-    console.log(event.detail.id);
     this.updateBenchmarkChart();
   }
 

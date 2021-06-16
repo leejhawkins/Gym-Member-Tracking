@@ -32,4 +32,31 @@ public inherited sharing class ScoreController {
       throw new AuraHandledException(e.getMessage());
     }
   }
+  @AuraEnabled
+  public static void insertScoreMemberWorkout(
+    String name,
+    Id memberId,
+    Id workoutId,
+    Integer weight,
+    String key1,
+    String value1,
+    String key2,
+    String value2,
+    Id recordType
+  ) {
+    Score__c s = new Score__c(
+      Name = name,
+      Member__c = memberId,
+      Workout__c = workoutId,
+      Weight__c = weight,
+      RecordTypeId = recordType
+    );
+    s.put(key1, value1);
+    s.put(key2, value2);
+    try {
+      insert s;
+    } catch (Exception e) {
+      throw new AuraHandledException(e.getMessage());
+    }
+  }
 }
