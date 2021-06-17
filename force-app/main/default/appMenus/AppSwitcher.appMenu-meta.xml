@@ -41,10 +41,6 @@
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
-        <name>standard__Insights</name>
-        <type>CustomApplication</type>
-    </appMenuItems>
-    <appMenuItems>
         <name>standard__LightningSales</name>
         <type>CustomApplication</type>
     </appMenuItems>
@@ -67,5 +63,9 @@
     <appMenuItems>
         <name>Gym_Tracker_App</name>
         <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>BenchMark Member Hub</name>
+        <type>Network</type>
     </appMenuItems>
 </AppMenu>
