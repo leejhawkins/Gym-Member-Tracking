@@ -1,0 +1,68 @@
+{
+  "activeBrandingSetId" : "a7ba1398-b5a3-496b-9a93-a58d36fa51ed",
+  "customCSS" : "",
+  "developerName" : "byo",
+  "id" : "3b1f78b4-072b-4b16-a484-77ed233760ba",
+  "label" : "Build Your Own (LWR)",
+  "layouts" : {
+    "Inner" : "243306ea-d162-4d6a-8470-10138264cacc"
+  },
+  "type" : "theme",
+  "views" : [ {
+    "componentAttributes" : { },
+    "componentName" : "community_byo:scopedHeaderAndFooter",
+    "id" : "243306ea-d162-4d6a-8470-10138264cacc",
+    "label" : "Scoped Header and Footer",
+    "regions" : [ {
+      "components" : [ {
+        "componentAttributes" : {
+          "sectionConfig" : "{\"UUID\":\"32a9a947-7d62-440a-8a1b-175b03c25590\",\"columns\":[{\"UUID\":\"e07856fa-76f7-43e3-985f-6768ad671ff8\",\"columnName\":\"Column 1\",\"columnKey\":\"headerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+        },
+        "componentName" : "community_layout:section",
+        "id" : "32a9a947-7d62-440a-8a1b-175b03c25590",
+        "regions" : [ {
+          "components" : [ {
+            "componentAttributes" : {
+              "richTextValue" : "<p community_builder-richtexteditor_richtexteditor=\"\" style=\"text-align: center;\"><span community_builder-richtexteditor_richtexteditor=\"\" style=\"font-size: 36px;\">BenchMark Member Hub</span></p>"
+            },
+            "componentName" : "community_builder:richTextEditor",
+            "id" : "175a0d66-1a5b-48cf-96d7-ea5570d0175b",
+            "renditionMap" : { },
+            "type" : "component"
+          } ],
+          "id" : "e07856fa-76f7-43e3-985f-6768ad671ff8",
+          "regionLabel" : "Theme Header",
+          "regionName" : "headerSection",
+          "renditionMap" : { },
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "type" : "component"
+      } ],
+      "id" : "db99ee38-38d5-4e6b-b1e8-f1858bb11a68",
+      "regionName" : "header",
+      "type" : "region"
+    }, {
+      "components" : [ {
+        "componentAttributes" : {
+          "sectionConfig" : "{\"UUID\":\"bcfb9452-89d1-4d1b-a851-72ab786e3391\",\"columns\":[{\"UUID\":\"d290058e-8a07-4b1e-b301-6129436c0a93\",\"columnName\":\"Column 1\",\"columnKey\":\"footerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+        },
+        "componentName" : "community_layout:section",
+        "id" : "bcfb9452-89d1-4d1b-a851-72ab786e3391",
+        "regions" : [ {
+          "id" : "d290058e-8a07-4b1e-b301-6129436c0a93",
+          "regionLabel" : "Theme Footer",
+          "regionName" : "footerSection",
+          "renditionMap" : { },
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "type" : "component"
+      } ],
+      "id" : "18651a7d-12a6-43df-82f1-0fdc0d16d757",
+      "regionName" : "footer",
+      "type" : "region"
+    } ],
+    "type" : "view"
+  } ]
+}
