@@ -23,10 +23,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ClientFocused</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>EmailController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
