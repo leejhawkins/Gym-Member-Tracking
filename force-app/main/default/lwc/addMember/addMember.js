@@ -1,27 +1,25 @@
 import { LightningElement } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
-import MEMBER_OBJECT from "@salesforce/schema/Member__c";
-import NAME_FIELD from "@salesforce/schema/Member__c.Name";
-import DOB_FIELD from "@salesforce/schema/Member__c.Date_of_Birth__c";
-import ACTIVE_FIELD from "@salesforce/schema/Member__c.Active__c";
-import HEIGHTFT_FIELD from "@salesforce/schema/Member__c.Height_Feet__c";
-import HEIGHTIN_FIELD from "@salesforce/schema/Member__c.Height_Inches__c";
-import EMAIL_FIELD from "@salesforce/schema/Member__c.Email__c";
-import FITNESSLEVEL_FIELD from "@salesforce/schema/Member__c.Fitness_Level__c";
-import TRAININGCLASS_FIELD from "@salesforce/schema/Member__c.Training_Class__c";
-import GENDER_FIELD from "@salesforce/schema/Member__c.Gender__c";
+import MEMBER_OBJECT from "@salesforce/schema/Contact";
+import NAME_FIELD from "@salesforce/schema/Contact.Name";
+import DOB_FIELD from "@salesforce/schema/Contact.Birthdate";
+import HEIGHTFT_FIELD from "@salesforce/schema/Contact.Height_Feet__c";
+import HEIGHTIN_FIELD from "@salesforce/schema/Contact.Height_Inches__c";
+import EMAIL_FIELD from "@salesforce/schema/Contact.Email__c";
+import FITNESSLEVEL_FIELD from "@salesforce/schema/Contact.Fitness_Level__c";
+import WEIGHT_FIELD from "@salesforce/schema/Contact.Weight__c";
+import GENDER_FIELD from "@salesforce/schema/Contact.Gender__c";
 
 export default class AddMember extends LightningElement {
   memberObject = MEMBER_OBJECT;
   nameField = NAME_FIELD;
   dobField = DOB_FIELD;
-  activeField = ACTIVE_FIELD;
   heightFtField = HEIGHTFT_FIELD;
   heightInField = HEIGHTIN_FIELD;
   emailField = EMAIL_FIELD;
   fitnessLevelField = FITNESSLEVEL_FIELD;
-  trainingClassField = TRAININGCLASS_FIELD;
+  weightField = WEIGHT_FIELD;
   genderField = GENDER_FIELD;
 
   showSuccessToast() {
