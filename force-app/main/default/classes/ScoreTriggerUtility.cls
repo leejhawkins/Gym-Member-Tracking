@@ -6,26 +6,26 @@ public with sharing class ScoreTriggerUtility {
       'Bench Press' => 'Bench_Press__c',
       'Shoulder Press' => 'Shoulder_Press__c'
     };
-    List<Member__c> members = new List<Member__c>();
+    List<Contact> members = new List<Contact>();
     List<Id> memberIds = new List<Id>();
-    Map<Id, Member__c> memberMap = new Map<Id, Member__c>();
+    Map<Id, Contact> memberMap = new Map<Id, Contact>();
     for (Score__c s : scores) {
-      memberIds.add(s.Member__c);
+      memberIds.add(s.Contact__c);
     }
     System.debug(scores);
     for (AggregateResult a : [
-      SELECT Member__r.Id, Max(Weight__c) MaxWeight, Strength_Type__c
+      SELECT Contact__r.Id, Max(Weight__c) MaxWeight, Strength_Type__c
       FROM Score__c
       WHERE
-        Member__c IN :memberIds
+        Contact__c IN :memberIds
         AND Strength_Reps__c = 1
         AND Workout_Date__c >= :Date.Today().addDays(-90)
-      GROUP BY Strength_Type__c, Member__r.Id
+      GROUP BY Strength_Type__c, Contact__r.Id
     ]) {
       System.debug(a);
-      Member__c m = memberMap.containsKey(a.Id)
+      Contact m = memberMap.containsKey(a.Id)
         ? memberMap.get(a.Id)
-        : new Member__c(Id = a.Id);
+        : new Contact(Id = a.Id);
 
       String liftField = liftMap.get((String) a.get('Strength_Type__c'));
       m.put(liftField, a.get('MaxWeight'));
@@ -40,11 +40,11 @@ public with sharing class ScoreTriggerUtility {
     );
     System.debug(memberMap);
     for (Score__c s : scores) {
-      Member__c member = new Member__c();
-      if (memberMap.get(s.Member__c) != null) {
-        member = memberMap.get(s.Member__c);
+      Contact member = new Contact();
+      if (memberMap.get(s.Contact__c) != null) {
+        member = memberMap.get(s.Contact__c);
       } else {
-        member.put('Id', s.Member__c);
+        member.put('Id', s.Contact__c);
       }
       Score__c relatedWorkoutInfo = relatedWorkoutMap.get(s.Id);
       String liftField = liftMap.get(relatedWorkoutInfo.Workout__r.Strength__c);

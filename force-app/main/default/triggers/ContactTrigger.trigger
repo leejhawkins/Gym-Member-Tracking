@@ -1,4 +1,4 @@
-trigger MemberTrigger on Member__c(after insert, before insert, before update) {
+trigger ContactTrigger on Contact(after insert, before insert, before update) {
   if (Trigger.isAfter && Trigger.isInsert) {
     MailToNewMember.sendWelcomeEmail(Trigger.new);
   }

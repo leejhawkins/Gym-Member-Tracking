@@ -83,6 +83,7 @@ export default class RecordMemberScore extends LightningElement {
     }
   }
   handleSuccess(event) {
+    console.log(event.detail.id);
     this.scoreId = event.detail.id;
     this.minutes = null;
     this.seconds = null;

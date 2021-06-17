@@ -4,13 +4,13 @@
 */
 @isTest
 public inherited sharing class TestDataFactory {
-  //methods to create records and populate the required fields
-  public static List<Member__c> generateMembers(Integer numOfMembers) {
-    List<Member__c> members = new List<Member__c>();
+  // methods to create records and populate the required fields
+  public static List<Contact> generateMembers(Integer numOfMembers) {
+    List<Contact> members = new List<Contact>();
     for (Integer i = 0; i < numOfMembers; i++) {
-      Member__c m = new Member__c();
-      m.Name = 'Test member ' + i;
-      m.Date_of_Birth__c = Date.today();
+      Contact m = new Contact();
+      m.LastName = 'Test member ' + i;
+      m.Birthdate = Date.today();
       members.add(m);
     }
     //insert members;
@@ -36,14 +36,14 @@ public inherited sharing class TestDataFactory {
 
   public static List<Benchmark__c> generateBenchmarks(
     Integer numOfBenchMarks,
-    Member__c member
+    Contact member
   ) {
     List<Benchmark__c> benchmarks = new List<Benchmark__c>();
 
     for (Integer j = 1; j < numOfBenchMarks; j++) {
       Benchmark__c b = new Benchmark__c();
       b.Name = 'Test benchmark ' + j;
-      b.Member__c = member.Name;
+
       b.Date__c = Date.today();
       benchmarks.add(b);
     }
@@ -54,22 +54,21 @@ public inherited sharing class TestDataFactory {
   }
 
   //methods to create records with specified fields
-  public static List<Member__c> generateMembers(
+  public static List<Contact> generateMembers(
     String email,
     String fitnessLevel,
     String trainingClass,
     String issues,
     Integer membersNum
   ) {
-    List<Member__c> members = new List<Member__c>();
+    List<Contact> members = new List<Contact>();
     for (Integer i = 0; i < membersNum; i++) {
-      Member__c member = new Member__c();
-      member.Name = 'Robust-Test-Member ' + i;
-      member.Date_of_Birth__c = Date.today();
-      member.Email__c = email;
-      member.Issues__c = issues;
+      Contact member = new Contact();
+      member.LastName = 'Robust-Test-Member ' + i;
+      member.Birthdate = Date.today();
+      member.Email = email;
+
       member.Fitness_Level__c = fitnessLevel;
-      member.Training_Class__c = trainingClass;
       members.add(member);
     }
     //insert members;
@@ -102,10 +101,7 @@ public inherited sharing class TestDataFactory {
     return workouts;
   }
 
-  public static void generateBenchmarks(
-    Member__c member,
-    Integer numBenchMarks
-  ) {
+  public static void generateBenchmarks(Contact member, Integer numBenchMarks) {
     List<Benchmark__c> benchmarks = new List<Benchmark__c>();
 
     for (Integer i = 0; i < numBenchMarks; i++) {

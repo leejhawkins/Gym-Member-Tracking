@@ -5,16 +5,16 @@ import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 import { subscribe, MessageContext } from "lightning/messageService";
 import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected__c";
 import getNextLevel from "@salesforce/apex/LiftStandardsController.getNextLevel";
-import NAME_FIELD from "@salesforce/schema/Member__c.Name";
-import LEVEL_FIELD from "@salesforce/schema/Member__c.Fitness_Level__c";
-import EMAIL_FIELD from "@salesforce/schema/Member__c.Email__c";
-import PICTURE_FIELD from "@salesforce/schema/Member__c.Picture__c";
-import BACKSQUAT_FIELD from "@salesforce/schema/Member__c.Back_Squat__c";
-import GENDER_FIELD from "@salesforce/schema/Member__c.Gender__c";
-import DEADLIFT_FIELD from "@salesforce/schema/Member__c.Deadlift__c";
-import BENCHPRESS_FIELD from "@salesforce/schema/Member__c.Bench_Press__c";
-import SHOULDERPRESS_FIELD from "@salesforce/schema/Member__c.Shoulder_Press__c";
-import WEIGHT_FIELD from "@salesforce/schema/Member__c.Weight__c";
+import NAME_FIELD from "@salesforce/schema/Contact.Name";
+import LEVEL_FIELD from "@salesforce/schema/Contact.Fitness_Level__c";
+import EMAIL_FIELD from "@salesforce/schema/Contact.Email";
+import PICTURE_FIELD from "@salesforce/schema/Contact.Picture__c";
+import BACKSQUAT_FIELD from "@salesforce/schema/Contact.Back_Squat__c";
+import GENDER_FIELD from "@salesforce/schema/Contact.Gender__c";
+import DEADLIFT_FIELD from "@salesforce/schema/Contact.Deadlift__c";
+import BENCHPRESS_FIELD from "@salesforce/schema/Contact.Bench_Press__c";
+import SHOULDERPRESS_FIELD from "@salesforce/schema/Contact.Shoulder_Press__c";
+import WEIGHT_FIELD from "@salesforce/schema/Contact.Weight__c";
 
 const fields = [
   NAME_FIELD,
@@ -40,7 +40,7 @@ export default class MemberDetails extends LightningElement {
   goalShoulderPress = 0;
 
   Name;
-  Email__c;
+  Email;
   Fitness_Level__c;
   Picture__c;
   Back_Squat__c = 0;
@@ -74,7 +74,7 @@ export default class MemberDetails extends LightningElement {
   })
   wiredBenchmarks({ error, data }) {
     if (error) {
-      console.log(data);
+      console.log(error);
     } else if (data) {
       this.goalBackSquat = data.Back_Squat__c;
       this.goalDeadlift = data.Deadlift__c;

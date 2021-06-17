@@ -42,7 +42,7 @@
             <lightning-record-edit-form
               object-api-name="Score__c"
               record-type-id={recordTypeId}
-              onsubmit={handleSuccess}
+              onsuccess={handleSuccess}
             >
               <div class="slds-hide">
                 <lightning-input-field
@@ -55,7 +55,7 @@
               </div>
               <div class="slds-hide">
                 <lightning-input-field
-                  field-name="Member__c"
+                  field-name="Contact__c"
                   value={memberid}
                   name="memberid"
                   onchange={handleChange}

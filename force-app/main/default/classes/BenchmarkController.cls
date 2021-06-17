@@ -27,7 +27,7 @@ public inherited sharing class BenchmarkController {
           Fitness_Level__c = 'Beginner'
         );
     bens.put('Current', currentBenchmark);
-    Member__c gMember = LiftStandardsController.getNextLevel(
+    Contact gMember = LiftStandardsController.getNextLevel(
       currentBenchmark.Fitness_Level__c,
       gender,
       currentBenchmark.Weight__c

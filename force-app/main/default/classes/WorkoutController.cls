@@ -3,9 +3,9 @@ public inherited sharing class WorkoutController {
   public static Workout__c getMemberWorkout(Id memberId, Date workoutDate) {
     try {
       workoutDate = workoutDate != null ? workoutDate : Date.today();
-      Member__c m = [
+      Contact m = [
         SELECT Fitness_Level__c
-        FROM Member__c
+        FROM Contact
         WHERE Id = :memberId
         LIMIT 1
       ];

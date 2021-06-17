@@ -4,7 +4,7 @@
 */
 public with sharing class MailToNewMember {
   //first create the email template
-  public static Messaging.SingleEmailMessage makeEmail(Member__c m) {
+  public static Messaging.SingleEmailMessage makeEmail(Contact m) {
     Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
     email.setSenderDisplayName('Gym Owner');
     email.setToAddresses(new List<String>{ m.Email__c });
@@ -19,9 +19,9 @@ public with sharing class MailToNewMember {
   }
 
   //send email to new member
-  public static void sendWelcomeEmail(List<Member__c> members) {
+  public static void sendWelcomeEmail(List<Contact> members) {
     List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
-    for (Member__c m : members) {
+    for (Contact m : members) {
       if (m.Email__c != null && m.Name != null) {
         emails.add(makeEmail(m));
       }

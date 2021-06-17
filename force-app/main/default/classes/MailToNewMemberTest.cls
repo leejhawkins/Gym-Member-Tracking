@@ -2,15 +2,15 @@
 public class MailToNewMemberTest {
   @TestSetup
   static void makeData() {
-    Member__c m = new Member__c();
-    m.Name = 'Bob';
-    m.Date_of_Birth__c = Date.today();
-    m.Email__c = 'kareemthedeveloper' + 1 + '@gmail.com';
+    Contact m = new Contact();
+    m.LastName = 'Bob';
+    m.Birthdate = Date.today();
+    m.Email = 'kareemthedeveloper' + 1 + '@gmail.com';
     insert m;
 
-    List<Member__c> newMembers = TestDataFactory.generateMembers(5);
+    List<Contact> newMembers = TestDataFactory.generateMembers(5);
     Integer counter = 1;
-    for (Member__c member : newMembers) {
+    for (Contact member : newMembers) {
       member.Email__c = 'kareemfullstackdev' + counter + '@gmail.com';
     }
     insert newMembers;
@@ -18,9 +18,9 @@ public class MailToNewMemberTest {
   @isTest
   public static void baseTest() {
     Test.startTest();
-    List<Member__c> newMember = [
-      SELECT Name, Email__c
-      FROM Member__c
+    List<Contact> newMember = [
+      SELECT Name, Email
+      FROM Contact
       WHERE Name LIKE 'Bob'
       LIMIT 1
     ];
@@ -38,9 +38,9 @@ public class MailToNewMemberTest {
   public static void addMembersTest() {
     Test.startTest();
     try {
-      List<Member__c> newMembers = [
-        SELECT Name, Email__c
-        FROM Member__c
+      List<Contact> newMembers = [
+        SELECT Name, Email
+        FROM Contact
         WHERE Name LIKE 'Test member'
       ];
       MailToNewMember.sendWelcomeEmail(newMembers);

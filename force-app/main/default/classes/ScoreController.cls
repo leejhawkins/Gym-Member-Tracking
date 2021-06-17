@@ -20,7 +20,7 @@ public inherited sharing class ScoreController {
       List<Score__c> scores = [
         SELECT Id, Workout__c
         FROM Score__c
-        WHERE Member__c = :memberId
+        WHERE Contact__c = :memberId
       ];
 
       for (Score__c s : scores) {
@@ -46,7 +46,7 @@ public inherited sharing class ScoreController {
   ) {
     Score__c s = new Score__c(
       Name = name,
-      Member__c = memberId,
+      Contact__c = memberId,
       Workout__c = workoutId,
       Weight__c = weight,
       RecordTypeId = recordType
