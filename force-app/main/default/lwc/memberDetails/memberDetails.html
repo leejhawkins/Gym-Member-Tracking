@@ -1,11 +1,11 @@
 <template>
   <lightning-card title={Name} if:true={Name}>
     <template if:true={Name} onchange={handleChange} value={Name}>
-      <div class="slds-m-around_medium">
+      <div class="slds-var-m-around_medium">
         <div class="slds-grid slds-wrap">
           <div class="slds-col slds-size_5-of-12">
             <span>{Fitness_Level__c}</span>
-            <div class="slds-m-around_medium">
+            <div class="slds-var-m-around_medium">
               <lightning-layout-item>
                 <img src={Picture__c} alt="Profile photo" />
               </lightning-layout-item>
@@ -43,7 +43,7 @@
             >
             </c-member-bar-chart>
             <div
-              class="slds-grid slds-gutters_direct-medium slds-wrap slds-m-around_medium slds-align_absolute-center"
+              class="slds-grid slds-gutters_direct-medium slds-wrap slds-var-m-around_medium slds-align_absolute-center"
             >
               <div class="slds-col slds-size_12-of-12">
                 <h1 class="slds-align_absolute-center slds-border_bottom">

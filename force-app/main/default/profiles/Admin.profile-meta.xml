@@ -144,11 +144,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>MemberController</apexClass>
+        <apexClass>ContactController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>MemberTriggerUtility</apexClass>
+        <apexClass>ContactTriggerUtility</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>

@@ -7,7 +7,7 @@ public with sharing class MailToNewMember {
   public static Messaging.SingleEmailMessage makeEmail(Contact m) {
     Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
     email.setSenderDisplayName('Gym Owner');
-    email.setToAddresses(new List<String>{ m.Email__c });
+    email.setToAddresses(new List<String>{ m.Email });
     email.setHtmlBody(
       '<p>Hello ' +
       m.Name +
@@ -22,7 +22,7 @@ public with sharing class MailToNewMember {
   public static void sendWelcomeEmail(List<Contact> members) {
     List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
     for (Contact m : members) {
-      if (m.Email__c != null && m.Name != null) {
+      if (m.Email != null && m.Name != null) {
         emails.add(makeEmail(m));
       }
     }

@@ -43,11 +43,11 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>MemberController</apexClass>
+        <apexClass>ContactController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>MemberTriggerUtility</apexClass>
+        <apexClass>ContactTriggerUtility</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>

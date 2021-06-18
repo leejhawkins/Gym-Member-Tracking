@@ -37,6 +37,7 @@ export default class RecordMemberScore extends LightningElement {
     this.momentjsInitialized = true;
     loadScript(this, MOMENT_JS)
       .then(() => {
+        // eslint-disable-next-line no-undef
         this.workoutDate = moment().format("YYYY-MM-DD");
       })
       .catch((error) => {
