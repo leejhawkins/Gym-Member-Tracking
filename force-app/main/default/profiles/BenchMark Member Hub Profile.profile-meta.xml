@@ -110,11 +110,11 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>MemberController</apexClass>
+        <apexClass>ContactController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>MemberTriggerUtility</apexClass>
+        <apexClass>ContactTriggerUtility</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -534,5 +534,4 @@
         <tab>Workout__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
-    <userLicense>Guest User License</userLicense>
 </Profile>

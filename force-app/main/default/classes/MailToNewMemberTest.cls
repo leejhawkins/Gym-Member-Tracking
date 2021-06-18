@@ -11,7 +11,7 @@ public class MailToNewMemberTest {
     List<Contact> newMembers = TestDataFactory.generateMembers(5);
     Integer counter = 1;
     for (Contact member : newMembers) {
-      member.Email__c = 'kareemfullstackdev' + counter + '@gmail.com';
+      member.Email = 'kareemfullstackdev' + counter + '@gmail.com';
     }
     insert newMembers;
   }

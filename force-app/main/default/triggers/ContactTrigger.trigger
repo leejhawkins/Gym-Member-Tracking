@@ -3,7 +3,7 @@ trigger ContactTrigger on Contact(after insert, before insert, before update) {
     MailToNewMember.sendWelcomeEmail(Trigger.new);
   }
   if (Trigger.isBefore && (Trigger.isUpdate || Trigger.isInsert)) {
-    MemberTriggerUtility.fitnessLevel(Trigger.new);
+    ContactTriggerUtility.fitnessLevel(Trigger.new);
   }
 
 }
