@@ -12,6 +12,7 @@ import WEIGHT_FIELD from "@salesforce/schema/Contact.Weight__c";
 import GENDER_FIELD from "@salesforce/schema/Contact.Gender__c";
 
 export default class AddMember extends LightningElement {
+  
   memberObject = MEMBER_OBJECT;
   nameField = NAME_FIELD;
   dobField = DOB_FIELD;
@@ -21,7 +22,10 @@ export default class AddMember extends LightningElement {
   fitnessLevelField = FITNESSLEVEL_FIELD;
   weightField = WEIGHT_FIELD;
   genderField = GENDER_FIELD;
+  
+  
 
+  
   showSuccessToast() {
     const evt = new ShowToastEvent({
       title: "Member Added",
@@ -32,4 +36,6 @@ export default class AddMember extends LightningElement {
     this.dispatchEvent(evt);
     window.location.reload();
   }
+  
 }
+
