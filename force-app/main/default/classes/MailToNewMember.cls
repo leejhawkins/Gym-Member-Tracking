@@ -3,6 +3,7 @@
    A class with the trigger logic to send an email to a member, gets invoked when member is inserted
 */
 public with sharing class MailToNewMember {
+  /*
   //first create the email template
   public static Messaging.SingleEmailMessage makeEmail(Member__c m) {
     Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
@@ -28,4 +29,6 @@ public with sharing class MailToNewMember {
     }
     List<Messaging.SendEmailResult> results = Messaging.sendEmail(emails);
   }
+  */
+  
 }
