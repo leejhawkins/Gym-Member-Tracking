@@ -1,4 +1,5 @@
 /* eslint-disable @lwc/lwc/no-api-reassignments */
+
 import { LightningElement, wire, api } from "lwc";
 
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
@@ -178,3 +179,4 @@ export default class MemberDetails extends LightningElement {
     modal.hide();
   }
 }
+

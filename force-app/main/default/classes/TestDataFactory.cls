@@ -5,6 +5,7 @@
 @isTest
 public inherited sharing class TestDataFactory {
   // methods to create records and populate the required fields
+  /*
   public static List<Contact> generateMembers(Integer numOfMembers) {
     List<Contact> members = new List<Contact>();
     for (Integer i = 0; i < numOfMembers; i++) {
@@ -117,4 +118,5 @@ public inherited sharing class TestDataFactory {
       insert b;
     }
   }
+  */
 }
