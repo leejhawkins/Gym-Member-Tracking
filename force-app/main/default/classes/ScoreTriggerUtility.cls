@@ -22,7 +22,6 @@ public with sharing class ScoreTriggerUtility {
         AND Workout_Date__c >= :Date.Today().addDays(-90)
       GROUP BY Strength_Type__c, Contact__r.Id
     ]) {
-      System.debug(a);
       Contact m = memberMap.containsKey(a.Id)
         ? memberMap.get(a.Id)
         : new Contact(Id = a.Id);
@@ -38,7 +37,6 @@ public with sharing class ScoreTriggerUtility {
         WHERE Id IN :scores
       ]
     );
-    System.debug(memberMap);
     for (Score__c s : scores) {
       Contact member = new Contact();
       if (memberMap.get(s.Contact__c) != null) {

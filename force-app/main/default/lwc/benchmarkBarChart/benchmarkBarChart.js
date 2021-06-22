@@ -41,9 +41,7 @@ export default class MemberBarChart extends LightningElement {
             }
           ]
         }
-      }
-    },
-    options: {
+      },
       title: {
         display: true,
         text: "Lift Progress as a Ratio to Goal Weight"
@@ -56,7 +54,6 @@ export default class MemberBarChart extends LightningElement {
       return;
     }
     this.chartjsInitialized = true;
-    console.log("making chart..");
     Promise.all([
       loadScript(this, chartjs + "/Chart.min.js"),
       loadStyle(this, chartjs + "/Chart.min.css")
@@ -92,5 +89,6 @@ export default class MemberBarChart extends LightningElement {
       console.log(true);
       return true;
     }
+    return false;
   }
 }
