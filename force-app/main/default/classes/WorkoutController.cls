@@ -1,3 +1,13 @@
+/**
+ * @description       : Change references from Contact to Contact.RecordType.Name = 'Gym Member' or use RecordTypeId or developerId
+ * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @group             : 
+ * @last modified on  : 06-19-2021
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * Modifications Log 
+ * Ver   Date         Author                               Modification
+ * 1.0   06-19-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+**/
 public inherited sharing class WorkoutController {
   @AuraEnabled(cacheable=true)
   public static Workout__c getMemberWorkout(Id memberId, Date workoutDate) {
@@ -6,7 +16,7 @@ public inherited sharing class WorkoutController {
       Contact m = [
         SELECT Fitness_Level__c
         FROM Contact
-        WHERE Id = :memberId
+        WHERE Id = :memberId AND RecordType.Name = 'Gym Member'
         LIMIT 1
       ];
       m.Fitness_Level__c = m.Fitness_Level__c == 'Novice'

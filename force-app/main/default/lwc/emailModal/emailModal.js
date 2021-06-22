@@ -88,3 +88,4 @@ export default class EmailModal extends LightningElement {
     footerEl.classList.remove(CSS_CLASS);
   }
 }
+

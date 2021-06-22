@@ -3,6 +3,7 @@ import Id from "@salesforce/user/Id";
 import getMember from "@salesforce/apex/ContactController.getMember";
 
 export default class IdentifyMember extends LightningElement {
+  
   userId = Id;
   recordid;
   memberName;
@@ -23,4 +24,5 @@ export default class IdentifyMember extends LightningElement {
     this.recordid = null;
     this.recordid = event.detail.id;
   }
+
 }
