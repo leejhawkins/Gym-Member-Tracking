@@ -1,28 +1,32 @@
 <template>
-    <lightning-tabset>
-        <lightning-tab label="Dense View">
-            <div class="slds-m-around_medium">
-              <lightning-card> 
-                <div class="slds-grid slds-wrap">
-                    <c-member-details
-                      recordid={recordid}>
-                    </c-member-details>
-                  </div>
-              </lightning-card> 
-              </div>
-        </lightning-tab>
-        <lightning-tab label="Create Workout">
-
-        </lightning-tab>
-        <lightning-tab label="Analyze Progress">
-            <div class="slds-m-around_medium">
-                <c-benchmark-analysis
-                  recordid={recordid}>
-                </c-benchmark-analysis>
-            </div>
-        </lightning-tab>
-        <lightning-tab label="Set Goals">
-
-        </lightning-tab>
-    </lightning-tabset>
+  <lightning-tabset>
+    <lightning-tab label="Member Details">
+      <div class="slds-var-m-around_medium">
+        <lightning-card>
+          <c-community-member-detail-tab recordid={recordid}>
+          </c-community-member-detail-tab>
+        </lightning-card>
+      </div>
+    </lightning-tab>
+    <lightning-tab label="Record Score">
+      <c-record-member-score
+        memberid={recordid}
+        membername={memberName}
+        onrecordscore={handleRecordScore}
+      ></c-record-member-score>
+    </lightning-tab>
+    <lightning-tab label="Create Workout">
+      <c-record-lift
+        memberid={recordid}
+        membername={memberName}
+        onrecordscore={handleRecordScore}
+      >
+      </c-record-lift>
+    </lightning-tab>
+    <lightning-tab label="Analyze Progress">
+      <div class="slds-var-m-around_medium">
+        <c-benchmark-analysis recordid={recordid}> </c-benchmark-analysis>
+      </div>
+    </lightning-tab>
+  </lightning-tabset>
 </template>

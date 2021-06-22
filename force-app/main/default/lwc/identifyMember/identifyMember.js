@@ -5,19 +5,22 @@ import getMember from "@salesforce/apex/ContactController.getMember";
 export default class IdentifyMember extends LightningElement {
   userId = Id;
   recordid;
-
+  memberName;
   error;
 
   connectedCallback() {
-    console.log("begin");
+    console.log(Id);
     getMember({ userId: this.userId })
       .then((data) => {
-        console.log(data);
         this.recordid = data.Id;
+        this.memberName = data.Name;
       })
       .catch((error) => {
-        console.log(error);
         this.error = error;
       });
+  }
+  handleRecordScore(event) {
+    this.recordid = null;
+    this.recordid = event.detail.id;
   }
 }

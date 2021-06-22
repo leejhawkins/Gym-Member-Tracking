@@ -61,7 +61,7 @@ export default class MemberBarChart extends LightningElement {
       return;
     }
     this.chartjsInitialized = true;
-    console.log("making chart..");
+    console.log("making chart..**");
     Promise.all([
       loadScript(this, chartjs + "/Chart.min.js"),
       loadStyle(this, chartjs + "/Chart.min.css")
@@ -83,12 +83,13 @@ export default class MemberBarChart extends LightningElement {
         this.chart = new window.Chart(ctx, this.config);
       })
       .catch((error) => {
-        console.log(error);
+        console.log("there is an error");
         this.error = error;
       });
   }
   @api
   updateChart(cBS, gBS, cDL, gDL, cBP, gBP, cSP, gSP) {
+    console.log(cBS);
     this.chart.data.datasets[0].data[0] = cBS;
     this.chart.data.datasets[1].data[0] = gBS;
     this.chart.data.datasets[0].data[1] = cDL;

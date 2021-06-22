@@ -1,102 +1,84 @@
 <template>
   <lightning-card>
-    <template if:false={showForm}>
-      <lightning-button
-        type="button"
-        onclick={handleClick}
-        variant="brand"
-        label="Create Workout"
-      >
-        Add Workout
-      </lightning-button>
-    </template>
-    <template if:true={showForm}>
-      <div class="slds-var-m-around_medium">
-        <lightning-record-edit-form object-api-name="Score__c">
-          <div class="slds-grid slds-wrap">
-            <div class="slds-col slds-size_6-of-12">
-              <lightning-input-field
-                field-name="Weight__c"
-                value={weight}
-                name="weight"
-                onchange={handleChange}
-              ></lightning-input-field>
-            </div>
-            <div class="slds-col slds-size_6-of-12"></div>
-            <div class="slds-col slds-size_5-of-12">
-              <lightning-input-field
-                field-name={fieldOne}
-                value={minutes}
-                name="minutes"
-                onchange={handleChange}
-              ></lightning-input-field>
-            </div>
-            <div class="slds-col slds-size_2-of-12"></div>
-            <div class="slds-col slds-size_5-of-12">
-              <lightning-input-field
-                field-name={fieldTwo}
-                value={seconds}
-                name="seconds"
-                onchange={handleChange}
-              ></lightning-input-field>
-            </div>
-          </div>
-        </lightning-record-edit-form>
-        <lightning-record-edit-form
-          object-api-name="Workout__c"
-          onsuccess={handleSuccess}
-        >
-          <div class="slds-hide">
+    <div class="slds-var-m-around_medium">
+      <lightning-record-edit-form object-api-name="Score__c">
+        <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-size_6-of-12">
             <lightning-input-field
-              field-name="Name"
-              value={workoutName}
-            ></lightning-input-field>
-          </div>
-          <lightning-input-field
-            field-name="Strength__c"
-            value={strength}
-            name="strength"
-          >
-          </lightning-input-field>
-          <lightning-input-field
-            field-name="Reps__c"
-            value={reps}
-            name="reps"
-          ></lightning-input-field>
-          <lightning-input-field
-            field-name="Type__c"
-            value={type}
-            name="type"
-            onchange={handleSelect}
-          ></lightning-input-field>
-          <lightning-input-field
-            field-name="Workout_Description__c"
-            onchange={handleChange}
-            name={workoutDescription}
-            value={workoutDescription}
-          ></lightning-input-field>
-          <div>
-            <lightning-input-field
-              field-name="Date__c"
-              value={date}
-              name="date"
+              field-name="Weight__c"
+              value={weight}
+              name="weight"
               onchange={handleChange}
             ></lightning-input-field>
           </div>
-          <lightning-button
-            type="submit"
-            variant="brand"
-            name="save"
-            label="Record Lift"
-          ></lightning-button>
-          <lightning-button
-            type="button"
-            onclick={handleClick}
-            variant="destructive-text"
-            label="Cancel"
-          ></lightning-button>
-        </lightning-record-edit-form>
-      </div>
-    </template>
+          <div class="slds-col slds-size_6-of-12"></div>
+          <div class="slds-col slds-size_5-of-12">
+            <lightning-input-field
+              field-name={fieldOne}
+              value={minutes}
+              name="minutes"
+              onchange={handleChange}
+            ></lightning-input-field>
+          </div>
+          <div class="slds-col slds-size_2-of-12"></div>
+          <div class="slds-col slds-size_5-of-12">
+            <lightning-input-field
+              field-name={fieldTwo}
+              value={seconds}
+              name="seconds"
+              onchange={handleChange}
+            ></lightning-input-field>
+          </div>
+        </div>
+      </lightning-record-edit-form>
+      <lightning-record-edit-form
+        object-api-name="Workout__c"
+        onsuccess={handleSuccess}
+      >
+        <div class="slds-hide">
+          <lightning-input-field
+            field-name="Name"
+            value={workoutName}
+          ></lightning-input-field>
+        </div>
+        <lightning-input-field
+          field-name="Strength__c"
+          value={strength}
+          name="strength"
+        >
+        </lightning-input-field>
+        <lightning-input-field
+          field-name="Reps__c"
+          value={reps}
+          name="reps"
+        ></lightning-input-field>
+        <lightning-input-field
+          field-name="Type__c"
+          value={type}
+          name="type"
+          onchange={handleSelect}
+        ></lightning-input-field>
+        <lightning-input-field
+          field-name="Workout_Description__c"
+          onchange={handleChange}
+          name={workoutDescription}
+          value={workoutDescription}
+        ></lightning-input-field>
+        <div>
+          <lightning-input-field
+            field-name="Date__c"
+            value={date}
+            name="date"
+            onchange={handleChange}
+          ></lightning-input-field>
+        </div>
+        <lightning-button
+          type="submit"
+          variant="brand"
+          name="save"
+          label="Create Workout"
+        ></lightning-button>
+      </lightning-record-edit-form>
+    </div>
   </lightning-card>
 </template>

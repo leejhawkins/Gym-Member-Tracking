@@ -14,15 +14,6 @@
             <lightning-formatted-email
               value={Email}
             ></lightning-formatted-email>
-
-            <lightning-button
-              type="button"
-              name="edit"
-              onclick={handleShowModal}
-              label="Send Workout"
-              variant="brand"
-            >
-            </lightning-button>
           </div>
           <div class="slds-col slds-size_7-of-12">
             <c-member-bar-chart
@@ -60,28 +51,6 @@
               </div>
             </div>
           </div>
-
-          <c-record-member-score
-            memberid={recordid}
-            membername={Name}
-            onrecordscore={handleRecordScore}
-          >
-          </c-record-member-score>
-
-          <c-email-modal
-            name={Name}
-            level={Fitness_Level__c}
-            email={Email__c}
-            memberid={recordid}
-          >
-            <div slot="footer">
-              <lightning-button
-                label="Cancel"
-                variant="neutral"
-                onclick={handleCancelModal}
-              ></lightning-button>
-            </div>
-          </c-email-modal>
         </div>
       </div>
     </template>

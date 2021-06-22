@@ -3,8 +3,6 @@ import { LightningElement, wire, api } from "lwc";
 
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 
-import { subscribe, MessageContext } from "lightning/messageService";
-import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected__c";
 import getNextLevel from "@salesforce/apex/LiftStandardsController.getNextLevel";
 import NAME_FIELD from "@salesforce/schema/Contact.Name";
 import LEVEL_FIELD from "@salesforce/schema/Contact.Fitness_Level__c";
@@ -30,7 +28,7 @@ const fields = [
   WEIGHT_FIELD
 ];
 
-export default class MemberDetails extends LightningElement {
+export default class CommunityMemberDetailTab extends LightningElement {
   subscription = null;
   nextLevel;
 
@@ -141,34 +139,5 @@ export default class MemberDetails extends LightningElement {
     return this.Shoulder_Press__c >= this.goalShoulderPress
       ? "achieved slds-col slds-size_5-of-12"
       : "next-level slds-col slds-size_5-of-12";
-  }
-
-  handleMessage(message) {
-    // eslint-disable-next-line @lwc/lwc/no-api-reassignments
-    this.recordid = message.recordId;
-  }
-
-  @wire(MessageContext)
-  messageContext;
-
-  subscribeToMessageChannel() {
-    this.subscription = subscribe(
-      this.messageContext,
-      RECORD_SELECTED_CHANNEL,
-      (message) => this.handleMessage(message)
-    );
-  }
-
-  connectedCallback() {
-    this.subscribeToMessageChannel();
-  }
-  handleShowModal() {
-    const modal = this.template.querySelector("c-email-modal");
-    modal.show();
-  }
-
-  handleCancelModal() {
-    const modal = this.template.querySelector("c-email-modal");
-    modal.hide();
   }
 }
