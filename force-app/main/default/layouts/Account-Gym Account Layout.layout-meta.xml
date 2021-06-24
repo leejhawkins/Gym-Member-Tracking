@@ -5,7 +5,7 @@
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
         <editHeading>true</editHeading>
-        <label>Contact Information</label>
+        <label>Account Information</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
@@ -13,124 +13,52 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Weight__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Height_Feet__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Height_Inches__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>Birthdate</field>
-            </layoutItems>
-            <layoutItems>
-
-                <behavior>Edit</behavior>
-                <field>Gender__c</field>
-
-            </layoutItems>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>AccountId</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Active__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <style>TwoColumnsTopToBottom</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>true</customLabel>
-        <detailHeading>true</detailHeading>
-        <editHeading>true</editHeading>
-        <label>Stats</label>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Fitness_Level__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Training_Class__c</field>
+                <field>ParentId</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Back_Squat__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Bench_Press__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Deadlift__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Shoulder_Press__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>true</customLabel>
-        <detailHeading>true</detailHeading>
-        <editHeading>true</editHeading>
-        <label>Contact Details</label>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Email</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>MobilePhone</field>
+                <field>Fax</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Phone</field>
             </layoutItems>
         </layoutColumns>
+        <style>TwoColumnsTopToBottom</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>false</customLabel>
+        <detailHeading>false</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Additional Information</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Picture__c</field>
+                <field>AnnualRevenue</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Premium_User__c</field>
+                <field>YearStarted</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>NumberOfEmployees</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>OwnerId</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>OperatingHoursId</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Description</field>
-            </layoutItems>
-        </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>true</customLabel>
-        <detailHeading>true</detailHeading>
-        <editHeading>true</editHeading>
-        <label>Health Details</label>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>BMI__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Issues__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -143,33 +71,24 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MailingAddress</field>
+                <field>Site</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>BillingAddress</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>OtherAddress</field>
+                <field>Website</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>ShippingAddress</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>false</customLabel>
-        <detailHeading>false</detailHeading>
-        <editHeading>true</editHeading>
-        <label>Additional Information</label>
-        <layoutColumns/>
-        <layoutColumns/>
-        <style>TwoColumnsLeftToRight</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>false</customLabel>
-        <detailHeading>false</detailHeading>
-        <editHeading>true</editHeading>
-        <label>Description Information</label>
-        <layoutColumns/>
-        <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
         <customLabel>false</customLabel>
@@ -181,8 +100,16 @@
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
+        <customLabel>false</customLabel>
+        <detailHeading>false</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Description Information</label>
+        <layoutColumns/>
+        <style>OneColumn</style>
+    </layoutSections>
+    <layoutSections>
         <customLabel>true</customLabel>
-        <detailHeading>true</detailHeading>
+        <detailHeading>false</detailHeading>
         <editHeading>false</editHeading>
         <label>Custom Links</label>
         <layoutColumns/>
@@ -201,13 +128,19 @@
             <quickActionName>NewTask</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
-            <quickActionName>LogACall</quickActionName>
+            <quickActionName>NewContact</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>NewCase</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
+            <quickActionName>LogACall</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
             <quickActionName>NewNote</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
+            <quickActionName>NewOpportunity</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>NewEvent</quickActionName>
@@ -231,16 +164,17 @@
     <relatedContent>
         <relatedContentItems>
             <layoutItem>
-                <behavior>Readonly</behavior>
-                <field>AccountId</field>
-            </layoutItem>
-        </relatedContentItems>
-        <relatedContentItems>
-            <layoutItem>
                 <component>runtime_sales_social:socialPanel</component>
             </layoutItem>
         </relatedContentItems>
     </relatedContent>
+    <relatedLists>
+        <fields>FULL_NAME</fields>
+        <fields>CONTACT.TITLE</fields>
+        <fields>CONTACT.EMAIL</fields>
+        <fields>CONTACT.PHONE1</fields>
+        <relatedList>RelatedContactList</relatedList>
+    </relatedLists>
     <relatedLists>
         <fields>OPPORTUNITY.NAME</fields>
         <fields>OPPORTUNITY.STAGE_NAME</fields>
@@ -250,15 +184,17 @@
     </relatedLists>
     <relatedLists>
         <fields>CASES.CASE_NUMBER</fields>
+        <fields>NAME</fields>
         <fields>CASES.SUBJECT</fields>
         <fields>CASES.PRIORITY</fields>
-        <fields>CASES.CREATED_DATE</fields>
+        <fields>CASES.CREATED_DATE_DATE_ONLY</fields>
         <fields>CASES.STATUS</fields>
         <fields>OWNER_NAME</fields>
         <relatedList>RelatedCaseList</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
+        <fields>TASK.WHO_NAME</fields>
         <fields>TASK.WHAT_NAME</fields>
         <fields>ACTIVITY.TASK</fields>
         <fields>TASK.DUE_DATE</fields>
@@ -269,6 +205,7 @@
     </relatedLists>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
+        <fields>TASK.WHO_NAME</fields>
         <fields>TASK.WHAT_NAME</fields>
         <fields>ACTIVITY.TASK</fields>
         <fields>TASK.DUE_DATE</fields>
@@ -277,37 +214,22 @@
         <relatedList>RelatedHistoryList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>CAMPAIGN.NAME</fields>
-        <fields>CAMPAIGN.START_DATE</fields>
-        <fields>CAMPAIGN.CAMPAIGN_TYPE</fields>
-        <fields>CM.STATUS</fields>
-        <fields>CM.RESPONDED</fields>
-        <fields>CM.LAST_UPDATE</fields>
-        <relatedList>RelatedCampaignList</relatedList>
-    </relatedLists>
-    <relatedLists>
         <relatedList>RelatedNoteList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>ACTIVITY.SUBJECT</fields>
-        <fields>EMAIL_STATUS.CREATED_DATE</fields>
-        <fields>EMAIL_STATUS.FIRST_OPEN_DATE</fields>
-        <fields>EMAIL_STATUS.TIMES_OPENED</fields>
-        <fields>EMAIL_STATUS.LAST_OPEN_DATE</fields>
-        <relatedList>RelatedEmailStatusList</relatedList>
+        <fields>ACCOUNT.NAME</fields>
+        <fields>OPPORTUNITY.NAME</fields>
+        <fields>PARTNER.ROLE</fields>
+        <relatedList>RelatedPartnerList</relatedList>
     </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Benchmark__c.Gym_Member__c</relatedList>
-    </relatedLists>
-    <relatedObjects>AccountId</relatedObjects>
+    <relatedObjects>ParentId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h1g000002nh0I</masterLabel>
+        <masterLabel>00h0t000000M44b</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
