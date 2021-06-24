@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Tab</actionName>
@@ -22,9 +22,9 @@
     <label>Gym Tracker App</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
-    <tabs>Member__c</tabs>
     <tabs>Workout__c</tabs>
-    <tabs>Benchmark__c</tabs>
+    <tabs>Score__c</tabs>
+    <tabs>standard-Contact</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Gym_Tracker_App_UtilityBar</utilityBar>
 </CustomApplication>
