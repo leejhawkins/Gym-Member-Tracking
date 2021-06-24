@@ -611,6 +611,10 @@
         <readable>false</readable>
     </fieldPermissions>
     <layoutAssignments>
+        <layout>Account-Gym Account Layout</layout>
+        <recordType>Account.Gym_Account</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Benchmark__c-Benchmark Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -734,6 +738,11 @@
         <apexPage>UnderConstruction</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>Account.Gym_Account</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
         <recordType>Contact.Gym_Member</recordType>
