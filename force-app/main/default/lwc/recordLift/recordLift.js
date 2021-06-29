@@ -21,8 +21,12 @@ export default class RecordLift extends LightningElement {
     getScoreRecordTypes()
       .then((data) => {
         this.scoreRecordTypes = data;
+        console.log(this.scoreRecordTypes);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log("there is an error");
+        console.log(err);
+      });
     if (this.momentjsInitialized) {
       return;
     }
