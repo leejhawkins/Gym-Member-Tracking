@@ -10,6 +10,7 @@ import EMAIL_FIELD from "@salesforce/schema/Contact.Email";
 import FITNESSLEVEL_FIELD from "@salesforce/schema/Contact.Fitness_Level__c";
 import WEIGHT_FIELD from "@salesforce/schema/Contact.Weight__c";
 import GENDER_FIELD from "@salesforce/schema/Contact.Gender__c";
+import ACCOUNT_FIELD from "@salesforce/schema/Contact.AccountId";
 
 export default class AddMember extends LightningElement {
   
@@ -22,6 +23,7 @@ export default class AddMember extends LightningElement {
   fitnessLevelField = FITNESSLEVEL_FIELD;
   weightField = WEIGHT_FIELD;
   genderField = GENDER_FIELD;
+  accountField = ACCOUNT_FIELD;
   
   
 
