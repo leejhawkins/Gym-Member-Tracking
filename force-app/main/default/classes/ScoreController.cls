@@ -1,4 +1,4 @@
-public inherited sharing class ScoreController {
+public class ScoreController {
   @AuraEnabled(cacheable=true)
   public static Map<String, Id> getScoreRecordTypes() {
     try {
@@ -39,9 +39,9 @@ public inherited sharing class ScoreController {
     Id workoutId,
     Integer weight,
     String key1,
-    String value1,
+    Integer value1,
     String key2,
-    String value2,
+    Integer value2,
     Id recordType
   ) {
     Score__c s = new Score__c(
