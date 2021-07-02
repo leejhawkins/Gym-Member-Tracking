@@ -59,4 +59,60 @@ public inherited sharing class ScoreController {
       throw new AuraHandledException(e.getMessage());
     }
   }
+  @AuraEnabled(cacheable=true)
+  public static Map<String, List<Score__c>> getMonthlyScores(Id memberId){
+    List<Score__c> monthlyScores = [Select Id, Strength_Type__c, Weight__c, Workout_Date__c FROM Score__c WHERE Workout_Date__c >=: Date.today().addMonths(-1) ORDER BY Workout_Date__c ASC];
+    List<Score__c> bsScores = new List<Score__c>();
+    List<Score__c> bpScores = new List<Score__c>();
+    List<Score__c> dlScores = new List<Score__c>();
+    List<Score__c> spScores = new List<Score__c>();
+    for(Score__c s : monthlyScores){
+      if(s.Strength_Type__c == 'Back Squat'){
+        bsScores.add(s);
+      }
+      if(s.Strength_Type__c == 'Bench Press'){
+        bpScores.add(s);
+      }
+      if(s.Strength_Type__c == 'Deadlift'){
+        dlScores.add(s);
+      }
+      if(s.Strength_Type__c == 'Shoulder Press'){
+        spScores.add(s);
+      }
+    }
+    Map<String, List<Score__c>> scoreMap = new Map<String, List<Score__c>>();
+    scoreMap.put('Back Squat', bsScores);
+    scoreMap.put('Bench Press', bpScores);
+    scoreMap.put('Deadlift', dlScores);
+    scoreMap.put('Shoulder Press', spScores);
+    return scoreMap;
+  }
+  @AuraEnabled(cacheable=true)
+  public static Map<String, List<Score__c>> getAnnualScores(Id memberId){
+    List<Score__c> monthlyScores = [Select Id, Strength_Type__c, Weight__c, Workout_Date__c FROM Score__c ORDER BY Workout_Date__c ASC];
+    List<Score__c> bsScores = new List<Score__c>();
+    List<Score__c> bpScores = new List<Score__c>();
+    List<Score__c> dlScores = new List<Score__c>();
+    List<Score__c> spScores = new List<Score__c>();
+    for(Score__c s : monthlyScores){
+      if(s.Strength_Type__c == 'Back Squat'){
+        bsScores.add(s);
+      }
+      if(s.Strength_Type__c == 'Bench Press'){
+        bpScores.add(s);
+      }
+      if(s.Strength_Type__c == 'Deadlift'){
+        dlScores.add(s);
+      }
+      if(s.Strength_Type__c == 'Shoulder Press'){
+        spScores.add(s);
+      }
+    }
+    Map<String, List<Score__c>> scoreMap = new Map<String, List<Score__c>>();
+    scoreMap.put('Back Squat', bsScores);
+    scoreMap.put('Bench Press', bpScores);
+    scoreMap.put('Deadlift', dlScores);
+    scoreMap.put('Shoulder Press', spScores);
+    return scoreMap;
+  }
 }
