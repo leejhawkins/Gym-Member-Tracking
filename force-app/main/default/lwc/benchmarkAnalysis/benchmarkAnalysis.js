@@ -7,6 +7,12 @@ import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected_
 import getBenchmarks from "@salesforce/apex/BenchmarkController.getBenchmarks";
 import getAnnualProgress from "@salesforce/apex/BenchmarkController.getAnnualProgress";
 import getMonthlyProgress from "@salesforce/apex/BenchmarkController.getMonthlyProgress";
+import getMonthlyScores from "@salesforce/apex/ScoreController.getMonthlyScores"
+import getAnnualScores from "@salesforce/apex/ScoreController.getAnnualScores"
+
+import STRENGTH_TYPE_FIELD from "@salesforce/schema/Score__c.Strength_Type__c";
+import WORKOUT_DATE_FIELD from "@salesforce/schema/Score__c.Workout_Date__c";
+import WEIGHT_FIELD from "@salesforce/schema/Score__c.Weight__c";
 
 import BACKSQUAT_FIELD from "@salesforce/schema/Benchmark__c.Back_Squat__c";
 import DEADLIFT_FIELD from "@salesforce/schema/Benchmark__c.Deadlift__c";
@@ -47,12 +53,12 @@ export default class MemberDetails extends LightningElement {
       datasets: [
         {
           data: [86, 87, 87, 88, 88],
-          label: "Bench Press",
+          label: "Back Squat",
           borderColor: "rgb(0, 0, 0)"
         },
         {
           data: [81, 81, 82, 83, 84],
-          label: "Back Squat",
+          label: "Bench Press",
           borderColor: "rgb(0, 255, 255)"
         },
         {
@@ -70,7 +76,7 @@ export default class MemberDetails extends LightningElement {
     options: {
       title: {
         display: true,
-        text: "Lift Progress as a Ratio to Goal Weight"
+        text: "Lift Progress by Weight"
       }
     }
   };
@@ -87,58 +93,97 @@ export default class MemberDetails extends LightningElement {
   }
 
   generateAnnualLineChart() {
-    getAnnualProgress({ memberId: this.recordid })
+    getAnnualScores({ memberId: this.recordid })
       .then((data) => {
-        console.log(data);
-        let goalData = data.Goal;
-        let goalBenchPress = getSObjectValue(goalData[0], BENCHPRESS_FIELD);
-        let goalBackSquat = getSObjectValue(goalData[0], BACKSQUAT_FIELD);
-        let goalDeadlift = getSObjectValue(goalData[0], DEADLIFT_FIELD);
-        let goalShoulderPress = getSObjectValue(
-          goalData[0],
-          SHOULDERPRESS_FIELD
-        );
-
-        let annualBenchPress = [];
-        let annualBackSquat = [];
-        let annualDeadlift = [];
-        let annualShoulderPress = [];
+        let annualBackSquat = data["Back Squat"];
+        let annualBenchPress = data["Bench Press"];
+        let annualDeadlift = data["Deadlift"];
+        let annualShoulderPress = data["Shoulder Press"];
         let dates = [];
-        let benchmarks = data["Benchmarks"];
-        console.log(benchmarks);
-        benchmarks.forEach((benchmark) => {
-          annualBenchPress.push(
-            getSObjectValue(benchmark, BENCHPRESS_FIELD) / goalBenchPress
-          );
-          annualBackSquat.push(
-            getSObjectValue(benchmark, BACKSQUAT_FIELD) / goalBackSquat
-          );
-          annualDeadlift.push(
-            getSObjectValue(benchmark, DEADLIFT_FIELD) / goalDeadlift
-          );
-          annualShoulderPress.push(
-            getSObjectValue(benchmark, SHOULDERPRESS_FIELD) / goalShoulderPress
-          );
-          dates.push(getSObjectValue(benchmark, DATE_FIELD));
+
+        annualBackSquat.forEach((score) => {
+          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+            dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
+          }
         });
-        console.log(dates);
+        annualBenchPress.forEach((score) => {
+          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+            dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
+          }
+        });
+        annualDeadlift.forEach((score) => {
+          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+            dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
+          }
+        });
+        annualShoulderPress.forEach((score) => {
+          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+            dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
+          }
+        });
+
+        let expandedBS = [];
+        let expandedBP = [];
+        let expandedDL = [];
+        let expandedSP = [];
+
+        let bsTemp = null;
+        let bpTemp = null;
+        let dlTemp = null;
+        let spTemp = null;
+
+        dates.sort();
+
+        let m = 0;
+        let n = 0;
+        let p = 0;
+        let q = 0;
+        for(let i = 0; i < dates.length; i++){
+          if(m < annualBackSquat.length){
+            if(dates[i] == getSObjectValue(annualBackSquat[m], WORKOUT_DATE_FIELD)){
+              bsTemp = annualBackSquat[m];
+              m++;
+            }
+          }
+          if(n < annualBenchPress.length){
+            if(dates[i] == getSObjectValue(annualBenchPress[n], WORKOUT_DATE_FIELD)){
+              bpTemp = annualBenchPress[n];
+              n++;
+            }
+          }
+          if(p < annualDeadlift.length){
+            if(dates[i] == getSObjectValue(annualDeadlift[p], WORKOUT_DATE_FIELD)){
+              dlTemp = annualDeadlift[p];
+              p++;
+            }
+          }
+          if(q < annualShoulderPress.length){
+            if(dates[i] == getSObjectValue(annualShoulderPress[q], WORKOUT_DATE_FIELD)){
+              spTemp = annualShoulderPress[q];
+              q++;
+            }
+          }
+          expandedBS.push(getSObjectValue(bsTemp, WEIGHT_FIELD));
+          expandedBP.push(getSObjectValue(bpTemp, WEIGHT_FIELD));
+          expandedDL.push(getSObjectValue(dlTemp, WEIGHT_FIELD));
+          expandedSP.push(getSObjectValue(spTemp, WEIGHT_FIELD));
+        }
         if (!this.chart) {
           const canvas = document.createElement("canvas");
-          this.config.data.datasets[0].data = annualBenchPress;
-          this.config.data.datasets[1].data = annualBackSquat;
-          this.config.data.datasets[2].data = annualDeadlift;
-          this.config.data.datasets[3].data = annualShoulderPress;
+          this.config.data.datasets[0].data = expandedBS;
+          this.config.data.datasets[1].data = expandedBP;
+          this.config.data.datasets[2].data = expandedDL;
+          this.config.data.datasets[3].data = expandedSP;
           this.config.data.labels = dates;
           this.template.querySelector("div.chart").appendChild(canvas);
           const ctx = canvas.getContext("2d");
           this.chart = new window.Chart(ctx, this.config);
         } else {
-          this.chart.data.datasets[0].data = annualBenchPress;
-          this.chart.data.datasets[1].data = annualBackSquat;
-          this.chart.data.datasets[2].data = annualDeadlift;
-          this.chart.data.datasets[3].data = annualShoulderPress;
+          this.chart.data.datasets[0].data = expandedBS;
+          this.chart.data.datasets[1].data = expandedBP;
+          this.chart.data.datasets[2].data = expandedDL;
+          this.chart.data.datasets[3].data = expandedSP;
           this.chart.data.labels = dates;
-          console.log(this.chart.data.labels);
           this.chart.update();
         }
       })
@@ -149,56 +194,96 @@ export default class MemberDetails extends LightningElement {
   }
 
   generateMonthlyLineChart() {
-    console.log("hello line 138");
-    getMonthlyProgress({ memberId: this.recordid })
+    getMonthlyScores({ memberId: this.recordid })
       .then((data) => {
-        let goalData = data.Goal;
-        let goalBenchPress = getSObjectValue(goalData[0], BENCHPRESS_FIELD);
-        let goalBackSquat = getSObjectValue(goalData[0], BACKSQUAT_FIELD);
-        let goalDeadlift = getSObjectValue(goalData[0], DEADLIFT_FIELD);
-        let goalShoulderPress = getSObjectValue(
-          goalData[0],
-          SHOULDERPRESS_FIELD
-        );
-
-        let monthlyBenchPress = [];
-        let monthlyBackSquat = [];
-        let monthlyDeadlift = [];
-        let monthlyShoulderPress = [];
+        let monthlyBackSquat = data["Back Squat"];
+        let monthlyBenchPress = data["Bench Press"];
+        let monthlyDeadlift = data["Deadlift"];
+        let monthlyShoulderPress = data["Shoulder Press"];
         let dates = [];
-        let benchmarks = data["Benchmarks"];
-        console.log(benchmarks);
-        benchmarks.forEach((benchmark) => {
-          monthlyBenchPress.push(
-            getSObjectValue(benchmark, BENCHPRESS_FIELD) / goalBenchPress
-          );
-          monthlyBackSquat.push(
-            getSObjectValue(benchmark, BACKSQUAT_FIELD) / goalBackSquat
-          );
-          monthlyDeadlift.push(
-            getSObjectValue(benchmark, DEADLIFT_FIELD) / goalDeadlift
-          );
-          monthlyShoulderPress.push(
-            getSObjectValue(benchmark, SHOULDERPRESS_FIELD) / goalShoulderPress
-          );
-          dates.push(getSObjectValue(benchmark, DATE_FIELD));
+
+        monthlyBackSquat.forEach((score) => {
+          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+            dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
+          }
         });
-        console.log(dates);
+        monthlyBenchPress.forEach((score) => {
+          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+            dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
+          }
+        });
+        monthlyDeadlift.forEach((score) => {
+          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+            dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
+          }
+        });
+        monthlyShoulderPress.forEach((score) => {
+          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+            dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
+          }
+        });
+
+        let expandedBS = [];
+        let expandedBP = [];
+        let expandedDL = [];
+        let expandedSP = [];
+
+        let bsTemp = null;
+        let bpTemp = null;
+        let dlTemp = null;
+        let spTemp = null;
+
+        dates.sort();
+
+        let m = 0;
+        let n = 0;
+        let p = 0;
+        let q = 0;
+        for(let i = 0; i < dates.length; i++){
+          if(m < monthlyBackSquat.length){
+            if(dates[i] == getSObjectValue(monthlyBackSquat[m], WORKOUT_DATE_FIELD)){
+              bsTemp = monthlyBackSquat[m];
+              m++;
+            }
+          }
+          if(n < monthlyBenchPress.length){
+            if(dates[i] == getSObjectValue(monthlyBenchPress[n], WORKOUT_DATE_FIELD)){
+              bpTemp = monthlyBenchPress[n];
+              n++;
+            }
+          }
+          if(p < monthlyDeadlift.length){
+            if(dates[i] == getSObjectValue(monthlyDeadlift[p], WORKOUT_DATE_FIELD)){
+              dlTemp = monthlyDeadlift[p];
+              p++;
+            }
+          }
+          if(q < monthlyShoulderPress.length){
+            if(dates[i] == getSObjectValue(monthlyShoulderPress[q], WORKOUT_DATE_FIELD)){
+              spTemp = monthlyShoulderPress[q];
+              q++;
+            }
+          }
+          expandedBS.push(getSObjectValue(bsTemp, WEIGHT_FIELD));
+          expandedBP.push(getSObjectValue(bpTemp, WEIGHT_FIELD));
+          expandedDL.push(getSObjectValue(dlTemp, WEIGHT_FIELD));
+          expandedSP.push(getSObjectValue(spTemp, WEIGHT_FIELD));
+        }
         if (!this.chart) {
           const canvas = document.createElement("canvas");
-          this.config.data.datasets[0].data = monthlyBenchPress;
-          this.config.data.datasets[1].data = monthlyBackSquat;
-          this.config.data.datasets[2].data = monthlyDeadlift;
-          this.config.data.datasets[3].data = monthlyShoulderPress;
+          this.config.data.datasets[0].data = expandedBS;
+          this.config.data.datasets[1].data = expandedBP;
+          this.config.data.datasets[2].data = expandedDL;
+          this.config.data.datasets[3].data = expandedSP;
           this.config.data.labels = dates;
           this.template.querySelector("div.chart").appendChild(canvas);
           const ctx = canvas.getContext("2d");
           this.chart = new window.Chart(ctx, this.config);
         } else {
-          this.chart.data.datasets[0].data = monthlyBenchPress;
-          this.chart.data.datasets[1].data = monthlyBackSquat;
-          this.chart.data.datasets[2].data = monthlyDeadlift;
-          this.chart.data.datasets[3].data = monthlyShoulderPress;
+          this.chart.data.datasets[0].data = expandedBS;
+          this.chart.data.datasets[1].data = expandedBP;
+          this.chart.data.datasets[2].data = expandedDL;
+          this.chart.data.datasets[3].data = expandedSP;
           this.chart.data.labels = dates;
           this.chart.update();
         }
