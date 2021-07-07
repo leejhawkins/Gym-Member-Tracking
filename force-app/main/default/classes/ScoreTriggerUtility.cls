@@ -1,5 +1,5 @@
 public with sharing class ScoreTriggerUtility {
-  public static void createRelatedBenchmark(List<Score__c> scores) {
+  public static void setMemberLifts(List<Score__c> scores) {
     Map<String, String> liftMap = new Map<String, String>{
       'Back Squat' => 'Back_Squat__c',
       'Deadlift' => 'Deadlift__c',
