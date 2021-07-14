@@ -84,6 +84,7 @@ export default class MemberDetails extends LightningElement {
   generateAnnualLineChart() {
     getAnnualScores({ memberId: this.recordid })
       .then((data) => {
+        console.log(data);
         let annualBackSquat = data["Back Squat"];
         let annualBenchPress = data["Bench Press"];
         let annualDeadlift = data.Deadlift;
@@ -197,6 +198,7 @@ export default class MemberDetails extends LightningElement {
   generateMonthlyLineChart() {
     getMonthlyScores({ memberId: this.recordid })
       .then((data) => {
+        console.log(data);
         let monthlyBackSquat = data["Back Squat"];
         let monthlyBenchPress = data["Bench Press"];
         let monthlyDeadlift = data.Deadlift;
