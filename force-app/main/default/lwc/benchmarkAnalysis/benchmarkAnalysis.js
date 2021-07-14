@@ -4,21 +4,11 @@ import { subscribe, MessageContext } from "lightning/messageService";
 import chartjs from "@salesforce/resourceUrl/chartJs";
 import { loadScript, loadStyle } from "lightning/platformResourceLoader";
 import RECORD_SELECTED_CHANNEL from "@salesforce/messageChannel/Record_Selected__c";
-import getBenchmarks from "@salesforce/apex/BenchmarkController.getBenchmarks";
-import getAnnualProgress from "@salesforce/apex/BenchmarkController.getAnnualProgress";
-import getMonthlyProgress from "@salesforce/apex/BenchmarkController.getMonthlyProgress";
-import getMonthlyScores from "@salesforce/apex/ScoreController.getMonthlyScores"
-import getAnnualScores from "@salesforce/apex/ScoreController.getAnnualScores"
+import getMonthlyScores from "@salesforce/apex/ScoreController.getMonthlyScores";
+import getAnnualScores from "@salesforce/apex/ScoreController.getAnnualScores";
 
-import STRENGTH_TYPE_FIELD from "@salesforce/schema/Score__c.Strength_Type__c";
 import WORKOUT_DATE_FIELD from "@salesforce/schema/Score__c.Workout_Date__c";
 import WEIGHT_FIELD from "@salesforce/schema/Score__c.Weight__c";
-
-import BACKSQUAT_FIELD from "@salesforce/schema/Benchmark__c.Back_Squat__c";
-import DEADLIFT_FIELD from "@salesforce/schema/Benchmark__c.Deadlift__c";
-import BENCHPRESS_FIELD from "@salesforce/schema/Benchmark__c.Bench_Press__c";
-import SHOULDERPRESS_FIELD from "@salesforce/schema/Benchmark__c.Shoulder_Press__c";
-import DATE_FIELD from "@salesforce/schema/Benchmark__c.Date__c";
 
 export default class MemberDetails extends LightningElement {
   //Fields for conditional rendering
@@ -82,13 +72,12 @@ export default class MemberDetails extends LightningElement {
   };
 
   handleMessage(message) {
+    // eslint-disable-next-line @lwc/lwc/no-api-reassignments
     this.recordid = message.recordid;
     if (this.annualProgressLineGraph) {
       this.generateAnnualLineChart();
     } else if (this.monthlyProgressLineGraph) {
       this.generateMonthlyLineChart();
-    } else if (this.currentProgressBarGraph) {
-      this.generateBarChart();
     }
   }
 
@@ -97,27 +86,27 @@ export default class MemberDetails extends LightningElement {
       .then((data) => {
         let annualBackSquat = data["Back Squat"];
         let annualBenchPress = data["Bench Press"];
-        let annualDeadlift = data["Deadlift"];
+        let annualDeadlift = data.Deadlift;
         let annualShoulderPress = data["Shoulder Press"];
         let dates = [];
 
         annualBackSquat.forEach((score) => {
-          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+          if (!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))) {
             dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
           }
         });
         annualBenchPress.forEach((score) => {
-          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+          if (!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))) {
             dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
           }
         });
         annualDeadlift.forEach((score) => {
-          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+          if (!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))) {
             dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
           }
         });
         annualShoulderPress.forEach((score) => {
-          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+          if (!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))) {
             dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
           }
         });
@@ -138,27 +127,39 @@ export default class MemberDetails extends LightningElement {
         let n = 0;
         let p = 0;
         let q = 0;
-        for(let i = 0; i < dates.length; i++){
-          if(m < annualBackSquat.length){
-            if(dates[i] == getSObjectValue(annualBackSquat[m], WORKOUT_DATE_FIELD)){
+        for (let i = 0; i < dates.length; i++) {
+          if (m < annualBackSquat.length) {
+            if (
+              dates[i] ===
+              getSObjectValue(annualBackSquat[m], WORKOUT_DATE_FIELD)
+            ) {
               bsTemp = annualBackSquat[m];
               m++;
             }
           }
-          if(n < annualBenchPress.length){
-            if(dates[i] == getSObjectValue(annualBenchPress[n], WORKOUT_DATE_FIELD)){
+          if (n < annualBenchPress.length) {
+            if (
+              dates[i] ===
+              getSObjectValue(annualBenchPress[n], WORKOUT_DATE_FIELD)
+            ) {
               bpTemp = annualBenchPress[n];
               n++;
             }
           }
-          if(p < annualDeadlift.length){
-            if(dates[i] == getSObjectValue(annualDeadlift[p], WORKOUT_DATE_FIELD)){
+          if (p < annualDeadlift.length) {
+            if (
+              dates[i] ===
+              getSObjectValue(annualDeadlift[p], WORKOUT_DATE_FIELD)
+            ) {
               dlTemp = annualDeadlift[p];
               p++;
             }
           }
-          if(q < annualShoulderPress.length){
-            if(dates[i] == getSObjectValue(annualShoulderPress[q], WORKOUT_DATE_FIELD)){
+          if (q < annualShoulderPress.length) {
+            if (
+              dates[i] ===
+              getSObjectValue(annualShoulderPress[q], WORKOUT_DATE_FIELD)
+            ) {
               spTemp = annualShoulderPress[q];
               q++;
             }
@@ -198,27 +199,27 @@ export default class MemberDetails extends LightningElement {
       .then((data) => {
         let monthlyBackSquat = data["Back Squat"];
         let monthlyBenchPress = data["Bench Press"];
-        let monthlyDeadlift = data["Deadlift"];
+        let monthlyDeadlift = data.Deadlift;
         let monthlyShoulderPress = data["Shoulder Press"];
         let dates = [];
 
         monthlyBackSquat.forEach((score) => {
-          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+          if (!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))) {
             dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
           }
         });
         monthlyBenchPress.forEach((score) => {
-          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+          if (!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))) {
             dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
           }
         });
         monthlyDeadlift.forEach((score) => {
-          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+          if (!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))) {
             dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
           }
         });
         monthlyShoulderPress.forEach((score) => {
-          if(!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))){
+          if (!dates.includes(getSObjectValue(score, WORKOUT_DATE_FIELD))) {
             dates.push(getSObjectValue(score, WORKOUT_DATE_FIELD));
           }
         });
@@ -239,27 +240,39 @@ export default class MemberDetails extends LightningElement {
         let n = 0;
         let p = 0;
         let q = 0;
-        for(let i = 0; i < dates.length; i++){
-          if(m < monthlyBackSquat.length){
-            if(dates[i] == getSObjectValue(monthlyBackSquat[m], WORKOUT_DATE_FIELD)){
+        for (let i = 0; i < dates.length; i++) {
+          if (m < monthlyBackSquat.length) {
+            if (
+              dates[i] ===
+              getSObjectValue(monthlyBackSquat[m], WORKOUT_DATE_FIELD)
+            ) {
               bsTemp = monthlyBackSquat[m];
               m++;
             }
           }
-          if(n < monthlyBenchPress.length){
-            if(dates[i] == getSObjectValue(monthlyBenchPress[n], WORKOUT_DATE_FIELD)){
+          if (n < monthlyBenchPress.length) {
+            if (
+              dates[i] ===
+              getSObjectValue(monthlyBenchPress[n], WORKOUT_DATE_FIELD)
+            ) {
               bpTemp = monthlyBenchPress[n];
               n++;
             }
           }
-          if(p < monthlyDeadlift.length){
-            if(dates[i] == getSObjectValue(monthlyDeadlift[p], WORKOUT_DATE_FIELD)){
+          if (p < monthlyDeadlift.length) {
+            if (
+              dates[i] ===
+              getSObjectValue(monthlyDeadlift[p], WORKOUT_DATE_FIELD)
+            ) {
               dlTemp = monthlyDeadlift[p];
               p++;
             }
           }
-          if(q < monthlyShoulderPress.length){
-            if(dates[i] == getSObjectValue(monthlyShoulderPress[q], WORKOUT_DATE_FIELD)){
+          if (q < monthlyShoulderPress.length) {
+            if (
+              dates[i] ===
+              getSObjectValue(monthlyShoulderPress[q], WORKOUT_DATE_FIELD)
+            ) {
               spTemp = monthlyShoulderPress[q];
               q++;
             }
@@ -291,79 +304,6 @@ export default class MemberDetails extends LightningElement {
       .catch((error) => {
         console.log(error);
         this.error = error;
-      });
-  }
-
-  generateBarChart() {
-    console.log("Generating Bar Chart");
-    this.currentBackSquat = 0;
-    this.currentDeadlift = 0;
-    this.currentBenchPress = 0;
-    this.currentShoulderPress = 0;
-    this.goalBackSquat = 0;
-    this.goalDeadlift = 0;
-    this.goalBenchPress = 0;
-    this.goalShoulderPress = 0;
-    getBenchmarks({ memberId: this.recordid })
-      .then((data) => {
-        let curBen = data.Current;
-        console.log(curBen);
-        let goalBen = data.Goal;
-        console.log(goalBen);
-        this.currentBackSquat =
-          getSObjectValue(curBen, BACKSQUAT_FIELD) != null
-            ? getSObjectValue(curBen, BACKSQUAT_FIELD)
-            : 0;
-        console.log(this.currentBackSquat);
-        this.currentDeadlift =
-          getSObjectValue(curBen, DEADLIFT_FIELD) != null
-            ? getSObjectValue(curBen, DEADLIFT_FIELD)
-            : 0;
-        this.currentBenchPress =
-          getSObjectValue(curBen, BENCHPRESS_FIELD) != null
-            ? getSObjectValue(curBen, BENCHPRESS_FIELD)
-            : 0;
-        this.currentShoulderPress =
-          getSObjectValue(curBen, SHOULDERPRESS_FIELD) != null
-            ? getSObjectValue(curBen, SHOULDERPRESS_FIELD)
-            : 0;
-        this.goalBackSquat =
-          getSObjectValue(goalBen, BACKSQUAT_FIELD) != null
-            ? getSObjectValue(goalBen, BACKSQUAT_FIELD)
-            : 0;
-        this.goalDeadlift =
-          getSObjectValue(goalBen, DEADLIFT_FIELD) != null
-            ? getSObjectValue(goalBen, DEADLIFT_FIELD)
-            : 0;
-        this.goalBenchPress =
-          getSObjectValue(goalBen, BENCHPRESS_FIELD) != null
-            ? getSObjectValue(goalBen, BENCHPRESS_FIELD)
-            : 0;
-        this.goalShoulderPress =
-          getSObjectValue(goalBen, SHOULDERPRESS_FIELD) != null
-            ? getSObjectValue(goalBen, SHOULDERPRESS_FIELD)
-            : 0;
-        if (
-          this.template.querySelector("c-benchmark-bar-chart").chartCreated()
-        ) {
-          console.log("Updating Bar Chart");
-          this.template
-            .querySelector("c-benchmark-bar-chart")
-            .updateChart(
-              this.currentBackSquat,
-              this.goalBackSquat,
-              this.currentDeadlift,
-              this.goalDeadlift,
-              this.currentBenchPress,
-              this.goalBenchPress,
-              this.currentShoulderPress,
-              this.goalShoulderPress
-            );
-        }
-      })
-      .catch((error) => {
-        this.error = error;
-        console.log(error);
       });
   }
 

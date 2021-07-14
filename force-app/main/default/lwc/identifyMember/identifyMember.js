@@ -12,7 +12,7 @@ export default class IdentifyMember extends LightningElement {
     console.log(Id);
     getMember({ userId: this.userId })
       .then((data) => {
-        this.recordid = data.Id;
+        this.recordid = data.ContactId;
         this.memberName = data.Name;
         console.log(this.memberName);
       })

@@ -15,8 +15,7 @@ public class ContactController {
   }
 
   @AuraEnabled(cacheable=true)
-  public static Contact getMember(Id userId) {
-    User u = [SELECT Id, Email, Name FROM User WHERE Id = :userId LIMIT 1];
-    return [SELECT Id, Name FROM Contact WHERE Email = :u.Email LIMIT 1];
+  public static User getMember(Id userId) {
+    return [SELECT ContactId, Name FROM User WHERE Id = :userId LIMIT 1];
   }
 }

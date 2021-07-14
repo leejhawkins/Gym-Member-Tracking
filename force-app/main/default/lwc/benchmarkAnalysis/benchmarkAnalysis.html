@@ -1,6 +1,6 @@
 <template>
   <lightning-card title="Benchmark Analysis" icon-name="utility:graph">
-    <div class="slds-p-around_medium lgc-bg">
+    <div class="slds-var-p-around_medium lgc-bg">
       <div class="slds-select_container">
         <select
           class="slds-select"
@@ -15,43 +15,12 @@
           <option value="monthlyProgressLineGraph">
             Monthly Progress Line Graph
           </option>
-          <option value="currentProgressBarGraph">
-            Current Progress Bar Graph
-          </option>
-          <option value="fitnessLevelPieChart">
-            Fitness Levels of Members
-          </option>
         </select>
       </div>
     </div>
     <template if:true={lineGraph}>
       <div class="slds-m-around_medium">
         <div class="chart slds-grid slds-wrap"></div>
-      </div>
-    </template>
-    <template if:true={currentProgressBarGraph}>
-      <div class="slds-m-around_medium">
-        <div class="slds-grid slds-wrap">
-          <c-benchmark-bar-chart
-            cbs={currentBackSquat}
-            cdl={currentDeadlift}
-            cbp={currentBenchPress}
-            csp={currentShoulderPress}
-            gbs={goalBackSquat}
-            gdl={goalDeadlift}
-            gbp={goalBenchPress}
-            gsp={goalShoulderPress}
-            class="slds-col slds-size_12-of-12"
-          >
-          </c-benchmark-bar-chart>
-        </div>
-      </div>
-    </template>
-    <template if:true={fitnessLevelPieChart}>
-      <div class="slds-m-around_medium">
-        <div class="slds-grid slds-wrap">
-          <c-sample-pie-chart> </c-sample-pie-chart>
-        </div>
       </div>
     </template>
   </lightning-card>
