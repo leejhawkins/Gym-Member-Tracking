@@ -61,7 +61,7 @@ public class ScoreController {
   }
   @AuraEnabled(cacheable=true)
   public static Map<String, List<Score__c>> getMonthlyScores(Id memberId){
-    List<Score__c> monthlyScores = [Select Id, Strength_Type__c, Weight__c, Workout_Date__c FROM Score__c WHERE Workout_Date__c >=: Date.today().addMonths(-1) ORDER BY Workout_Date__c ASC];
+    List<Score__c> monthlyScores = [Select Id, Contact__c, Strength_Type__c, Weight__c, Workout_Date__c FROM Score__c WHERE Contact__c =: memberId AND Workout_Date__c >=: Date.today().addMonths(-1) ORDER BY Workout_Date__c ASC];
     List<Score__c> bsScores = new List<Score__c>();
     List<Score__c> bpScores = new List<Score__c>();
     List<Score__c> dlScores = new List<Score__c>();
@@ -89,7 +89,7 @@ public class ScoreController {
   }
   @AuraEnabled(cacheable=true)
   public static Map<String, List<Score__c>> getAnnualScores(Id memberId){
-    List<Score__c> monthlyScores = [Select Id, Strength_Type__c, Weight__c, Workout_Date__c FROM Score__c ORDER BY Workout_Date__c ASC];
+    List<Score__c> monthlyScores = [Select Id, Contact__c, Strength_Type__c, Weight__c, Workout_Date__c FROM Score__c WHERE Contact__c =: memberId ORDER BY Workout_Date__c ASC];
     List<Score__c> bsScores = new List<Score__c>();
     List<Score__c> bpScores = new List<Score__c>();
     List<Score__c> dlScores = new List<Score__c>();
