@@ -18,6 +18,11 @@ export default class MemberOperations extends LightningElement {
     publish(this.messageContext, RECORD_SELECTED_CHANNEL, payload);
   }
 
+  handleClear(event) {
+    console.log(JSON.stringify(event, null, 3));
+    this.inputValue = "Member Search - ";
+  }
+
   handleKeyChange(event) {
     // Debouncing this method: Do not update the reactive property as long as this function is
     // being called within a delay of DELAY. This is to avoid a very large number of Apex method calls.

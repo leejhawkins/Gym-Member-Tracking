@@ -1,7 +1,7 @@
 /* eslint-disable @lwc/lwc/no-api-reassignments */
 
 import { LightningElement, wire, api } from "lwc";
-
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 
 import { subscribe, MessageContext } from "lightning/messageService";
@@ -55,7 +55,14 @@ export default class MemberDetails extends LightningElement {
   @wire(getRecord, { recordId: "$recordid", fields })
   wiredGetRecord({ error, data }) {
     if (error) {
-      this.dispatchToast(error);
+      console.log(JSON.stringify(error));
+      const evt = new ShowToastEvent({
+        title: "Error",
+        message: error.message,
+        variant: "error",
+        mode: "dismissable"
+      });
+      this.dispatchEvent(evt);
     } else if (data) {
       fields.forEach(
         (item) =>
