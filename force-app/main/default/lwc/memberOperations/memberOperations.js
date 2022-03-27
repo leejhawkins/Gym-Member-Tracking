@@ -6,6 +6,7 @@ const DELAY = 100;
 
 export default class MemberOperations extends LightningElement {
   searchKey = "";
+  inputValue = "Member Search - ";
 
   @wire(findMembers, { searchKey: "$searchKey" }) members;
   @wire(MessageContext)
@@ -21,11 +22,15 @@ export default class MemberOperations extends LightningElement {
     // Debouncing this method: Do not update the reactive property as long as this function is
     // being called within a delay of DELAY. This is to avoid a very large number of Apex method calls.
     window.clearTimeout(this.delayTimeout);
-    const searchKey = event.target.value;
+    const searchKey =
+      event.target.value.split("- ")[1] !== undefined
+        ? event.target.value.split("- ")[1]
+        : " ";
+    this.inputValue = "Member Search - " + searchKey;
+
     // eslint-disable-next-line @lwc/lwc/no-async-operation
     this.delayTimeout = setTimeout(() => {
-      this.searchKey = searchKey;
+      this.searchKey = searchKey.trim();
     }, DELAY);
   }
 }
-

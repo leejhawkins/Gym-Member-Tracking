@@ -2,15 +2,13 @@
   <div class="slds-scrollable_y" style="height: 20rem">
     <lightning-card title="Find Member" icon-name="utility:people">
       <div class="slds-var-m-around_medium">
-        <div class="slds-m-around_medium">
-          <c-sample-pie-chart> </c-sample-pie-chart>
-        </div>
+        <div class="slds-m-around_medium"></div>
         <lightning-input
           type="search"
           onchange={handleKeyChange}
           class="slds-var-m-bottom_small"
           label="Search"
-          value={searchKey}
+          value={inputValue}
         ></lightning-input>
         <div class="slds-grid slds-wrap">
           <div

@@ -1,4 +1,4 @@
-import { LightningElement, api } from "lwc";
+import { LightningElement, api, track } from "lwc";
 import { loadScript, loadStyle } from "lightning/platformResourceLoader";
 import chartjs from "@salesforce/resourceUrl/chartJs";
 export default class MemberBarChart extends LightningElement {
@@ -14,7 +14,7 @@ export default class MemberBarChart extends LightningElement {
   @api csp;
   @api gsp;
 
-  config = {
+  @track config = {
     type: "horizontalBar",
     data: {
       datasets: [
@@ -69,7 +69,12 @@ export default class MemberBarChart extends LightningElement {
       .then(() => {
         // disable Chart.js CSS injection
         window.Chart.platform.disableCSSInjection = true;
-        this.config.data.datasets[0].data[0] = this.cbs;
+        this.config.data.datasets[0].data = [
+          this.cbs,
+          this.cdl,
+          this.cdp,
+          this.csp
+        ];
         this.config.data.datasets[1].data[0] = this.gbs;
         this.config.data.datasets[0].data[1] = this.cdl;
         this.config.data.datasets[1].data[1] = this.gdl;

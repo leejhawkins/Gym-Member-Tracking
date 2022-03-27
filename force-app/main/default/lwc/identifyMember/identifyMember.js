@@ -9,12 +9,11 @@ export default class IdentifyMember extends LightningElement {
   error;
 
   connectedCallback() {
-    console.log(Id);
     getMember({ userId: this.userId })
       .then((data) => {
         this.recordid = data.ContactId;
         this.memberName = data.Name;
-        console.log(this.memberName);
+        console.log(this.recordid);
       })
       .catch((error) => {
         this.error = error;

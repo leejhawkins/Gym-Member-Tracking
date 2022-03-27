@@ -173,4 +173,3 @@ export default class MemberDetails extends LightningElement {
     modal.hide();
   }
 }
-

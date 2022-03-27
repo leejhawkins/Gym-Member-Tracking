@@ -7,11 +7,7 @@ public class ContactController {
   @AuraEnabled(cacheable=true)
   public static List<Contact> findMembers(String searchKey) {
     String key = '%' + searchKey + '%';
-    return [
-      SELECT Id, Name, Fitness_Level__c
-      FROM Contact
-      WHERE Name LIKE :key AND RecordType.Name = 'Gym Member'
-    ];
+    return [SELECT Id, Name FROM Contact WHERE Name LIKE :key];
   }
 
   @AuraEnabled(cacheable=true)

@@ -6,10 +6,6 @@
         <visible>false</visible>
     </applicationVisibilities>
     <classAccesses>
-        <apexClass>BenchmarkController</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>BenchmarkTriggerUtility</apexClass>
         <enabled>false</enabled>
     </classAccesses>
